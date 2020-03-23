@@ -25,10 +25,8 @@ public class User {
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	private List<Relation> Relations;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Demande demande;
 	
-	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="user_Reciver",cascade = CascadeType.ALL)
 	private List<Demande> Demandes;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
