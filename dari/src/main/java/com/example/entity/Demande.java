@@ -11,19 +11,27 @@ public class Demande {
 	private int id;
 	private boolean Notification;
 	private int id_Sender;
+	private String  etat;
 	
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	private User user_Reciver;
+	private User userReciver;
 	
 
 	
 	
+	public Demande(boolean notification, int id_Sender, String etat, User user_Reciver) {
+		super();
+		Notification = notification;
+		this.id_Sender = id_Sender;
+		this.etat = etat;
+		this.userReciver = user_Reciver;
+	}
 	public Demande(boolean notification, int id_Sender, User user_Reciver) {
 		super();
 		Notification = notification;
 		this.id_Sender = id_Sender;
-		this.user_Reciver = user_Reciver;
+		this.userReciver = user_Reciver;
 	}
 	public int getId_Sender() {
 		return id_Sender;
@@ -32,10 +40,10 @@ public class Demande {
 		this.id_Sender = id_Sender;
 	}
 	public User getUser_Reciver() {
-		return user_Reciver;
+		return userReciver;
 	}
 	public void setUser_Reciver(User user_Reciver) {
-		this.user_Reciver = user_Reciver;
+		this.userReciver = user_Reciver;
 	}
 	public Demande() {
 		super();
