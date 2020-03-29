@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.entity.Demande;
 import com.example.entity.User;
 import com.example.repository.DemandeRepository;
+import com.example.repository.RelationRepository;
 import com.example.repository.UserRepository;
 
 @Service
@@ -20,6 +21,7 @@ public class DemandeService {
 	DemandeRepository demandeRepository;
 	@Autowired
 	UserRepository userRepository;
+
 	
 	public void SendDemande(String username,String connectedUserName)
 	{
@@ -48,5 +50,19 @@ public class DemandeService {
 	public List<Demande> MySendedDemandes(String userName)
 	{	
 		return  allDemande().stream().filter(d->d.getId()==userRepository.findByUserName(userName).get().getId()).collect(Collectors.toList());		
+	}
+	
+	public void  changeStatus(Demande demande , int id )
+	{
+		Demande selected = allDemande().stream().filter(d->d.getId()==id).findFirst().get();
+		
+		selected.setEtat(demande.getEtat());
+		
+		demandeRepository.save(selected);	
+	
+	}
+	public void DeleteDemande(Demande demande )
+	{
+		demandeRepository.delete(demande);
 	}
 }

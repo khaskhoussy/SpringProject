@@ -19,11 +19,7 @@ public class User {
 	private int nic;
 	private boolean active;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Relation relation;
 	
-	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
-	private List<Relation> Relations;
 	
 	
 	@OneToMany(mappedBy="userReciver",cascade = CascadeType.ALL)

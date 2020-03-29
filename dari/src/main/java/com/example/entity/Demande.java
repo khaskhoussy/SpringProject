@@ -64,6 +64,12 @@ public class Demande {
 	public void setNotification(boolean notification) {
 		Notification = notification;
 	}
+	public String getEtat() {
+		return etat;
+	}
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
 	
 
 }
