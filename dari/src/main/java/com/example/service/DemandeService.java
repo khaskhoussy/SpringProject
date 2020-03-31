@@ -1,6 +1,7 @@
 package com.example.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +58,7 @@ public class DemandeService {
 		Demande selected = allDemande().stream().filter(d->d.getId()==id).findFirst().get();
 		
 		selected.setEtat(demande.getEtat());
+		selected.setDate(new Date());
 		
 		demandeRepository.save(selected);	
 	

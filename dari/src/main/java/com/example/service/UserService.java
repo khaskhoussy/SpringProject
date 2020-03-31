@@ -32,4 +32,14 @@ public class UserService {
 	{
 		userRepository.save(user);
 	}
+	public void deleteUser(User user)
+	{
+		userRepository.delete(user);
+	}
+	public void modifyUser(String username,User user)
+	{
+		User modifieduser =getAllUsers().stream().filter(u->u.getUserName().equals(username)).findFirst().get();
+		modifieduser = user;
+		userRepository.save(modifieduser);		
+	}
 }

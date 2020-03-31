@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -12,8 +13,15 @@ public class Demande {
 	private boolean Notification;
 	private int id_Sender;
 	private String  etat;
+	private Date date;
 	
 	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	@ManyToOne(cascade = CascadeType.ALL)
 	private User userReciver;
 	
