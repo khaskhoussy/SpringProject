@@ -1,16 +1,24 @@
 package com.example.controller;
 import com.example.controller.Home;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.entity.Demande;
+import com.example.entity.MessageBroker;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
+import com.example.service.MessageService;
 import com.example.service.RelationService;
 import com.example.service.UserService;
 
@@ -23,6 +31,8 @@ public class UserController {
 	private UserService us;
 	@Autowired
 	RelationService relationService;
+	@Autowired
+	MessageService messageService;
 	
 	@RequestMapping(value = "/profile")
 	@ResponseBody
@@ -40,6 +50,25 @@ public class UserController {
 	public void editAccount(User user)
 	{
 		us.modifyUser(Home.connectedUser, user);
+	}
+	@RequestMapping(method = RequestMethod.POST,value ="/send")
+	public void sendMessage(@RequestBody MessageBroker message)
+	{
+		message.setSendDate(new Date());
+		message.setStatus(false);
+		messageService.sendMessage(message);
+	}
+	
+	@Scheduled(initialDelay=1000L,fixedDelayString= "PT10S")
+	public void checkForMessages()
+	{
+		messageService.sendedMessages().stream().filter(s->s.isStatus() == false).forEach(sended->
+		{
+			messageService.sendMessageToSpecificUser(sended);
+			sended.setStatus(true);
+			messageService.sendMessage(sended);
+		});
+		
 	}
 	
 }

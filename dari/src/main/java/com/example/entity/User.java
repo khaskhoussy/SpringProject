@@ -25,10 +25,9 @@ public class User {
 	@OneToMany(mappedBy="userReciver",cascade = CascadeType.ALL)
 	private List<Demande> Demandes;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Message message;
+
 	
-	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="userReciver",cascade = CascadeType.ALL)
 	private List<Message> messages;
 	
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)

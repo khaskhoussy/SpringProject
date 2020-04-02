@@ -14,14 +14,24 @@ public class Message {
 	private Date date;
 	private String messageContenu;
 	private boolean notification ;
-	
-	@OneToMany(mappedBy="message",cascade = CascadeType.ALL)
-	private List<User> users;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private User user;	
+	private String sender;
 	
 	
+	@ManyToOne()
+	
+	private User userReciver;	
+	
+	
+	
+	
+	
+	public Message(Date date, String messageContenu, String sender, User userReciver) {
+		super();
+		this.date = date;
+		this.messageContenu = messageContenu;
+		this.sender = sender;
+		this.userReciver = userReciver;
+	}
 	public Message() {
 		super();
 	}
