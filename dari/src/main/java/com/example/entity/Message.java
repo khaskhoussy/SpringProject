@@ -16,10 +16,23 @@ public class Message {
 	private boolean notification ;
 	private String sender;
 	
-	
 	@ManyToOne()
+	private User userReciver;
 	
-	private User userReciver;	
+	
+	public String getSender() {
+		return sender;
+	}
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+	public User getUserReciver() {
+		return userReciver;
+	}
+	public void setUserReciver(User userReciver) {
+		this.userReciver = userReciver;
+	}
+		
 	
 	
 	

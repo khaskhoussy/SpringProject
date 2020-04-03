@@ -2,11 +2,9 @@ package com.example.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.example.entity.MessageBroker;
-
+import com.example.entity.ProductImages;
 
 @Repository
-public interface MessageBrokerRepository extends JpaRepository<MessageBroker, Integer> {
+public interface ProductImagesRepository extends JpaRepository<ProductImages, Integer> {
 
 }

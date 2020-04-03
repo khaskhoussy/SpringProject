@@ -3,10 +3,9 @@ package com.example.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.entity.MessageBroker;
-
+import com.example.entity.Shop;
 
 @Repository
-public interface MessageBrokerRepository extends JpaRepository<MessageBroker, Integer> {
+public interface ShopRepository extends JpaRepository<Shop, Integer>{
 
 }

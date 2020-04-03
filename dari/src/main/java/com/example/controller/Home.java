@@ -13,27 +13,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.User;
+import com.example.repository.UserRepository;
 import com.example.service.UserService;
 
 @RestController
 public class Home {
 	@Autowired
 	UserService us;
+	@Autowired 
+	UserRepository userRepository ;
 	
-	 static  String connectedUser="";
+	static User userConnected;
+	
+	 static  String connectedUser;
 	@GetMapping("/")
 	
-	public String home(Authentication authentication)
+	public String connectedUsername(Authentication authentication)
 	{
 		connectedUser = authentication.getName();
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-		Date date2 = new Date();
-		Date date = new Date();		
-		int  result =(date.getYear()+1900)-(date2.getYear()+1900);
-		int result2=date.getDate()-date2.getDate();
-		int rsult3=date.getMonth()-date2.getMonth();
-		System.out.println("defference months"+rsult3+"defference years"+result+"defference years"+result2);	
-		return ("welcome");
+		userConnected = userRepository.findByUserName(connectedUser).get();
+		return connectedUser ;
 	}	
 	
 	@GetMapping("/admin")

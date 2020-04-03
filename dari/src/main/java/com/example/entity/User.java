@@ -53,6 +53,9 @@ public class User {
 	
 	@OneToMany(mappedBy="users",cascade = CascadeType.ALL)
 	private List<Announce> Announcess;
+	
+	@OneToMany(mappedBy="ownerUser",cascade = CascadeType.ALL)
+	private List<Shop> shops;
 		
 	
 	public int getId() {

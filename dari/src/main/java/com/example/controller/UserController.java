@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Demande;
+import com.example.entity.Message;
 import com.example.entity.MessageBroker;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
@@ -69,6 +71,11 @@ public class UserController {
 			messageService.sendMessage(sended);
 		});
 		
+	}
+	@RequestMapping(value="/messages/{username}")
+	public List<Message> messagesWithOther(@PathVariable String username)
+	{	System.out.println("qsdqsdqsd"+Home.connectedUser);
+		return messageService.ourMessages(Home.connectedUser, username);
 	}
 	
 }

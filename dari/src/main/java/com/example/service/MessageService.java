@@ -3,6 +3,7 @@ package com.example.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,13 @@ public class MessageService {
 	@Autowired
 	UserRepository userRepository;
 	
+	public List<Message> AllMessages()
+	{
+		List<Message> listOfMessages = new ArrayList<>();
+		messageRepository.findAll().forEach(listOfMessages::add);
+		return listOfMessages;
+	}
+	
 	public List<MessageBroker> sendedMessages(){
 		List <MessageBroker> listOfSendedMessages = new ArrayList<>();
 		 messageBrokerRepository.findAll().forEach(listOfSendedMessages::add);
@@ -41,6 +49,18 @@ public class MessageService {
 				userRepository.findByUserName(messageBroker.getUserReciver()).get());
 		messageRepository.save(message);
 	}
-	
+		public List<Message> ourMessages(String myUsername,String username)
+		{
+			
+		List<Message> myMessages =	AllMessages().stream().filter(message-> 
+				((message.getSender().equals(myUsername) && message.getUserReciver().getUserName().equals(username))
+														||
+				( message.getUserReciver().getUserName().equals(myUsername) && message.getSender().equals(username))))
+				.collect(Collectors.toList());
+		System.out.println("azezaeaze"+myMessages);
+		
+		return myMessages;
+					
+		}
 
 }
