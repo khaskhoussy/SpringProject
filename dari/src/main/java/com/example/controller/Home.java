@@ -41,6 +41,12 @@ public class Home {
 	{
 	return ("welcome Admin");
 	}
+	@GetMapping("/expert")
+	
+	public String homeExpert()
+	{
+	return ("welcome Expert");
+	}
 	
 	@RequestMapping(method = RequestMethod.POST,value="/registration")
 	

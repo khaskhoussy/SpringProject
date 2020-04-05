@@ -29,6 +29,7 @@ public class Security extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers("/admin").hasRole("ADMIN")
 		.antMatchers("/user").hasAnyRole("USER","ADMIN")
+		.antMatchers("/expert").hasAnyRole("EXPERT","ADMIN")
 		.antMatchers("/").permitAll()
 		.and().formLogin();
 		http.csrf().disable();// for more information about csrf Token https://www.yawintutor.com/how-to-enable-and-disable-csrf
