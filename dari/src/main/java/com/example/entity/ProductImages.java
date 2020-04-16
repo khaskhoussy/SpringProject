@@ -17,6 +17,12 @@ public class ProductImages {
 	@ManyToOne()
 	private Shop idProduct;
 
+	
+	public ProductImages() {
+		super();
+
+	}
+
 	public int getId() {
 		return id;
 	}

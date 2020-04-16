@@ -61,21 +61,29 @@ public class UserController {
 		messageService.sendMessage(message);
 	}
 	
-	@Scheduled(initialDelay=1000L,fixedDelayString= "PT10S")
-	public void checkForMessages()
+	/*@Scheduled(initialDelay=1000L,fixedDelayString= "PT10S")
+	public MessageBroker checkForMessages()
 	{
 		messageService.sendedMessages().stream().filter(s->s.isStatus() == false).forEach(sended->
 		{
 			messageService.sendMessageToSpecificUser(sended);
 			sended.setStatus(true);
 			messageService.sendMessage(sended);
+			
 		});
 		
+	MessageBroker recived =messageService.sendedMessages().stream().filter(s->s.isStatus() == false)
+		.filter(msg->msg.getUserReciver().equals(Home.connectedUser)).findFirst().get();
+	if(recived !=null)
+		return recived;
+	else
+		return null;
+	//need to check if there is a method in the front that check fo responses evrey 5seconds for example ; 
 	}
 	@RequestMapping(value="/messages/{username}")
 	public List<Message> messagesWithOther(@PathVariable String username)
 	{	System.out.println("qsdqsdqsd"+Home.connectedUser);
 		return messageService.ourMessages(Home.connectedUser, username);
 	}
-	
+	*/
 }
