@@ -5,12 +5,19 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+
 
 @Entity
 public class Announce {
@@ -29,15 +36,79 @@ public class Announce {
 	private boolean disponibilité;
 	private String type;
 	
+
+
+
+
+	//	@Enumerated(EnumType.STRING)
+	//@NotNull
+	private String regions;
+	private int nbrchambre;
+	private float superficie;
+	
+	
+	
+/*	public Regions getRegions() {
+		return regions;
+	}
+
+
+
+	public void setRegions(Regions regions) {
+		this.regions = regions;
+	}
+
+
+*/
+	public int getNbrchambre() {
+		return nbrchambre;
+	}
+
+
+
+	public void setNbrchambre(int nbrchambre) {
+		this.nbrchambre = nbrchambre;
+	}
+
+
+
+	public float getSuperficie() {
+		return superficie;
+	}
+
+
+
+	public void setSuperficie(float superficie) {
+		this.superficie = superficie;
+	}
+
+
+
 	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "iduser", referencedColumnName = "id", insertable=false, updatable=false)
 	private User user;
 	
 	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
 	private List<Appointment> Appointments;
-	
+
+	@JsonBackReference
 	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
-	private List<Rent> Rents;
+	private List<Reservation> Reservation;	
 	
+	
+	
+	public List<Reservation> getReservation() {
+		return Reservation;
+	}
+
+
+
+	public void setReservation(List<Reservation> reservation) {
+		Reservation = reservation;
+	}
+
+
+
 	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
 	private List<CommentsAnnonce> commentsAnnonces;
 	
@@ -53,9 +124,57 @@ public class Announce {
 	
 	
 	
-	
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
 	public Announce() {
 		super();
+	}
+
+	
+
+
+	public String getRegions() {
+		return regions;
+	}
+
+
+
+	public void setRegions(String regions) {
+		this.regions = regions;
+	}
+
+
+
+	public Announce(int id, String name, String description, Date beginDate, Date endDate, int vueNumber, float price,
+			String img, boolean disponibilité, String type, String regions, int nbrchambre, float superficie,
+			List<User> users) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.beginDate = beginDate;
+		this.endDate = endDate;
+		this.vueNumber = vueNumber;
+		this.price = price;
+		this.img = img;
+		this.disponibilité = disponibilité;
+		this.type = type;
+		this.regions = regions;
+		this.nbrchambre = nbrchambre;
+		this.superficie = superficie;
+		this.users = users;
 	}
 
 

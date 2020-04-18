@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class User {
 
@@ -42,15 +44,40 @@ public class User {
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	private List<Appointment> Appointments;
 	
-	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
-	private List<Rent> Rents;
-	
+
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	private List<SearchHistory> searchHistorys;
 	
 	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
 	private List<Simulation> simulations;
 	
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
+	private List<Reservation> Reservation;
+
+	public List<Reservation> getReservation() {
+		return Reservation;
+	}
+
+
+
+	public void setReseration(List<Reservation> reservation) {
+		Reservation = reservation;
+	}
+
+	@JsonBackReference
+	@OneToOne(mappedBy="user")
+	private Rent rent;
+
+	public Rent getRent() {
+		return rent;
+	}
+
+
+
+	public void setRent(Rent rent) {
+		this.rent = rent;
+	}
+
 	@OneToMany(mappedBy="users",cascade = CascadeType.ALL)
 	private List<Announce> Announcess;
 	

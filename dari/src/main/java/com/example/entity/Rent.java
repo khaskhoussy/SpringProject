@@ -1,37 +1,69 @@
 package com.example.entity;
 
-import java.util.List;
+import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Entity
-public class Rent {
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+
+
+@Entity
+public class Rent  implements Serializable {
+	private static final long serialVersionUID= 1L;
+
+	 
+	@Id@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	private String cin;
 	private String garantor;
 	private String letterOfCommitment;
 	private String proofOfPayment;
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Announce announce;
+
 	
-	@OneToMany(mappedBy="rent",cascade = CascadeType.ALL)
-	private List<Reservation> Reservations;
-	
+
+
 	public Rent() {
 		super();
+
 	}
 
 
 
-	public Rent(String garantor, String letterOfCommitment, String proofOfPayment) {
-		super();
-		this.garantor = garantor;
-		this.letterOfCommitment = letterOfCommitment;
-		this.proofOfPayment = proofOfPayment;
+
+	public String getCin() {
+		return cin;
+	}
+
+	public void setCin(String cin) {
+		this.cin = cin;
+	}
+
+
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+
+	public String getGarantor() {
+		return garantor;
 	}
 
 
@@ -42,15 +74,11 @@ public class Rent {
 
 
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-
-	public String getGarantor() {
-		return garantor;
-	}
 
 
 
@@ -80,6 +108,12 @@ public class Rent {
 
 	public void setProofOfPayment(String proofOfPayment) {
 		this.proofOfPayment = proofOfPayment;
+	}
+
+	@Override
+	public String toString() {
+		return "Rent [cin=" + cin + ", garantor=" + garantor + ", letterOfCommitment=" + letterOfCommitment
+				+ ", proofOfPayment=" + proofOfPayment + ", ]";
 	}
 	
 	
