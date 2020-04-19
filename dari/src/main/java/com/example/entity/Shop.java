@@ -1,5 +1,6 @@
 package com.example.entity;
 
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-public class Shop {
+public class Shop  {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id ;
 	
@@ -25,6 +29,7 @@ public class Shop {
 	private Date postDate;
 	
 	private float price;
+	
 	
 	@ManyToOne()
 	private User ownerUser ;

@@ -44,19 +44,19 @@ public class ShopService {
 
 	
 	
-	public void addProduct(String username,Shop product,String photos)
+	public void addProduct(String username,Shop product)
 	{
 		
 		product.setPostDate(new Date());
 		product.setOwnerUser(userRepository.findByUserName(username).get());
 		shopRepository.save(product);		
-		List<String> productImages = new ArrayList<String>();
+		/*List<String> productImages = new ArrayList<String>();
 		productImages = Arrays.asList(photos.split(","));
 		productImages.stream().forEach(ph->
 		{
 			ProductImages newone = new ProductImages(ph, product);
 			imagesRepository.save(newone);			
-		});				
+		});	*/			
    }
 	
 	

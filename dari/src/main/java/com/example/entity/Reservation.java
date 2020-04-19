@@ -28,7 +28,8 @@ public class Reservation implements Serializable  {
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "iduser", referencedColumnName = "id")
 	private User user;
-	@JsonBackReference
+	
+	//@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idannounce", referencedColumnName = "id")
 	private Announce announce;

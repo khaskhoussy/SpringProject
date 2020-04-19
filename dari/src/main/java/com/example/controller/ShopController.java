@@ -49,7 +49,7 @@ public class ShopController {
 	public void addProduct(@RequestBody Shop product)
 	{
 		String test="test1,test2,test3,test4";
-		shopService.addProduct(Home.connectedUser, product,test);
+		shopService.addProduct(Home.connectedUser, product);
 	}
 
 	
