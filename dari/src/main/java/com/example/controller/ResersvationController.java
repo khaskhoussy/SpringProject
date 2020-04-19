@@ -41,6 +41,7 @@ public class ResersvationController {
 	         rS.ajouterReservation(idannounce,Home.connectedUser,checkIn,checkOut);
 	    }
 	    
+	    
 	    @RequestMapping(value="/allreservation")
 	    public List<Reservation> getAllreservation() 
 	    {
