@@ -56,10 +56,10 @@ public class ResersvationController {
 
 		}
 		
-	    @DeleteMapping("/deletereservationbyuser") 
+	    @DeleteMapping("/deletereservationbyId/{id}") 
 		@ResponseBody 
-		public void deleteReservationByuser(HttpServletResponse response,HttpServletRequest request) {
-			rS.deleteReservationByUser(Home.connectedUser);
+		public void deleteReservationById(@PathVariable("id") int id,HttpServletResponse response,HttpServletRequest request) {
+			rS.deleteReservationById(id,Home.connectedUser);
 			
 		}
 	    @PostMapping("/addreservation/{idannounce}")

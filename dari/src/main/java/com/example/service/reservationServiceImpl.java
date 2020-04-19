@@ -124,22 +124,16 @@ public class reservationServiceImpl implements reservationService
 			rR.save(reservation);
 		}
 	}
-
-	public void deleteReservationById(int id) 
-	{	
-		rR.deletebyid(id);
-	}
 	@Override
-	public void deleteReservationByUser(String username) 
+	public void deleteReservationById(int id,String username) 
 	{	
 		User user = uR.findByUserName(username).get();
-		List<Reservation> res= rR.deleteByUser(username);
-		for (int i=0;i<res.size();i++) 
+		Reservation r = rR.findById(id).get();
+		if(user.getId()==r.getUser().getId())
 		{
-			rR.deleteById(res.get(i).getId());
+			rR.deletebyid(id);
 		}
 	}
-
 	@Override
 	public void ajouterReservationLong(int idannounce, String username) throws Exception 
 	{
