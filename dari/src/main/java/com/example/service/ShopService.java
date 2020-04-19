@@ -125,4 +125,12 @@ public class ShopService {
 			shopRepository.save(selected);
 		});
 	}
+	public float basketPrice()
+	{
+		float price = 0;
+		for(Shop p : activeBaseket){
+			price =	price +(p.getAmount()*p.getPrice());
+		}
+		return price;
+	}
 }
