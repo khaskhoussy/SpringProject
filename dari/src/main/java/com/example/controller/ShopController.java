@@ -97,6 +97,9 @@ public class ShopController {
 		
 	    return shopService.myBasket(productIdCookie, productamountCookie);
 		}
+	public float basketPrice(){
+		return shopService.basketPrice();
+	}
 	
 	
 	@RequestMapping(value="/valdiatBasket")
