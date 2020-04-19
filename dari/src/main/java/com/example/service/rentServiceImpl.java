@@ -23,15 +23,11 @@ public class rentServiceImpl implements rentService {
 	 private static final Logger l=LogManager.getLogger(rentServiceImpl.class);
 
 	@Override
-	public void saveRent(int user_id,String cin,String LetterOfCommitment ,String proofOfPayment,String garantor) throws Exception 
+	public void saveRent(String username,String cin,String LetterOfCommitment ,String proofOfPayment,String garantor) throws Exception 
 	{
-		Rent rent =rentRepository.user(user_id);
-		int rentid =rentRepository.user(user_id).getUser().getId();
-
-		User user=userRepository.findById(user_id).get();
-		if(user_id==rentid){
-			throw new Exception("l itilisateur a deja ses documents ")	;
-		}
+		Rent rent = new Rent();
+		User user =userRepository.findByUserName(username).get();
+		//User user =userRepository.findById(1).get();
 		rent.setUser(user);
 		rent.setCin(cin);
 		rent.setLetterOfCommitment(LetterOfCommitment);
@@ -41,9 +37,9 @@ public class rentServiceImpl implements rentService {
 	}
 
 	@Override
-	public void updateRent(int id ,int user_id,String cin,String LetterOfCommitment ,String proofOfPayment,String garantor) {
-		 User u =userRepository.findById(user_id).get();
-		 Rent rent = rentRepository.update(id,user_id);
+	public void updateRent(String username,String cin,String LetterOfCommitment ,String proofOfPayment,String garantor) {
+		User u =userRepository.findByUserName(username).get();
+		Rent rent = rentRepository.user(username);
 		 
 		 rent.setUser(u);
 		 rent.setCin(cin);

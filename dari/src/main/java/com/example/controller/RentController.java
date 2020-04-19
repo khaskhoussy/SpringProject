@@ -2,6 +2,8 @@ package com.example.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,14 +22,15 @@ import com.example.service.rentService;
 
 
 @RestController
+@RequestMapping("/user/rent")
 public class RentController {
     @Autowired
     private rentService rentservice;
 
-    @PostMapping("/addrent/{user_id}/{cin}/{LetterOfCommitment}/{proofOfPayment}/{garantor}")
+    @RequestMapping(method = RequestMethod.POST,value="/addrent/{cin}/{LetterOfCommitment}/{proofOfPayment}/{garantor}")
     @ResponseBody
-    public void addrent(@PathVariable("user_id")int user_id,@PathVariable("cin")String cin,@PathVariable("LetterOfCommitment")String LetterOfCommitment,@PathVariable("proofOfPayment")String proofOfPayment,@PathVariable("garantor")String garantor) throws Exception {
-        rentservice.saveRent(user_id, cin, LetterOfCommitment, proofOfPayment, garantor);
+    public void addrent(@PathVariable("cin")String cin,@PathVariable("LetterOfCommitment")String LetterOfCommitment,@PathVariable("proofOfPayment")String proofOfPayment,@PathVariable("garantor")String garantor,HttpServletResponse response,HttpServletRequest request) throws Exception {
+        rentservice.saveRent(Home.connectedUser, cin, LetterOfCommitment, proofOfPayment, garantor);
         		
     	
     }
@@ -37,10 +40,10 @@ public class RentController {
     public List<Rent> getAllUser() {
         return rentservice.getAllRentList();
     }
-    @PutMapping(path ="/update/{id}/{user_id}/{cin}/{LetterOfCommitment}/{proofOfPayment}/{garantor}")
+    @PutMapping(path ="/update/{cin}/{LetterOfCommitment}/{proofOfPayment}/{garantor}")
     @ResponseBody
-    public void update(@PathVariable("id")int id,@PathVariable("user_id")int user_id,@PathVariable("cin")String cin,@PathVariable("LetterOfCommitment")String LetterOfCommitment,@PathVariable("proofOfPayment")String proofOfPayment,@PathVariable("garantor")String garantor ){
-         rentservice.updateRent(id,user_id, cin, LetterOfCommitment, proofOfPayment, garantor);
+    public void update(@PathVariable("cin")String cin,@PathVariable("LetterOfCommitment")String LetterOfCommitment,@PathVariable("proofOfPayment")String proofOfPayment,@PathVariable("garantor")String garantor ,HttpServletResponse response,HttpServletRequest request){
+         rentservice.updateRent(Home.connectedUser, cin, LetterOfCommitment, proofOfPayment, garantor);
     	
     }
 

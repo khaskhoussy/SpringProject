@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.entity.Announce;
 import com.example.entity.Reservation;
 import com.example.entity.User;
+import com.example.entity.Rent;
 import com.example.repository.AnnonceRepository;
 import com.example.repository.UserRepository;
 import com.example.repository.rentRepository;
@@ -39,9 +40,9 @@ import com.example.repository.reservationRepository;
 public class reservationServiceImpl implements reservationService 
 {
 	@Value("${jobs.enabled:true}")
-	  private boolean isEnabled;
-		
-	 private static final Logger l=LogManager.getLogger(rentServiceImpl.class);
+	private boolean isEnabled;
+
+	private static final Logger l=LogManager.getLogger(rentServiceImpl.class);
 
 	@Autowired
 	reservationRepository rR;
@@ -53,28 +54,28 @@ public class reservationServiceImpl implements reservationService
 	rentRepository eR;
 
 	@Override
-	public void ajouterReservation(int idannounce, int iduser, Date checkIn, Date checkOut) throws Exception 
+	public void ajouterReservation(int idannounce,String username, Date checkIn, Date checkOut) throws Exception 
 	{
 		Reservation reservation = new Reservation();
-		User user = uR.findById(iduser).get();
+		User user = uR.findByUserName(username).get();
 		Announce announce = aR.findById(idannounce).get();
 		String l="location";
 		Reservation val= rR.ajout(idannounce, checkIn, checkOut) ;
 		if(announce.getReservation().contains(val))
-			{
+		{
 			throw new Exception("Erreur cette annonce"+idannounce+" est deja reservée du "+checkIn+" au "+checkOut)	;
-			}
+		}
 		else if((announce.getType().equals(l))&&(checkIn.before(checkOut)))
-				{
-					LocalDateTime localDate = LocalDateTime.now();
-					reservation.setUser(user);
-					reservation.setAnnounce(announce);
-					reservation.setCheckIn(checkIn);
-					reservation.setCheckOut(checkOut);
-					reservation.setValide(false); //par defaut non valide
-					reservation.setDateres(localDate);
-					rR.save(reservation);		
-				}
+		{
+			LocalDateTime localDate = LocalDateTime.now();
+			reservation.setUser(user);
+			reservation.setAnnounce(announce);
+			reservation.setCheckIn(checkIn);
+			reservation.setCheckOut(checkOut);
+			reservation.setValide(false); //par defaut non valide
+			reservation.setDateres(localDate);
+			rR.save(reservation);		
+		}
 		else if(checkOut.before(checkIn))
 		{
 			throw new Exception("Erreur date debut apres date fin ")	;
@@ -100,78 +101,61 @@ public class reservationServiceImpl implements reservationService
 
 
 	@Override
-	public void modifierReservation(int id ,int idannounce, int iduser, Date checkIn, Date checkOut) throws Exception 
+	public void modifierReservation(int id ,int idannounce,String username, Date checkIn, Date checkOut) throws Exception 
 	{
-		User user = uR.findById(iduser).get();
+		User user = uR.findByUserName(username).get();
 		Announce announce = aR.findById(idannounce).get();
-		Reservation reservationF= rR.modif(idannounce,iduser,checkIn, checkOut) ;	
+		Reservation reservationF= rR.modif(idannounce,username,checkIn, checkOut) ;	
 		String l="location";
-		Reservation reservatio= rR.validation(id, iduser, idannounce);
+		Reservation reservatio= rR.validation(id, username, idannounce);
 		if(announce.getReservation().contains(reservationF))
 		{
 			throw new Exception("Erreur cette annonce"+idannounce+" est deja reservée du "+checkIn+" au "+checkOut)	;
 		}
 		else if((checkIn.before(checkOut))&&(announce.getReservation().contains(reservatio))&&(announce.getType().equals(l)))
 		{
-	
-				Reservation reservation= rR.validation(id, iduser, idannounce)	;
-				reservation.setUser(user);
-				reservation.setAnnounce(announce);
-				reservation.setCheckIn(checkIn);
-				reservation.setCheckOut(checkOut);
-				reservation.setValide(false); //par defaut non valide
-				rR.save(reservation);
-			}
+
+			Reservation reservation= rR.validation(id, username, idannounce)	;
+			reservation.setUser(user);
+			reservation.setAnnounce(announce);
+			reservation.setCheckIn(checkIn);
+			reservation.setCheckOut(checkOut);
+			reservation.setValide(false); //par defaut non valide
+			rR.save(reservation);
+		}
 	}
-	
+
 	public void deleteReservationById(int id) 
 	{	
 		rR.deletebyid(id);
 	}
 	@Override
-	public void deleteReservationByUser(int iduser) 
+	public void deleteReservationByUser(String username) 
 	{	
-		rR.deleteByUser(iduser);
-	}
-/*
-	public boolean isThisDateWithin3MonthsRange(Date checkIn,Date checkOut) 
-	{
-		// if not valid, it will throw ParseException
-		int dated =checkIn.getDay() ;
-		int datem=checkIn.getMonth();
-		int datey=checkIn.getYear();
-		
-		int date2 = checkIn.compareTo(checkOut);
-		Calendar reserverc = new GregorianCalendar();
-		if ( checkIn.after(reserverc.getTime()))
-			{
-			
-				reserverc.set(datey, datem, dated);
-				reserverc.add(Calendar.DATE, date2);
-				return true;
-			} 
-		else 
-			{
-			return false;
-			}
+		User user = uR.findByUserName(username).get();
+		List<Reservation> res= rR.deleteByUser(username);
+		for (int i=0;i<res.size();i++) 
+		{
+			rR.deleteById(res.get(i).getId());
 		}
-	*/
+	}
+
 	@Override
-	public void ajouterReservationLong(int idannounce, int iduser) throws Exception 
+	public void ajouterReservationLong(int idannounce, String username) throws Exception 
 	{
 		Reservation reservation = new Reservation();
-		User user = uR.findById(iduser).get();
+		User user = uR.findByUserName(username).get();
 		Announce announce = aR.findById(idannounce).get();
 		String l="LocationLongDuree";
 		if((announce.isDisponibilité()==false)&&(announce.getType().equals(l)))
-			{
-				reservation.setUser(user);
-				reservation.setAnnounce(announce);
-				reservation.getAnnounce().setDisponibilité(true);
-				reservation.setValide(false); //par defaut non valide
-				rR.save(reservation);		
-			}
-		
+		{
+			reservation.setUser(user);
+			reservation.setAnnounce(announce);
+			reservation.getAnnounce().setDisponibilité(true);
+			reservation.setValide(false); //par defaut non valide
+			rR.save(reservation);		
+		}
+
 	}
 	/*public void validerReservationLong(int id ,int idannounce, int iduser,int announcer) 
 	{
@@ -184,7 +168,7 @@ public class reservationServiceImpl implements reservationService
 		String l="LocationLongDuree";
 		if((announce.getReservation().contains(validateF))&&(ann==announcer)&&(ren==iduser))
 			{
-	
+
 			if(announce.getType().equals(l))
 			{
 				Reservation validate=rR.valLong(id, iduser, idannounce);
@@ -198,13 +182,13 @@ public class reservationServiceImpl implements reservationService
 			}
 			}
 	}
-	*/
+	 */
 	@Override
-	public List<Reservation> findReservationByUser(int iduser) 
+	public List<Reservation> findReservationByUser(String username) 
 	{
-		return  rR.findReservationByUser(iduser);
+		return  rR.findReservationByUser(username);
 	}
-	
+
 	@Override
 	public List<Announce> findannonceby(String type,String region ,int chambremin,int chambremax, float priceMin, float priceMax ) 
 	{		
@@ -232,28 +216,30 @@ public class reservationServiceImpl implements reservationService
 		List<Announce> a = null;
 
 		return aR.findbyDate(type,region,checkIn, checkOut);
-				
+
 	}
-	
+
 	@Override
-	@Scheduled(cron="*/60 * * * * ?")
+	@Scheduled(cron="*/15 * * * * ?")
 	public void valider() 
 	{
 		List<User> user =uR.findAll();
-		List<Reservation> res= rR.findReservation();
-		 for (int i=0;i<res.size();i++) 
-		 {
-			 if(res.get(i).isValide()==false)
-			 {
-						res.get(i).setValide(true);
-						rR.save(res.get(i));
-			 }
-		 }
-		
+		List<Reservation> res= rR.findReservationD();
+		for (int i=0;i<res.size();i++) 
+		{
+			for (int j=0;j<user.size();j++) 
+			{
+				if(res.get(i).getUser().getId()==user.get(j).getId())
+				{
+					res.get(i).setValide(true);
+					rR.save(res.get(i));
+				}
+			}
+		}
 	}
-	@Override
-	@Scheduled(cron="*/60 * * * * ?")
-	public void supprimer() 
+	//@Override
+	//@Scheduled(cron="*/60 * * * * ?")
+	/*	public void supprimer() 
 	{
 		List<User> user =uR.findAll();
 		List<Reservation> res= rR.findReservationD();
@@ -262,11 +248,10 @@ public class reservationServiceImpl implements reservationService
 		 {
 			 if(now.isAfter(res.get(i).getDateres()))
 			 {
-				 
+
 				 deleteReservationById(res.get(i).getId());
-		 
+
 			 }
 		 }	 
-	}
+	}*/
 }
- 

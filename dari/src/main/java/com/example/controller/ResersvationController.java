@@ -1,8 +1,12 @@
 package com.example.controller;
 
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
+
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.plaf.synth.Region;
 import javax.validation.Valid;
 
@@ -26,14 +30,15 @@ import com.example.service.reservationService;
 
 
 @RestController
+@RequestMapping("/user/reservation")
 public class ResersvationController {
 	
 	 @Autowired
 	    private reservationService rS;
-	    @PostMapping("/addreservation/{idannounce}/{iduser}/{checkIn}/{checkOut}")
+	    @PostMapping("/addreservation/{idannounce}/{checkIn}/{checkOut}")
 	    @ResponseBody
-	    public void ajouterReservation(@PathVariable("idannounce") int idannounce, @PathVariable("iduser") int iduser, @PathVariable("checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,@PathVariable("checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut) throws Exception {
-	         rS.ajouterReservation(idannounce,iduser,checkIn,checkOut);
+	    public void ajouterReservation(@PathVariable("idannounce") int idannounce, @PathVariable("checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,@PathVariable("checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut,HttpServletResponse response,HttpServletRequest request) throws Exception {
+	         rS.ajouterReservation(idannounce,Home.connectedUser,checkIn,checkOut);
 	    }
 	    
 	    @RequestMapping(value="/allreservation")
@@ -43,24 +48,24 @@ public class ResersvationController {
 	    }
 	    
 
-	    @PutMapping(value = "/modifierreservation/{id}/{idannounce}/{iduser}/{checkIn}/{checkOut}") 
+	    @PutMapping(value = "/modifierreservation/{id}/{idannounce}/{checkIn}/{checkOut}") 
 	    @ResponseBody
-		public void modifierReservation(@PathVariable("id") int id,@PathVariable("idannounce") int idannounce, @PathVariable("iduser") int iduser, @PathVariable("checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,@PathVariable("checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut) throws Exception {
+		public void modifierReservation(@PathVariable("id") int id,@PathVariable("idannounce") int idannounce, @PathVariable("checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,@PathVariable("checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut,HttpServletResponse response,HttpServletRequest request) throws Exception {
 		    
-	    	rS.modifierReservation(id,idannounce, iduser, checkIn, checkOut);
+	    	rS.modifierReservation(id,idannounce, Home.connectedUser, checkIn, checkOut);
 
 		}
 		
-	    @DeleteMapping("/deletereservationbyuser/{iduser}") 
+	    @DeleteMapping("/deletereservationbyuser") 
 		@ResponseBody 
-		public void deleteReservationByuser(@PathVariable("iduser")int iduser) {
-			rS.deleteReservationByUser(iduser);
+		public void deleteReservationByuser(HttpServletResponse response,HttpServletRequest request) {
+			rS.deleteReservationByUser(Home.connectedUser);
 			
 		}
-	    @PostMapping("/addreservation/{idannounce}/{iduser}")
+	    @PostMapping("/addreservation/{idannounce}")
 	    @ResponseBody
-	    public void ajouterReservationLong(@PathVariable("idannounce") int idannounce, @PathVariable("iduser") int iduser) throws Exception {
-	         rS.ajouterReservationLong(idannounce,iduser);
+	    public void ajouterReservationLong(@PathVariable("idannounce") int idannounce,HttpServletResponse response,HttpServletRequest request) throws Exception {
+	         rS.ajouterReservationLong(idannounce,Home.connectedUser);
 	    }
 	  /*  @PutMapping(value ="/validerreservationLong/{id}/{idannounce}/{iduser}/{announcer}") 
 	    @ResponseBody
@@ -69,10 +74,10 @@ public class ResersvationController {
 		    	rS.validerReservationLong(id, idannounce, iduser, announcer);
 
 		}*/
-	    @RequestMapping(value="/reservationbyuser/{iduser}")
-	    public List<Reservation> findReservationByUser(@PathVariable("iduser")int iduser) 
+	    @RequestMapping(value="/reservationbyuser")
+	    public List<Reservation> findReservationByUser(HttpServletResponse response,HttpServletRequest request) 
 	    {
-	    	return rS.findReservationByUser(iduser);
+	    	return rS.findReservationByUser(Home.connectedUser);
 	    }
 
 	    @RequestMapping(value="/findAnnounce/{type}/{region}")
