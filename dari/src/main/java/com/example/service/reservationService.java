@@ -24,9 +24,9 @@ public interface reservationService {
 	public List<Announce> annoncebyregion(String type,String region);
 	public List<Announce> annoncebyprice(String type, String region, float priceMin, float priceMax);
 	public List<Announce> findannoncebynbrchambre(String type, String region, int chambremin, int chambremax);
-	public void valider();
+	//public void valider();
 	public List<Announce> findannoncebydate(String type, String region, Date checkIn, Date checkOut) throws Exception;
-	//public void supprimer();
+	public void supprimer();
 
 
 
