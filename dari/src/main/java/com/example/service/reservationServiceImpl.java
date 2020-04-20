@@ -140,32 +140,7 @@ public class reservationServiceImpl implements reservationService
 		}
 
 	}
-	/*public void validerReservationLong(int id ,int idannounce, int iduser,int announcer) 
-	{
-		User user = uR.findById(iduser).get();
-		Announce announce = aR.findById(idannounce).get();
-		User rent = uR.findById(iduser).get();
-		Reservation validateF= rR.validation(id,iduser, idannounce) ;
-		int ann=announce.getUser().getId();
-		int ren=rent.getRent().getUser().getId();
-		String l="LocationLongDuree";
-		if((announce.getReservation().contains(validateF))&&(ann==announcer)&&(ren==iduser))
-			{
 
-			if(announce.getType().equals(l))
-			{
-				Reservation validate=rR.valLong(id, iduser, idannounce);
-				validate.setId(id);
-				validate.setUser(user);
-				validate.setAnnounce(announce);
-				validate.setValide(true); //par defaut non valide
-				rR.save(validate);
-				announce.setDisponibilité(false);
-				aR.save(announce);
-			}
-			}
-	}
-	 */
 	@Override
 	public List<Reservation> findReservationByUser(String username) 
 	{
@@ -216,9 +191,9 @@ public class reservationServiceImpl implements reservationService
 			}
 		}
 	}*/
-	@Override
-	@Scheduled(cron="*/60 * * * * ?")
-		public void supprimer() 
+	//@Override
+	//@Scheduled(cron="*/60 * * * * ?")
+		/*public void supprimer() 
 	{
 		List<Reservation> res= rR.findReservationD();
 		LocalDateTime now = LocalDateTime.now().plusMinutes(2);
@@ -231,5 +206,5 @@ public class reservationServiceImpl implements reservationService
 
 			 }
 		 }	 
-	}
+	}*/
 }
