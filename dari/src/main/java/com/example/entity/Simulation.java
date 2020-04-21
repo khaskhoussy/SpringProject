@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @JsonIgnoreProperties({ "user", "offre"})
 public class Simulation implements Serializable{
-	
+///	
 
 	@EmbeddedId
 	private SimulationPK simulationpk;
