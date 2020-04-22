@@ -19,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
-
 @Entity
 public class Announce {
 	
@@ -29,47 +28,27 @@ public class Announce {
 	private String description;
 	private float longitude;
 	private float latitude;
+	private Date beginDate;
+	private Date endDate;
 	private int vueNumber;
 	private float price;
 	private String img;
 	private boolean disponibilité;
 	private String type;
-	private String regions;
-	private int nbrchambre;
-	private float superficie;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "iduser", referencedColumnName = "id", insertable=false, updatable=false)
-	private User user;
-	
-	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
-	private List<Appointment> Appointments;
 
-	@JsonBackReference
-	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
-	private List<Reservation> Reservation;	
-	
-	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
-	private List<CommentsAnnonce> commentsAnnonces;
-	
-	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
-	private List<Pictures> pictures;
-	
-	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
-	private List<SearchHistory> searchHistorys;
-	
-	@OneToMany
-	@JoinTable(name="Favorites")
-	private List<User> users;
+
 
 
 	//	@Enumerated(EnumType.STRING)
 	//@NotNull
+	private String regions;
+	private int nbrchambre;
+	private float superficie;
 	
 	
 	
-	/*
-	public Regions getRegions() {
+/*	public Regions getRegions() {
 		return regions;
 	}
 
@@ -79,12 +58,11 @@ public class Announce {
 		this.regions = regions;
 	}
 
-*/
 
+*/
 	public int getNbrchambre() {
 		return nbrchambre;
 	}
-	
 
 
 
@@ -106,6 +84,19 @@ public class Announce {
 
 
 
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "iduser", referencedColumnName = "id", insertable=false, updatable=false)
+	private User user;
+	
+	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
+	private List<Appointment> Appointments;
+
+	@JsonBackReference
+	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
+	private List<Reservation> Reservation;	
+	
+	
+	
 	public List<Reservation> getReservation() {
 		return Reservation;
 	}
@@ -118,6 +109,19 @@ public class Announce {
 
 
 
+	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
+	private List<CommentsAnnonce> commentsAnnonces;
+	
+	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
+	private List<Pictures> pictures;
+	
+	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
+	private List<SearchHistory> searchHistorys;
+	
+	@OneToMany
+	@JoinTable(name="Favorites")
+	private List<User> users;
+	
 	
 	
 
@@ -151,6 +155,45 @@ public class Announce {
 		this.regions = regions;
 	}
 
+
+
+	public Announce(int id, String name, String description, Date beginDate, Date endDate, int vueNumber, float price,
+			String img, boolean disponibilité, String type, String regions, int nbrchambre, float superficie,
+			List<User> users) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.beginDate = beginDate;
+		this.endDate = endDate;
+		this.vueNumber = vueNumber;
+		this.price = price;
+		this.img = img;
+		this.disponibilité = disponibilité;
+		this.type = type;
+		this.regions = regions;
+		this.nbrchambre = nbrchambre;
+		this.superficie = superficie;
+		this.users = users;
+	}
+
+
+
+	public Announce(String name, String description, float longitude, float latitude, Date beginDate, Date endDate,
+			int vueNumber, float price, String img, boolean disponibilité, String type) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.beginDate = beginDate;
+		this.endDate = endDate;
+		this.vueNumber = vueNumber;
+		this.price = price;
+		this.img = img;
+		this.disponibilité = disponibilité;
+		this.type = type;
+	}
 
 
 
@@ -214,6 +257,30 @@ public class Announce {
 
 
 
+	public Date getBeginDate() {
+		return beginDate;
+	}
+
+
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+
+
 	public int getVueNumber() {
 		return vueNumber;
 	}
@@ -272,40 +339,6 @@ public class Announce {
 		this.type = type;
 	}
 	
-	public Announce(int id, String name, String description,int vueNumber, float price,
-			String img, boolean disponibilité, String type, String regions, int nbrchambre, float superficie,
-			List<User> users) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-
-		this.vueNumber = vueNumber;
-		this.price = price;
-		this.img = img;
-		this.disponibilité = disponibilité;
-		this.type = type;
-		this.regions = regions;
-		this.nbrchambre = nbrchambre;
-		this.superficie = superficie;
-		this.users = users;
-	}
-
-
-
-	public Announce(String name, String description, float longitude, float latitude,
-			int vueNumber, float price, String img, boolean disponibilité, String type) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.longitude = longitude;
-		this.latitude = latitude;
-		this.vueNumber = vueNumber;
-		this.price = price;
-		this.img = img;
-		this.disponibilité = disponibilité;
-		this.type = type;
-	}
 	
 
 }

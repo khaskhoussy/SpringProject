@@ -54,11 +54,11 @@ public interface reservationRepository  extends CrudRepository<Reservation,Integ
     @Transactional
 	@Query(value="DELETE from Reservation r  where  r.id= :id")
 	public void deletebyid(@Param("id")int id);
-
-	@Transactional
-	@Modifying
-	@Query(value="DELETE from Reservation r  where  r.user.userName= :userName")
-	public void deleteByUser(@Param("userName")String userName);
+	
+	
+	
+	@Query(value="Select r from Reservation r  where  r.user.userName= :userName")
+	public List<Reservation> deleteByUser(@Param("userName")String userName);
 	
 	
 	

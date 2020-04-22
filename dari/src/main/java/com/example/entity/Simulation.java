@@ -1,82 +1,132 @@
 package com.example.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.*;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-
 @Entity
-@JsonIgnoreProperties({ "user", "offre"})
-public class Simulation implements Serializable{
-///	
+public class Simulation {
 
-	@EmbeddedId
-	private SimulationPK simulationpk;
-	
-	private static final long serialVersionUID = 3876346912862238239L;
-	
-	
-	
-	 //idUser est a la fois primary key et foreign key
-	@ManyToOne
-    @JoinColumn(name = "idUser", referencedColumnName = "id", insertable=false, updatable=false)
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	private Date date;
+	private float monthleyPayBack;
+	private float creditAmount;
+	private int refoundPeroid;
+	private float salary;
+	private float price;
+	@ManyToOne(cascade = CascadeType.ALL)
 	private User user;
 	
-	//idOffre est a la fois primary key et foreign key
-	
-	@ManyToOne
-    @JoinColumn(name = "idOffre", referencedColumnName = "id", insertable=false, updatable=false)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Offre offre;
-
-	public SimulationPK getSimulationpk() {
-		return simulationpk;
+	
+	
+	
+	public Simulation() {
+		super();
 	}
 
-	public void setSimulationpk(SimulationPK simulationpk) {
-		this.simulationpk = simulationpk;
+
+
+	public Simulation(Date date, float monthleyPayBack, float creditAmount, int refoundPeroid, float salary,
+			float price) {
+		super();
+		this.date = date;
+		this.monthleyPayBack = monthleyPayBack;
+		this.creditAmount = creditAmount;
+		this.refoundPeroid = refoundPeroid;
+		this.salary = salary;
+		this.price = price;
 	}
 
-	public User getUser() {
-		return user;
+
+
+	public int getId() {
+		return id;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public Offre getOffre() {
-		return offre;
+
+
+	public Date getDate() {
+		return date;
 	}
 
-	public void setOffre(Offre offre) {
-		this.offre = offre;
+
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	@Override
-	public String toString() {
-		return "Simulation [simulationpk=" + simulationpk + "]";
+
+
+	public float getMonthleyPayBack() {
+		return monthleyPayBack;
 	}
-	 
-	
-	
-	
-	
-	
-	/*
 
 
+
+	public void setMonthleyPayBack(float monthleyPayBack) {
+		this.monthleyPayBack = monthleyPayBack;
+	}
+
+
+
+	public float getCreditAmount() {
+		return creditAmount;
+	}
+
+
+
+	public void setCreditAmount(float creditAmount) {
+		this.creditAmount = creditAmount;
+	}
+
+
+
+	public int getRefoundPeroid() {
+		return refoundPeroid;
+	}
+
+
+
+	public void setRefoundPeroid(int refoundPeroid) {
+		this.refoundPeroid = refoundPeroid;
+	}
+
+
+
+	public float getSalary() {
+		return salary;
+	}
+
+
+
+	public void setSalary(float salary) {
+		this.salary = salary;
+	}
+
+
+
+	public float getPrice() {
+		return price;
+	}
+
+
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
 	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private User user;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Offre offre;*/
 }
