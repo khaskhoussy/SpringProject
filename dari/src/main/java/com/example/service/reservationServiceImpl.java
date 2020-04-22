@@ -1,6 +1,7 @@
 package com.example.service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +18,8 @@ import com.example.repository.AnnonceRepository;
 import com.example.repository.UserRepository;
 import com.example.repository.rentRepository;
 import com.example.repository.reservationRepository;
-
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 
 
 @EnableScheduling
@@ -28,7 +30,8 @@ public class reservationServiceImpl implements reservationService
 	private boolean isEnabled;
 
 	private static final Logger l=LogManager.getLogger(rentServiceImpl.class);
-
+	@Autowired
+	private JavaMailSender javaMailSender;
 	@Autowired
 	reservationRepository rR;
 	@Autowired
@@ -44,15 +47,17 @@ public class reservationServiceImpl implements reservationService
 		Reservation reservation = new Reservation();
 		User user = uR.findByUserName(username).get();
 		Announce announce = aR.findById(idannounce).get();
+		LocalDateTime localDate = LocalDateTime.now();
+		Date d = Date.from(localDate.atZone(ZoneId.systemDefault()).toInstant());
 		String l="location";
 		Reservation val= rR.ajout(idannounce, checkIn, checkOut) ;
 		if(announce.getReservation().contains(val))
 		{
 			throw new Exception("Erreur cette annonce"+idannounce+" est deja reservée du "+checkIn+" au "+checkOut)	;
 		}
-		else if((announce.getType().equals(l))&&(checkIn.before(checkOut)))
+		else if((announce.getType().equals(l))&&(checkIn.before(checkOut)&&(checkIn.after(d))))
 		{
-			LocalDateTime localDate = LocalDateTime.now();
+
 			reservation.setUser(user);
 			reservation.setAnnounce(announce);
 			reservation.setCheckIn(checkIn);
@@ -148,10 +153,15 @@ public class reservationServiceImpl implements reservationService
 	}
 
 	@Override
-	public List<Announce> findannonceby(String type,String region ,int chambremin,int chambremax, float priceMin, float priceMax ) 
+	public List<Announce> findannonceby(String type,String region ,int chambremin, float priceMin, float priceMax,Date checkIn,Date checkOut ) 
 	{		
-		return aR.findReservationBynbrChambreandprice(type,region,chambremin, chambremax, priceMin, priceMax);
-	}
+		List<Announce> r= aR.findAll();
+		r= aR.findReservationByRegion(type,region);
+		r= aR.findReservationBynbrChambre(chambremin);
+		r= aR.findReservationBynbyprice(priceMin, priceMax);
+		r = aR.findbyDate(checkIn, checkOut);
+		return r;	
+		}
 	@Override
 	public List<Announce> annoncebyregion(String type,String region) 
 	{
@@ -160,17 +170,51 @@ public class reservationServiceImpl implements reservationService
 	@Override
 	public List<Announce> annoncebyprice(String type,String region,float priceMin, float priceMax) 
 	{
-		return aR.findReservationBynbyprice(type, region, priceMin, priceMax);
-	}
+		List<Announce> r= aR.findAll();
+		r= aR.findReservationBynbyprice(priceMin, priceMax);
+		return r;	
+		}
 	@Override
-	public List<Announce> findannoncebynbrchambre(String type,String region ,int chambremin,int chambremax) 
+	public List<Announce> findannoncebynbrchambre(String type,String region ,int chambremin) 
 	{		
-		return aR.findReservationBynbrChambre(type,region,chambremin, chambremax);
-	}
+		List<Announce> r= aR.findAll();
+		r= aR.findReservationBynbrChambre(chambremin);
+		return r;
+		}
 	@Override
 	public List<Announce> findannoncebydate(String type,String region ,Date checkIn,Date checkOut) throws Exception 
 	{		
-		return aR.findbyDate(type,region,checkIn, checkOut);
+		List<Announce> r= aR.findAll();
+		r = aR.findbyDate(checkIn, checkOut);
+		return r;
+	}
+	@Override
+	public List<Announce> findannonceby(String type,String region ,Date checkIn,Date checkOut,float priceMin, float priceMax) throws Exception 
+	{		
+		List<Announce> r= aR.findAll();
+		r = aR.findbyDate(checkIn, checkOut);
+		return r;
+	}
+
+
+	@Override
+	public List<Announce> findannoncebyprixnbrchambre(String type, String region, float priceMin, float priceMax,
+			int chambremin) {
+		List<Announce> r= aR.findAll();
+		r= aR.findReservationByRegion(type,region);
+		r= aR.findReservationBynbrChambre(chambremin);
+		r= aR.findReservationBynbyprice(priceMin, priceMax);
+		return r;	
+
+	}
+
+
+	@Override
+	public List<Announce> findannoncebydatec(String type, String region, Date checkIn, Date checkOut, int chambremin) {
+		List<Announce> r= aR.findAll();
+		r= aR.findReservationByRegion(type,region);
+		r= aR.findReservationBynbrChambre(chambremin);
+		return r;	
 	}
 
 	//@Override
@@ -179,32 +223,53 @@ public class reservationServiceImpl implements reservationService
 	{
 		List<User> user =uR.findAll();
 		List<Reservation> res= rR.findReservationD();
+		SimpleMailMessage msg = new SimpleMailMessage();
+
 		for (int i=0;i<res.size();i++) 
 		{
 			for (int j=0;j<user.size();j++) 
 			{
-				if(res.get(i).getUser().getId()==user.get(j).getId())
+
+				if((res.get(i).getUser().getRent().getUser().getId()==user.get(j).getId())&&(res.get(i).isValide()==false))
 				{
 					res.get(i).setValide(true);
 					rR.save(res.get(i));
+					msg.setTo(res.get(i).getUser().getMailAddress());
+					msg.setSubject("Validate");
+					msg.setText("Hello "+res.get(i).getUser().getName()+" your reservation from "+res.get(i).getCheckIn()+" to "+res.get(i).getCheckOut() +" has been validated");
+					javaMailSender.send(msg);
 				}
+				else if (res.get(i).isValide()==false){
+
+					msg.setTo(res.get(i).getUser().getMailAddress());
+					msg.setSubject("Validation");
+					msg.setText("Hello "+res.get(i).getUser().getName()+" you have to upload your docs to validate your reservation");
+					javaMailSender.send(msg);
+				}
+		
+
 			}
 		}
 	}*/
 	//@Override
 	//@Scheduled(cron="*/60 * * * * ?")
-		/*public void supprimer() 
+	/*public void supprimer() 
 	{
 		List<Reservation> res= rR.findReservationD();
 		LocalDateTime now = LocalDateTime.now().plusMinutes(2);
+		SimpleMailMessage msg = new SimpleMailMessage();
+
 		for (int i=0;i<res.size();i++) 
-		 {
-			 if(now.isAfter(res.get(i).getDateres()))
-			 {
+		{
+			if(now.isAfter(res.get(i).getDateres()))
+			{
 
-				 deleteReservation(res.get(i).getId());
-
-			 }
-		 }	 
+				deleteReservation(res.get(i).getId());
+				msg.setTo(res.get(i).getUser().getMailAddress());
+				msg.setSubject("Validation");
+				msg.setText("Hello "+res.get(i).getUser().getName()+"Your reservation has been deleted");
+				javaMailSender.send(msg);
+			}
+		}	 
 	}*/
 }
