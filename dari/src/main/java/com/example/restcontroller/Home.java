@@ -1,8 +1,7 @@
-package com.example.controller;
+package com.example.restcontroller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +31,7 @@ public class Home {
 	{
 		connectedUser = authentication.getName();
 		userConnected = userRepository.findByUserName(connectedUser).get();
-		return connectedUser ;
+		return "Hello" ;
 	}	
 	
 	@GetMapping("/admin")

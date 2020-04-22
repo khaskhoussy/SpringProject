@@ -1,6 +1,7 @@
-package com.example.controller;
+package com.example.restcontroller;
 
 import java.util.List;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.restcontroller.Home;
 import com.example.entity.Rent;
 import com.example.service.rentService;
 

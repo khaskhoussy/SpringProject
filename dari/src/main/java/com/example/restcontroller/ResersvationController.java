@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.restcontroller;
 
 
 import java.util.Date;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.restcontroller.Home;
 import com.example.entity.Announce;
 import com.example.entity.Reservation;
 import com.example.service.reservationService;

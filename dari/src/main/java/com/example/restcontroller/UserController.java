@@ -1,6 +1,4 @@
-package com.example.controller;
-import com.example.controller.Home;
-
+package com.example.restcontroller;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +18,7 @@ import com.example.entity.Message;
 import com.example.entity.MessageBroker;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
+import com.example.restcontroller.Home;
 import com.example.service.MessageService;
 import com.example.service.RelationService;
 import com.example.service.UserService;

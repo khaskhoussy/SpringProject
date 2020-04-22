@@ -30,8 +30,8 @@ public class reservationServiceImpl implements reservationService
 	private boolean isEnabled;
 
 	private static final Logger l=LogManager.getLogger(rentServiceImpl.class);
-	@Autowired
-	private JavaMailSender javaMailSender;
+	//@Autowired
+	//private JavaMailSender javaMailSender;
 	@Autowired
 	reservationRepository rR;
 	@Autowired
