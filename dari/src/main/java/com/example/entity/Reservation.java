@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -29,8 +30,9 @@ public class Reservation implements Serializable  {
     @JoinColumn(name = "iduser", referencedColumnName = "id")
 	private User user;
 	
-	//@JsonBackReference
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idannounce", referencedColumnName = "id")
 	private Announce announce;
 	private LocalDateTime dateres;

@@ -56,10 +56,10 @@ public class ResersvationController {
 
 		}
 		
-	    @DeleteMapping("/deletereservationbyuser") 
+	    @DeleteMapping("/deletereservationbyId/{id}") 
 		@ResponseBody 
-		public void deleteReservationByuser(HttpServletResponse response,HttpServletRequest request) {
-			rS.deleteReservationByUser(Home.connectedUser);
+		public void deleteReservationById(@PathVariable("id") int id,HttpServletResponse response,HttpServletRequest request) {
+			rS.deleteReservationById(id,Home.connectedUser);
 			
 		}
 	    @PostMapping("/addreservation/{idannounce}")
@@ -82,50 +82,83 @@ public class ResersvationController {
 
 	    @RequestMapping(value="/findAnnounce/{type}/{region}")
 	    @ResponseBody
-	    public List<Announce> annoncebyregion(@PathVariable("type") String type,@PathVariable("region") String region) 
+	    public List<Announce> annoncebyregion(@PathVariable(value = "type") String type,@PathVariable(value = "region") String region) 
 		{
 	    	
 	    		return rS.annoncebyregion(type, region);
 		}
-	    @RequestMapping(value="/findAnnouncebyp/{type}/{region}/{priceMin}/{priceMax}")
+	    @RequestMapping(value="/findAnnounce/{type}/{region}/{priceMin}/{priceMax}")
 	   
-	    public List<Announce> annoncebyprice(@PathVariable("type") String type,@PathVariable("region") String region,@PathVariable("priceMin") float priceMin,@PathVariable("priceMax") float priceMax) 
+	    public List<Announce> annoncebyprice(@PathVariable(value = "type") String type,@PathVariable(value = "region") String region,@PathVariable(value = "priceMin") float priceMin,@PathVariable(value = "priceMax") float priceMax) 
 		{
 	    
 	    			return rS.annoncebyprice(type, region, priceMin, priceMax);
 	    		
 	    	
 	    }
-	    @RequestMapping(value="/findAnnouncebynbrch/{type}/{region}/{chambremin}/{chambremax}")
+	    @RequestMapping(value="/findAnnounce/{type}/{region}/{chambremin}")
 	   
-	    public List<Announce> annoncebychambre(@PathVariable("type") String type,@PathVariable("region") String region
-	    		,@PathVariable("chambremin") int chambremin,@PathVariable("chambremax") int chambremax) 
+	    public List<Announce> annoncebychambre(@PathVariable(value = "type") String type,@PathVariable(value = "region") String region
+	    		,@PathVariable(value = "chambremin") int chambremin) 
 		{
 	    	
-	    			return rS.findannoncebynbrchambre(type, region, chambremin, chambremax);
+	    			return rS.findannoncebynbrchambre(type, region, chambremin);
 	    		
 	    	
 	    }
-	    @RequestMapping(value="/findAnnounce/{type}/{region}/{chambremin}/{chambremax}/{priceMin}/{priceMax}")
-	   
-	    public List<Announce> annoncebych(@PathVariable("type") String type,@PathVariable("region") String region
-	    		,@PathVariable("chambremin") int chambremin,@PathVariable("chambremax") int chambremax,
-	    		@PathVariable("priceMin") float priceMin,@PathVariable("priceMax") float priceMax) 
+	    @RequestMapping(value="/findAnnounce/{type}/{region}/{priceMin}/{priceMax}/{chambremin}")
+		   
+	    public List<Announce> annoncebychambreprix(@PathVariable(value = "type") String type,@PathVariable(value = "region") String region
+	    		,@PathVariable(value = "chambremin") int chambremin,@PathVariable(value = "priceMin") float priceMin,@PathVariable(value = "priceMax") float priceMax) 
 		{
-	  
-	    			return rS.findannonceby(type,region,chambremin, chambremax, priceMin, priceMax);
+	    	
+	    			return rS.findannoncebyprixnbrchambre(type, region, priceMin, priceMax, chambremin);
 	    		
+	    	
+	    }
+	  
+	  
 
-		}
-	    
-	    @RequestMapping(value="/findAnnouncebydate/{type}/{region}/{checkIn}/{checkOut}")
+	    @RequestMapping(value="/findAnnounce/{type}/{region}/{checkIn}/{checkOut}")
 		public List<Announce> findannonceby(@PathVariable("type") String type,
-				 @PathVariable("region") String region,
-				 @PathVariable("checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,
-				 @PathVariable("checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut) throws Exception 
+				 @PathVariable(value = "region") String region,
+				 @PathVariable(value = "checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,
+				 @PathVariable(value = "checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut) throws Exception 
 	    {
 	    	return rS.findannoncebydate(type, region, checkIn, checkOut);
 	    }
+	    
+	    @RequestMapping(value="/findAnnounce/{type}/{region}/{checkIn}/{checkOut}/{chambremin}")
+		public List<Announce> findannoncebyc(@PathVariable("type") String type,
+				 @PathVariable(value = "region") String region,
+				 @PathVariable(value = "checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,
+				 @PathVariable(value = "checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut,@PathVariable(value = "chambremin") int chambremin) throws Exception 
+	    {
+	    	return rS.findannoncebydatec(type, region, checkIn, checkOut,chambremin);
+	    }
+	    
+	    @RequestMapping(value="/findAnnounce/{type}/{region}/{checkIn}/{checkOut}/{priceMin}/{priceMax}")
+	 		public List<Announce> findannoncebyd(@PathVariable("type") String type,
+	 				 @PathVariable(value = "region") String region,
+	 				 @PathVariable(value = "checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,
+	 				 @PathVariable(value = "checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut,
+	 	    		@PathVariable(value = "priceMin") float priceMin,@PathVariable(value = "priceMax") float priceMax) throws Exception 
+	 	    {
+	 	    	return rS.findannonceby(type, region, checkIn, checkOut, priceMin, priceMax);
+	 	    
+	 	    }
+	    
+	    @RequestMapping(value="/findAnnounce/{type}/{region}/{checkIn}/{checkOut}/{priceMin}/{priceMax}/{chambremin}")
+		   
+	    public List<Announce> annoncebych(@PathVariable(value = "type") String type,@PathVariable(value = "region") String region
+	    		,@PathVariable(value = "chambremin") int chambremin,@PathVariable(value = "priceMin") float priceMin,@PathVariable(value = "priceMax") float priceMax,@PathVariable(value = "checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,
+				 @PathVariable(value = "checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut) 
+		{
+	  
+	    			return rS.findannonceby(type,region,chambremin, priceMin, priceMax, checkIn, checkOut);
+	    		
+
+		}
 	    }
 
 
