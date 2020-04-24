@@ -42,10 +42,10 @@ public class CustomLoginSeccessHandler extends SimpleUrlAuthenticationSuccessHan
 		for(GrantedAuthority a : authorities){
 			roles.add(a.getAuthority());
 		}
-		if(roles.contains("USER"))
+		if(roles.contains("ROLE_USER"))
 		
 			return  "/user/test" ;
-		if(roles.contains("ADMIN"))
+		if(roles.contains("ROLE_ADMIN"))
 			return "/admin/test";
 		
 		return "";
