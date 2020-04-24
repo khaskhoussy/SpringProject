@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<title>LoginPage</title>
+</head>
+<body>
+<h:form id="form">
+<b>Connexion</b>
+<h:panelGrid columns="2">
+<h:outputText value="Login UserName" />
+<h:inputText value="#{employeController.username}" />
+<h:outputText value="Mot de passe" />
+<h:inputSecret value="#{employeController.password}" />
+<h:commandButton id="btn" value="Connexion" action="#{employeController.doLogin()}" />
+<h:message for="btn"/>
+</h:panelGrid>
+</h:form>
+</body>
+</html>
