@@ -8,8 +8,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.example.entity.Announce;
 import com.example.entity.Reservation;
@@ -18,6 +20,7 @@ import com.example.repository.AnnonceRepository;
 import com.example.repository.UserRepository;
 import com.example.repository.rentRepository;
 import com.example.repository.reservationRepository;
+
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -30,8 +33,9 @@ public class reservationServiceImpl implements reservationService
 	private boolean isEnabled;
 
 	private static final Logger l=LogManager.getLogger(rentServiceImpl.class);
-	//@Autowired
-	//private JavaMailSender javaMailSender;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
 	@Autowired
 	reservationRepository rR;
 	@Autowired
