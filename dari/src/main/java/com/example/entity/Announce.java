@@ -58,9 +58,7 @@ public class Announce {
 	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
 	private List<SearchHistory> searchHistorys;
 	
-	@OneToMany
-	@JoinTable(name="Favorites")
-	private List<User> users;
+
 
 
 	//	@Enumerated(EnumType.STRING)
@@ -269,8 +267,8 @@ public class Announce {
 	}
 	
 	public Announce(int id, String name, String description,int vueNumber, float price,
-			String img, boolean disponibilité, String type, String regions, int nbrchambre, float superficie,
-			List<User> users) {
+			String img, boolean disponibilité, String type, String regions, int nbrchambre, float superficie
+		) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -284,7 +282,7 @@ public class Announce {
 		this.regions = regions;
 		this.nbrchambre = nbrchambre;
 		this.superficie = superficie;
-		this.users = users;
+		
 	}
 
 

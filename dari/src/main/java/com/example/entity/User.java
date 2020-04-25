@@ -78,8 +78,7 @@ public class User {
 		this.rent = rent;
 	}
 
-	@OneToMany(mappedBy="users",cascade = CascadeType.ALL)
-	private List<Announce> Announcess;
+	
 	
 	@OneToMany(mappedBy="ownerUser",cascade = CascadeType.ALL)
 	private List<Shop> shops;

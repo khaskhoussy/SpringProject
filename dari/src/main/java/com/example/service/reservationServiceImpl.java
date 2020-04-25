@@ -21,8 +21,8 @@ import com.example.repository.UserRepository;
 import com.example.repository.rentRepository;
 import com.example.repository.reservationRepository;
 
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.mail.SimpleMailMessage;
+//import org.springframework.mail.javamail.JavaMailSender;
 
 
 @EnableScheduling
