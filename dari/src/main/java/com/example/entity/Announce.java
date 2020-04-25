@@ -39,7 +39,7 @@ public class Announce {
 	private float superficie;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "iduser", referencedColumnName = "id", insertable=false, updatable=false)
+    @JoinColumn(name = "iduser", referencedColumnName = "id")
 	private User user;
 	
 	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
@@ -300,6 +300,30 @@ public class Announce {
 		this.disponibilité = disponibilité;
 		this.type = type;
 	}
+
+
+
+
+	public Announce(int id, String name, String description, float longitude, float latitude, int vueNumber,
+			float price, String img, boolean disponibilité, String type, String regions, int nbrchambre,
+			float superficie, User user) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.vueNumber = vueNumber;
+		this.price = price;
+		this.img = img;
+		this.disponibilité = disponibilité;
+		this.type = type;
+		this.regions = regions;
+		this.nbrchambre = nbrchambre;
+		this.superficie = superficie;
+		this.user = user;
+	}
+	
 	
 
 }
