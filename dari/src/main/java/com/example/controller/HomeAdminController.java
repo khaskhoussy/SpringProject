@@ -6,13 +6,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 @Scope(value = "session")
-@Controller(value ="UserController")
-@ELBeanName(value = "UserController")
-@Join(path = "/user/test", to = "/pages/user/test.jsf")
-public class testPage {
-	public void testUser()
-	{
-		System.out.println("active");
-	}
+@Controller(value ="employeControllerr")
+@ELBeanName(value = "employeControllerr")
+@Join(path = "/admin/Home", to = "/pages/admin/Home.jsf")
+public class HomeAdminController {
 
 }

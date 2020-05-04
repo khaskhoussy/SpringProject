@@ -44,9 +44,9 @@ public class CustomLoginSeccessHandler extends SimpleUrlAuthenticationSuccessHan
 		}
 		if(roles.contains("ROLE_USER"))
 		
-			return  "/user/test" ;
+			return  "/user/Home" ;
 		if(roles.contains("ROLE_ADMIN"))
-			return "/admin/test";
+			return "/admin/Home";
 		
 		return "";
 		

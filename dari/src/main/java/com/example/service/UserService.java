@@ -16,7 +16,7 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public User  findUserByName(String userName)
+	public  User  findUserByName(String userName)
 	{
 		User a = new User();
 		a = userRepository.findByUserName(userName).get();
