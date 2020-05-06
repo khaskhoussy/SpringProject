@@ -17,6 +17,18 @@ public class Pictures {
 	
 	
 	
+	
+	
+	public Announce getAnnounce() {
+		return announce;
+	}
+
+
+	public void setAnnounce(Announce announce) {
+		this.announce = announce;
+	}
+
+
 	public Pictures(String image) {
 		super();
 		Image = image;
@@ -40,6 +52,19 @@ public class Pictures {
 
 	public void setImage(String image) {
 		Image = image;
+	}
+
+
+	public Pictures(String image, Announce announce) {
+		super();
+		Image = image;
+		this.announce = announce;
+	}
+
+
+	public Pictures() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	

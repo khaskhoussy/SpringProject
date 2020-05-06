@@ -5,19 +5,24 @@ import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
 
 import org.ocpsoft.rewrite.servlet.RewriteFilter;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.example.properties.FilesStorageProperties;
+
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.example.service","com.example.controller","com.example.configuration","com.example.restcontroller"})
 @EntityScan("com.example.entity")
 @EnableJpaRepositories("com.example.repository")
+@EnableConfigurationProperties({ FilesStorageProperties.class })
 public class DariApplication {
 
 	public static void main(String[] args) {
