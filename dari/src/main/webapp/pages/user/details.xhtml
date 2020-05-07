@@ -57,31 +57,30 @@
       
     </div>  
 
+       
     
-    
-       
-    <div class="site-section" id="property-details">
-    
-      <div class="container">
-       
-        
-        <div class="row">
-       
-          <div class="col-lg-7">
-          
-            <div class="owl-carousel slide-one-item with-dots">
-              <ui:repeat var="picture" value="#{DetailsController.findAddimages(annonce.id)}" varStatus="status">
-       
-             
-   
-              <div><img src="#{picture.images}" alt="Image" class="img-fluid"/></div>
+
+            <div class="site-section" id="property-details">
             
-              <div><img src="images/property_3.jpg" alt="Image" class="img-fluid"/></div>
-             </ui:repeat>           
-            </div>
+      <div class="container">
+      
+        <div class="row">
+         
+          <div class="col-lg-7">
+             <ui:repeat var="picture" value="#{DetailsController.findAddimages(annonce.id)}" varStatus="status">
+            <div class="owl-carousel slide-one-item with-dots">
              
+              <div><img src="#{picture.images}"  alt="Image" class="img-fluid"/></div>
+            
+            </div>
+            </ui:repeat> 
           </div>
-           
+          
+          
+          
+       
+          
+          
           
           <div class="col-lg-5 pl-lg-5 ml-auto">
             <div class="mb-5">
@@ -134,9 +133,11 @@
          
 
           </div>
+        
         </div>
+         
       </div>
-      
+     
     </div>
     
     

@@ -27,7 +27,7 @@ public class HomeController {
 	@Autowired
 	UserService userService;
 	Logger logger = LoggerFactory.getLogger(Profile.class);
-	static User connectedUser;
+  public	static User connectedUser;
 	
 	
 	public  void getConnectedUser()

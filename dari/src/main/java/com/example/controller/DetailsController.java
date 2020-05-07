@@ -54,7 +54,7 @@ public class DetailsController {
 	}
 	
 	
-public List<Pictures> findAddimages(Integer announceid) {
+public List<Pictures>findAddimages(Integer announceid) {
 		
 		
 		
