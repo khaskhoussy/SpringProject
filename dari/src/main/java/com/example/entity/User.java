@@ -95,7 +95,7 @@ public class User {
 	}
 
 
-
+		
 	public User(String userName, String password, int phoneNumber, String name, String lastName, String roles,
 			String mailAddress, int nic) {
 		super();
@@ -109,6 +109,14 @@ public class User {
 		this.nic = nic;
 	}
 
+	public User (String name,String lastName,int nic,int phoneNumber) {
+		super();
+		
+		this.phoneNumber = phoneNumber;
+		this.name = name;
+		this.lastName = lastName;
+		this.nic = nic;
+	}
 
 
 	public User(int id, String userName, String password, int phoneNumber, String name, String lastName, String roles,

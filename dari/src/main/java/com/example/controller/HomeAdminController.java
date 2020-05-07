@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 @Scope(value = "session")
 @Controller(value ="employeControllerr")
 @ELBeanName(value = "employeControllerr")
-@Join(path = "/admin/test", to = "/pages/admin/otherTest.jsf")
-public class otherTest {
+@Join(path = "/admin/Home", to = "/pages/admin/Home.jsf")
+public class HomeAdminController {
 
 }
