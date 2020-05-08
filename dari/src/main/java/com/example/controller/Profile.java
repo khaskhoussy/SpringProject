@@ -1,6 +1,13 @@
 package com.example.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Random;
+
+import javax.servlet.http.Part;
+
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.slf4j.Logger;
@@ -11,7 +18,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.example.entity.User;
+import com.example.service.FileStorageService;
 import com.example.service.UserService;
+
 
 @Scope(value = "session")
 @Controller(value ="ProfileController")
@@ -23,12 +32,16 @@ public class Profile {
 	
 	 @Autowired
 	 private UserService userService;
+	 @Autowired
+	 FileStorageService fileStorageService;
 	 
 	 private User connectedUser ;
 	 private String newPassword;
 	 private String currentPassword;
 	 private String repeatdPassword;
 	 private String passwordResult;
+	 private Part   myImage;
+	 private String imageUrl;
 	 
 
 	
@@ -63,6 +76,19 @@ public class Profile {
 		
 	 }
 	
+	 public void addImage() throws IOException {	
+	
+		 myImage.write("C:\\Users\\aisce\\SpringProject\\dari\\src\\main\\webapp\\resources\\userImages\\"+myImage.getSubmittedFileName());		 		 
+		File oldFile=new File("C:\\Users\\aisce\\SpringProject\\dari\\src\\main\\webapp\\resources\\userImages\\"+myImage.getSubmittedFileName());
+		String AddedName=userService.getAlphaNumericString(7)+myImage.getSubmittedFileName();
+		File newfile =new File("C:\\Users\\aisce\\SpringProject\\dari\\src\\main\\webapp\\resources\\userImages\\"+AddedName);
+		oldFile.renameTo(newfile);		 
+		 User userWithImage= new User();
+		 userWithImage  = connectedUser;
+		 userWithImage.setPhoto(AddedName);
+		 userService.addUser(userWithImage);
+		 System.out.println(newfile.toURL().toString());
+		}
 
 	public User getConnectedUser() {
 		return connectedUser;
@@ -103,6 +129,16 @@ public class Profile {
 	public void setPasswordResult(String passwordResult) {
 		this.passwordResult = passwordResult;
 	}
+
+	public Part   getMyImage() {
+		return myImage;
+	}
+
+	public void setMyImage(Part   myImage) {
+		this.myImage = myImage;
+	}
+
+	
 	
 	
 	

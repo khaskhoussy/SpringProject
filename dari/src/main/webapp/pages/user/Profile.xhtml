@@ -4,6 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/template.xhtml">
 	<f:metadata>
 		<f:viewAction action="#{ProfileController.testwhoIsConnected()}" />
@@ -659,7 +660,7 @@ body {
 							</nav>
 						</div>
 						<div class="content-panel" id="profileInterface">
-							<h:form id="formId">
+							<h:form enctype="multipart/form-data" id="formId">
 								<h2 class="title">
 									Profile<span class="pro-label label label-warning">PRO</span>
 								</h2>
@@ -667,33 +668,36 @@ body {
 								<fieldset class="fieldset">
 									<h3 class="fieldset-title">Personal Info</h3>
 									<div class="form-group avatar">
-										<figure class="figure col-md-2 col-sm-3 col-xs-12"> <img
-											class="img-rounded img-responsive"
-											src="https://bootdey.com/img/Content/avatar/avatar1.png"
-											alt="" /></figure>
+										 <figure class="figure col-md-2 col-sm-3 col-xs-12">  
+											<!--<img src="file:/D:/1fSEUE950-Short-Haircuts-Hairstyle-Tips-for-Men.jpg" class="rounded float-left" alt="..."/>  -->
+										<!--  	<img src="#{request.contextPath}/resources/images/1fSEUE950-Short-Haircuts-Hairstyle-Tips-for-Men.jpg" class="img-profile img-circle img-responsive center-block"/>-->
+											
+ 											<h:graphicImage  library="userImages" name ="#{ProfileController.connectedUser.photo}"  alt="..."></h:graphicImage> 
+											 </figure>
+											
+											
 										<div class="form-inline col-md-10 col-sm-9 col-xs-12">
-											<input type="file" class="file-uploader pull-left"/>
-											<button type="submit"
-												class="btn btn-sm btn-default-alt pull-left">Update
-												Image</button>
+											<h:inputFile type="file" class="file-uploader pull-left" value="#{ProfileController.myImage}"> </h:inputFile>  
+
+											<h:commandButton action="#{ProfileController.addImage()}"
+											value="Update Image" class="btn btn-primary" ></h:commandButton>
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div class="form-group" style="margin-bottom:20px;">
 										<label class="col-md-2 col-sm-3 col-xs-12 control-label">UserName</label>
-										<div class="col-md-10 col-sm-9 col-xs-12">
+										<div class="col-md-10 col-sm-9 col-xs-12" style="margin-bottom:20px;">
 											<h:inputText binding="#{userName}" type="text"
-												class="form-control"
+												class="form-control" 
 												value="#{ProfileController.connectedUser.userName}"
 												disabled="true">
 											</h:inputText>
 										</div>
 									</div>
-
-									<div class="form-group">
+									<div class="form-group" style="margin-bottom:20px;">
 										<label class="col-md-2 col-sm-3 col-xs-12 control-label">First
 											Name</label>
-										<div class="col-md-10 col-sm-9 col-xs-12">
+										<div class="col-md-10 col-sm-9 col-xs-12" style="margin-bottom:20px;">
 											<h:inputText type="text" class="form-control"
 												value="#{ProfileController.connectedUser.name}"
 												binding="#{firstName}"></h:inputText>

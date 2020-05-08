@@ -20,6 +20,7 @@ public class User {
 	private String mailAddress;
 	private int nic;
 	private boolean active;
+	private String photo;
 	
 	
 	
@@ -132,6 +133,14 @@ public class User {
 		this.mailAddress = mailAddress;
 		this.nic = nic;
 	}
+	
+
+
+	public User(int id, String photo) {
+		super();
+		this.id = id;
+		this.photo = photo;
+	}
 
 
 
@@ -197,6 +206,18 @@ public class User {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	
