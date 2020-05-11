@@ -159,12 +159,7 @@ public class reservationServiceImpl implements reservationService
 	@Override
 	public List<Announce> findannonceby(String type,String region ,int chambremin, float priceMin, float priceMax,Date checkIn,Date checkOut ) 
 	{		
-		List<Announce> r= aR.findAll();
-		r= aR.findReservationByRegion(type,region);
-		r= aR.findReservationBynbrChambre(chambremin);
-		r= aR.findReservationBynbyprice(priceMin, priceMax);
-		r = aR.findbyDate(checkIn, checkOut);
-		return r;	
+		return aR.findbyDatepc(chambremin,priceMin, priceMax,checkIn, checkOut,type,region);
 		}
 	@Override
 	public List<Announce> annoncebyregion(String type,String region) 
@@ -174,52 +169,44 @@ public class reservationServiceImpl implements reservationService
 	@Override
 	public List<Announce> annoncebyprice(String type,String region,float priceMin, float priceMax) 
 	{
-		List<Announce> r= aR.findAll();
-		r= aR.findReservationBynbyprice(priceMin, priceMax);
-		return r;	
+		return aR.findReservationBynbyprice(priceMin, priceMax,type,region);
 		}
 	@Override
 	public List<Announce> findannoncebynbrchambre(String type,String region ,int chambremin) 
 	{		
-		List<Announce> r= aR.findAll();
-		r= aR.findReservationBynbrChambre(chambremin);
-		return r;
+		return aR.findReservationBynbrChambre(chambremin,type,region);
 		}
 	@Override
 	public List<Announce> findannoncebydate(String type,String region ,Date checkIn,Date checkOut) throws Exception 
 	{		
-		List<Announce> r= aR.findAll();
-		r = aR.findbyDate(checkIn, checkOut);
-		return r;
+		return aR.findbyDate(checkIn, checkOut,type,region);
 	}
 	@Override
-	public List<Announce> findannonceby(String type,String region ,Date checkIn,Date checkOut,float priceMin, float priceMax) throws Exception 
+	public List<Announce> findannoncebyd(String type,String region , float priceMin, float priceMax,Date checkIn,Date checkOut)
 	{		
-		List<Announce> r= aR.findAll();
-		r = aR.findbyDate(checkIn, checkOut);
-		return r;
+		return aR.findbyDatep(priceMin, priceMax,checkIn, checkOut,type,region);
 	}
 
 
 	@Override
 	public List<Announce> findannoncebyprixnbrchambre(String type, String region, float priceMin, float priceMax,
 			int chambremin) {
-		List<Announce> r= aR.findAll();
-		r= aR.findReservationByRegion(type,region);
-		r= aR.findReservationBynbrChambre(chambremin);
-		r= aR.findReservationBynbyprice(priceMin, priceMax);
-		return r;	
+		return aR.findReservationBynbypricec(chambremin,priceMin, priceMax,type,region);
 
 	}
 
 
 	@Override
 	public List<Announce> findannoncebydatec(String type, String region, Date checkIn, Date checkOut, int chambremin) {
-		List<Announce> r= aR.findAll();
-		r= aR.findReservationByRegion(type,region);
-		r= aR.findReservationBynbrChambre(chambremin);
-		return r;	
+		return aR.findbyDatec(chambremin,checkIn, checkOut,type,region);
 	}
+
+
+	@Override
+	public List<Announce> findannoncebyid(int idannounce) {
+		return aR.findAnnounceByid(idannounce);
+	}
+
 
 	//@Override
 	//@Scheduled(cron="*/15 * * * * ?")
@@ -262,7 +249,7 @@ public class reservationServiceImpl implements reservationService
 		List<Reservation> res= rR.findReservationD();
 		LocalDateTime now = LocalDateTime.now().plusMinutes(2);
 		SimpleMailMessage msg = new SimpleMailMessage();
-
+	
 		for (int i=0;i<res.size();i++) 
 		{
 			if(now.isAfter(res.get(i).getDateres()))
@@ -276,4 +263,5 @@ public class reservationServiceImpl implements reservationService
 			}
 		}	 
 	}*/
+
 }

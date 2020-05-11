@@ -87,7 +87,7 @@ public class Profile {
 		 userWithImage  = connectedUser;
 		 userWithImage.setPhoto(AddedName);
 		 userService.addUser(userWithImage);
-		 //System.out.println(newfile.toURL().toString());
+		 System.out.println(newfile.toURL().toString());
 		}
 
 	public User getConnectedUser() {

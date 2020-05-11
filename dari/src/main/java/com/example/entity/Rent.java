@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -20,8 +21,11 @@ public class Rent  implements Serializable {
 	private String garantor;
 	private String letterOfCommitment;
 	private String proofOfPayment;
+	private LocalDateTime daterent;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER,cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH})
 	private User user;
 	
 
@@ -31,6 +35,20 @@ public class Rent  implements Serializable {
 	public Rent() {
 		super();
 
+	}
+
+
+
+
+	public LocalDateTime getDaterent() {
+		return daterent;
+	}
+
+
+
+
+	public void setDaterent(LocalDateTime daterent) {
+		this.daterent = daterent;
 	}
 
 
@@ -110,11 +128,17 @@ public class Rent  implements Serializable {
 		this.proofOfPayment = proofOfPayment;
 	}
 
+
+
+
 	@Override
 	public String toString() {
-		return "Rent [cin=" + cin + ", garantor=" + garantor + ", letterOfCommitment=" + letterOfCommitment
-				+ ", proofOfPayment=" + proofOfPayment + ", ]";
+		return "Rent [id=" + id + ", cin=" + cin + ", garantor=" + garantor + ", letterOfCommitment="
+				+ letterOfCommitment + ", proofOfPayment=" + proofOfPayment + ", daterent=" + daterent + ", user="
+				+ user + "]";
 	}
+
+
 	
 	
 }

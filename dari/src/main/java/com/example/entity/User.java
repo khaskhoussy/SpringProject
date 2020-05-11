@@ -93,22 +93,8 @@ public class User {
 	
 	public User() {
 		super();
-		
-		
 	}
-	public User(String userName,String mailAddress,String name,  String lastName, int phoneNumber,int nic, String password,  String roles,boolean active) 
-	{
-		super();
-		this.userName = userName;
-		this.password = password;
-		this.phoneNumber = phoneNumber;
-		this.name = name;
-		this.lastName = lastName;
-		this.roles = roles;
-		this.mailAddress = mailAddress;
-		this.nic = nic;
-		this.active=active;
-	}
+
 
 		
 	public User(String userName, String password, int phoneNumber, String name, String lastName, String roles,

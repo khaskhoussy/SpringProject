@@ -24,10 +24,10 @@ public interface reservationRepository  extends CrudRepository<Reservation,Integ
 	@Query(value="Select r from Reservation r where r.user.userName= :userName and r.announce.id= :idannounce and r.id= :id ")
     public Reservation validation(@Param("id")int id,@Param("userName")String userName, @Param("idannounce")int idannounce);
 	
-	@Query(value="Select r from Reservation r where r.announce.id= :idannounce and ((r.checkIn<= :checkIn and r.checkOut>= :checkIn) or (r.checkIn<= :checkOut and r.checkOut>= :checkOut) or ((r.checkIn<= :checkIn and r.checkOut>= :checkIn) and (r.checkIn<= :checkOut and r.checkOut>= :checkOut)))")
+	@Query(value="Select r from Reservation r where r.announce.id= :idannounce and ((r.checkIn<= :checkIn and r.checkOut>= :checkIn) or (r.checkIn<= :checkOut and r.checkOut>= :checkOut) or (r.checkIn<= :checkIn and r.checkOut>= :checkIn and r.checkIn<= :checkOut and r.checkOut>= :checkOut) or (r.checkIn>= :checkIn and r.checkOut>= :checkIn and r.checkIn<= :checkOut and r.checkOut<= :checkOut))")
 	public Reservation ajout( @Param("idannounce")int idannounce, @Param("checkIn")Date checkIn, @Param("checkOut")Date checkOut);
 	
-	@Query(value="Select r from Reservation r where r.user.userName!= :userName and r.announce.id= :idannounce and ((r.checkIn<= :checkIn and r.checkOut>= :checkIn) or (r.checkIn<= :checkOut and r.checkOut>= :checkOut) or ((r.checkIn<= :checkIn and r.checkOut>= :checkIn) and (r.checkIn<= :checkOut and r.checkOut>= :checkOut)))")
+	@Query(value="Select r from Reservation r where r.user.userName!= :userName and r.announce.id= :idannounce and ((r.checkIn<= :checkIn and r.checkOut>= :checkIn) or (r.checkIn<= :checkOut and r.checkOut>= :checkOut) or (r.checkIn<= :checkIn and r.checkOut>= :checkIn and r.checkIn<= :checkOut and r.checkOut>= :checkOut) or (r.checkIn>= :checkIn and r.checkOut>= :checkIn and r.checkIn<= :checkOut and r.checkOut<= :checkOut))")
 	public Reservation modif( @Param("idannounce")int idannounce,@Param("userName")String username,@Param("checkIn")Date checkIn, @Param("checkOut")Date checkOut);
 	
 	@Query(value="Select r from Reservation r where r.user.userName= :userName and r.announce.id= :idannounce and r.id= :id  and r.checkIn= :checkIn and r.checkOut= :checkOut ")
