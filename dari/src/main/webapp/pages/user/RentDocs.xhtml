@@ -693,6 +693,9 @@ body {
 	margin: 0 auto;
 	z-index: 1;
 }
+.bgSizeContain {
+  height: 200px;
+  }
 </style>
 		</head>
 
@@ -794,29 +797,35 @@ body {
 																<f:facet name="header">
 																	<h:outputText value="cin" />
 																</f:facet>
-																<h:outputText value="#{rent.cin}" />
+																<h:graphicImage class="bgSizeContain" library="usersdocs"  name ="#{rent.cin}" />
 															</h:column>
 															<h:column>
 																<f:facet name="header">
 																	<h:outputText value="garantor" />
 																</f:facet>
-																<h:outputText value="#{rent.garantor}" />
+																<h:graphicImage class="bgSizeContain" library="usersdocs" name ="#{rent.garantor}" />
 															</h:column>
+															</h:dataTable>
+															<h:dataTable value="#{rentcontroller.rentD}" var="rent"
+															styleClass="table table-data2" rowClasses="tr-shadow">
 															<h:column>
 																<f:facet name="header">
 																	<h:outputText value="letterOfCommitment" />
 																</f:facet>
-																<h:outputText value="#{rent.letterOfCommitment}" />
+																<h:graphicImage class="bgSizeContain" library="usersdocs"  name ="#{rent.letterOfCommitment}" />
 															</h:column>
 															<h:column>
 																<f:facet name="header">
 																	<h:outputText value="proofOfPayment" />
 																</f:facet>
-																<h:outputText value="#{rent.proofOfPayment}" />
+																<h:graphicImage class="bgSizeContain" library="usersdocs"  name ="#{rent.proofOfPayment}" />
 															</h:column>
+															</h:dataTable>
+															<h:dataTable value="#{rentcontroller.rentD}" var="rent"
+															styleClass="table table-data2" rowClasses="tr-shadow">
 															<h:column>
 																<f:facet name="header">
-																	<h:outputText value="Date de creation" />
+																	<h:outputText  value="Date de creation" />
 																</f:facet>
 																<h:outputText value="#{rent.daterent}" />
 															</h:column>
