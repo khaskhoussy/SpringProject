@@ -32,7 +32,7 @@ import com.example.service.reservationService;
 @Scope(value = "session")
 @Controller(value ="resrvationcontroller")
 @ELBeanName(value = "reservationcontroller")
-@Join(path = "/user/reservation", to = "/pages/user/reserve.jsf")
+@Join(path = "/user/recherche", to = "/pages/user/recherche.jsf")
 public class Reservationcontrole {
 	
 	
@@ -54,8 +54,17 @@ public class Reservationcontrole {
 	private String img;
 	private int phoneNumber,nbrchambre;
 	private float price,superficie;
+	private int idannonce;
 	
 	
+	public int getIdannonce() {
+		return idannonce;
+	}
+
+	public void setIdannonce(int idannonce) {
+		this.idannonce = idannonce;
+	}
+
 	public String getMailAddress() {
 		return mailAddress;
 	}
@@ -114,16 +123,22 @@ public class Reservationcontrole {
 		this.superficie = superficie;
 	}
 
-	public void afficher(Announce annonce)
+	public String afficher(Announce an)
 	{
-	this.setDescription(annonce.getDescription());
-	this.setImg(annonce.getImg());
-	this.setNbrchambre(annonce.getNbrchambre());
-	this.setSuperficie(annonce.getSuperficie());
-	this.setPrice(annonce.getPrice());
-	this.setPhoneNumber(annonce.getUser().getPhoneNumber());
-	this.setMailAddress(annonce.getUser().getMailAddress());
+		String navigateTo ="null";
+	this.setIdannonce(an.getId());
+	this.setDescription(an.getDescription());
+	this.setDescription(an.getDescription());
+	this.setImg(an.getImg());
+	this.setNbrchambre(an.getNbrchambre());
+	this.setSuperficie(an.getSuperficie());
+	this.setPrice(an.getPrice());
+	this.setPhoneNumber(an.getUser().getPhoneNumber());
+	this.setMailAddress(an.getUser().getMailAddress());
+	navigateTo = "/pages/user/reserve.xhtml?faces-redirect=true";
+		return navigateTo;
 	}
+	
 
 	public void setRechercher(List<Announce> rechercher) {
 		this.rechercher = rechercher;
@@ -203,8 +218,11 @@ public class Reservationcontrole {
 	}
 	
 	
-	    public void ajouterReservation() throws Exception {
-	         rS.ajouterReservation(announce.getId(),HomeController.connectedUser.getUserName(),checkIn,checkOut);
+	    public String ajouterReservation() throws Exception {
+	    	String navigateTo ="null";
+	    	rS.ajouterReservation(idannonce,HomeController.connectedUser.getUserName(),checkIn,checkOut);
+	         navigateTo = "/pages/user/recherche.xhtml?faces-redirect=true";
+	 		return navigateTo;
 	    }
 	    
 	    public List<Reservation> getAllreservation() 

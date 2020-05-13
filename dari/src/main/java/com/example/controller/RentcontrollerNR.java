@@ -67,17 +67,20 @@ public class  RentcontrollerNR{
 		String AddedName= rentservice.getAlphaNumericString(7)+cinf.getSubmittedFileName();
 		File newfile =new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+AddedName);
 		oldFile.renameTo(newfile);
+		
 		letterOfCommitmentf.write("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+letterOfCommitmentf.getSubmittedFileName());		 		 
 		File oldFilel=new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+letterOfCommitmentf.getSubmittedFileName());
 		String AddedNamel= rentservice.getAlphaNumericString(7)+letterOfCommitmentf.getSubmittedFileName();
 		File newfilel =new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+AddedNamel);
 		oldFilel.renameTo(newfilel);
+		
 		proofOfPaymentf.write("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+proofOfPaymentf.getSubmittedFileName());		 		 
 		File oldFilep=new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+proofOfPaymentf.getSubmittedFileName());
 		String AddedNamep= rentservice.getAlphaNumericString(7)+proofOfPaymentf.getSubmittedFileName();
 		File newfilep =new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+AddedNamep);
 		oldFilep.renameTo(newfilep);
-		garantorf.write("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+garantorf.getSubmittedFileName());		 		 
+		
+		 garantorf.write("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+garantorf.getSubmittedFileName());		 		 
 		File oldFileg=new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+garantorf.getSubmittedFileName());
 		String AddedNameg= rentservice.getAlphaNumericString(7)+garantorf.getSubmittedFileName();
 		File newfileg =new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+AddedNameg);
