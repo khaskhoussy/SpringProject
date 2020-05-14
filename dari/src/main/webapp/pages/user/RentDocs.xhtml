@@ -768,7 +768,7 @@ body {
 
 										<div class="col-md-10 col-sm-9 col-xs-12">
 											<h:commandButton  value="Ajouter Documents"
-												class="btn btn-primary"
+												action="#{rentcontroller.adddocs()}" class="btn btn-primary"
 												binding="#{submitting}" />
 											<div class="col-md-10 col-sm-9 col-xs-12">
 												<h:commandButton value="Mettre A jour Documents"
@@ -843,7 +843,59 @@ body {
 						</div>
 
 
-						<div class="content-panel" id="reserveInterface"></div>
+						<div class="content-panel" id="reserveInterface">
+						<h:panelGroup columns="2">
+								<h:form>
+									<div class="section__content section__content--p30">
+										<div class="container-fluid">
+											<div class="row">
+												<h3 class="title-5 m-b-35">Mes Reservation	</h3>
+												<div class="col-md-12">
+													<div class="table-responsive table-responsive-data2">
+														<h:dataTable value="#{reservationcontroller.findReservationByUser}" var="mesres"
+															styleClass="table table-data2" rowClasses="tr-shadow">
+
+															
+															<h:column>
+																<f:facet name="header">
+																	<h:outputText value="id" />
+																</f:facet>
+																<h:outputText value ="#{mesres.announce.id}" />
+															</h:column>
+															<h:column>
+																<f:facet name="header">
+																	<h:outputText value="Date of Reservation" />
+																</f:facet>
+																<h:outputText  value ="#{mesres.dateres}" />
+															</h:column>
+															<h:column>
+																<f:facet name="header">
+																	<h:outputText value="CheckIn" />
+																</f:facet>
+																<h:outputText class="bgSizeContain" library="usersdocs"  value ="#{mesres.checkIn}" />
+															</h:column>
+															<h:column>
+																<f:facet name="header">
+																	<h:outputText value="CheckOut" />
+																</f:facet>
+																<h:outputText value ="#{mesres.checkOut}" />
+															</h:column>
+															<h:column>
+																<f:facet name="header">
+																	<h:outputText value="Action" />
+																</f:facet>
+															</h:column>
+														</h:dataTable>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</h:form>
+
+							</h:panelGroup>
+						</div>
 						<div class="content-panel" id="addsInterface"></div>
 					</div>
 					</section>

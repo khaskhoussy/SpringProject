@@ -257,7 +257,7 @@
 										<div class="form-group">
 											<span class="form-label">Type</span>
 											<h:selectOneMenu class="form-control"
-												value="#{resrvationcontroller.type}">
+												value="#{reservationcontroller.type}">
 												<f:selectItem itemValue="location" itemLabel="location" />
 												<f:selectItem itemValue="locationLongduree"
 													itemLabel="location Long duree" />
@@ -266,7 +266,7 @@
 										<div class="form-group">
 											<span class="form-label">Your Destination</span>
 											<h:selectOneMenu class="form-control"
-												value="#{resrvationcontroller.region}">
+												value="#{reservationcontroller.region}">
 												<f:selectItem itemValue="Ariana" itemLabel="Ariana" />
 												<f:selectItem itemValue="Tunis" itemLabel="Tunis" />
 												<f:selectItem itemValue="Nabeul" itemLabel="Nabeul" />
@@ -284,7 +284,7 @@
 												<div class="form-group">
 													<span class="form-label">Check In</span>
 													<h:inputText type="date" class="form-control"
-														value="#{resrvationcontroller.checkIn}">
+														value="#{reservationcontroller.checkIn}">
 														<f:convertDateTime pattern="dd-MM-yyyy" />
 													</h:inputText>
 												</div>
@@ -293,7 +293,7 @@
 												<div class="form-group">
 													<span class="form-label">Check out</span>
 													<h:inputText type="date" class="form-control"
-														value="#{resrvationcontroller.checkOut}">
+														value="#{reservationcontroller.checkOut}">
 														<f:convertDateTime pattern="dd-MM-yyyy" />
 													</h:inputText>
 												</div>
@@ -304,7 +304,7 @@
 												<div class="form-group">
 													<span class="form-label">Rooms</span>
 													<h:selectOneMenu class="form-control"
-														value="#{resrvationcontroller.chambremin}">
+														value="#{reservationcontroller.chambremin}">
 														<f:selectItem itemValue="1" itemLabel="1+" />
 														<f:selectItem itemValue="2" itemLabel="2+" />
 														<f:selectItem itemValue="3" itemLabel="3+" />
@@ -317,7 +317,7 @@
 												<div class="form-group">
 													<span class="form-label">PriceMin</span>
 													<h:inputText type="number" step="any" class="form-control"
-														value="#{resrvationcontroller.priceMin}">
+														value="#{reservationcontroller.priceMin}">
 
 													</h:inputText>
 													<span class="select-arrow"></span>
@@ -327,7 +327,7 @@
 												<div class="form-group">
 													<span class="form-label">PriceMax</span>
 													<h:inputText type="number" step="any" class="form-control"
-														value="#{resrvationcontroller.priceMax}">
+														value="#{reservationcontroller.priceMax}">
 
 													</h:inputText>
 													<span class="select-arrow"></span>
@@ -336,7 +336,7 @@
 										</div>
 										<div class="form-btn">
 											<h:commandButton value="Rechercher"
-												action="#{resrvationcontroller.getRechercher}"
+												action="#{reservationcontroller.getRechercher}"
 												class="btn btn-primary" binding="#{submitting}">
 												<f:ajax render="pnlResultat" execute="formAjax"
 													event="keyup"></f:ajax>
@@ -358,7 +358,7 @@
 							<div class="table-responsive table-responsive-data2">
 								<h:panelGroup id="pnlResultat">
 									<h:form>
-										<h:dataTable value="#{resrvationcontroller.rechercher}"
+										<h:dataTable value="#{reservationcontroller.rechercher}"
 											styleClass="table table-data2" rowClasses="tr-shadow"
 											var="annonce">
 											<h:column>
@@ -398,7 +398,7 @@
 													<h:outputText value="Action" />
 												</f:facet>
 												<h:commandButton value="Afficher"
-													action="#{resrvationcontroller.afficher(annonce)}" />
+													action="#{reservationcontroller.afficher(annonce)}" />
 
 											</h:column>
 										</h:dataTable>

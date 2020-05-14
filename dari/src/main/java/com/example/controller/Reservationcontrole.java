@@ -30,7 +30,7 @@ import com.example.service.reservationService;
 
 
 @Scope(value = "session")
-@Controller(value ="resrvationcontroller")
+@Controller(value ="reservationcontroller")
 @ELBeanName(value = "reservationcontroller")
 @Join(path = "/user/recherche", to = "/pages/user/recherche.jsf")
 public class Reservationcontrole {
@@ -135,7 +135,7 @@ public class Reservationcontrole {
 	this.setPrice(an.getPrice());
 	this.setPhoneNumber(an.getUser().getPhoneNumber());
 	this.setMailAddress(an.getUser().getMailAddress());
-	navigateTo = "/pages/user/reserve.xhtml?faces-redirect=true";
+	navigateTo = "/pages/user/reserve.xhtml?faces-redirect=false";
 		return navigateTo;
 	}
 	
@@ -246,11 +246,18 @@ public class Reservationcontrole {
 	    public void ajouterReservationLong() throws Exception {
 	         rS.ajouterReservationLong(announce.getId(),HomeController.connectedUser.getUserName());
 	    }
+	    private List<Reservation> findReservationByUser;
+	    
+	    public List<Reservation> getFindReservationByUser() {
+	    	
+	    	findReservationByUser=rS.findReservationByUser(HomeController.connectedUser.getUserName());
+	    	return findReservationByUser;
+		}
 
-	    public List<Reservation> findReservationByUser() 
-	    {
-	    	return rS.findReservationByUser(HomeController.connectedUser.getUserName());
-	    }
+		public void setFindReservationByUser(List<Reservation> findReservationByUser) {
+			this.findReservationByUser = findReservationByUser;
+		}
+
 
 	    private Announce annonce;
 	    
