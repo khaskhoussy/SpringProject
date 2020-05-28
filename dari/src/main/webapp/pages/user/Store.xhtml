@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/template.xhtml">
+	
+
+	<ui:param name="page_name" value="Store"/>
+<ui:define name="content">
+	
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/bootstrap.min.css"/>
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/animate.css"/>
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/owl.carousel.min.css"/>
+    <!-- nice select CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/nice-select.css"/>
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/all.css"/>
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/flaticon.css"/>
+    <link rel="stylesheet" href="/resources/cssStore/themify-icons.css"/>
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/magnific-popup.css"/>
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/slick.css"/>
+    <link rel="stylesheet" href="/resources/cssStore/price_rangs.css"/>
+    <!-- style CSS -->
+    <link rel="stylesheet" href="/resources/cssStore/style.css"/>
+	 <!--================Category Product Area =================-->
+    <section class="cat_product_area section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+                        <aside class="left_widgets p_filter_widgets">
+                            <div class="l_w_title">
+                                <h3>Product filters</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+                                    <li>
+                                      <div class="dropdown">
+										  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										    Dropdown
+										  </button>
+										  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+										    <button class="dropdown-item" type="button">Action</button>
+										    <button class="dropdown-item" type="button">Another action</button>
+										    <button class="dropdown-item" type="button">Something else here</button>
+										  </div>
+									</div>
+                                    </li>                                 
+                                </ul>
+                            </div>
+                        </aside>
+                        <aside class="left_widgets p_filter_widgets price_rangs_aside">                            
+                           <div class="l_w_title">
+                                <h3>Add Product</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+                                    <li>
+                                    	
+                                    	 <a href="#" id="AddProductButton"><span
+										class="btn btn-secondary"> Add</span></a>
+                                    </li>                                 
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+                  <div class="col-lg-9" id="displayProducts">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu">
+                                    <p><span>10000 </span> Prodict Found</p>
+                                </div>
+                                <div class="single_product_menu d-flex">
+                                    <h5>short by : </h5>
+                                    <select>
+                                        <option data-display="Select">name</option>
+                                        <option value="1">price</option>
+                                        <option value="2">product</option>
+                                    </select>
+                                </div>
+                                <div class="single_product_menu d-flex">
+                                    <h5>show :</h5>
+                                    <div class="top_pageniation">
+                                        <ul>
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="single_product_menu d-flex">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="search"
+                                            aria-describedby="inputGroupPrepend"/>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupPrepend"><i
+                                                    class="ti-search"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center latest_product_inner">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_1.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_2.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_3.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_4.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_5.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_6.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_7.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_8.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <img src="img/product/product_2.png" alt=""/>
+                                <div class="single_product_text">
+                                    <h4>Quartz Belt Watch</h4>
+                                    <h3>$150.00</h3>
+                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="pageination">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <i class="ti-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <i class="ti-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9" id="AddProduct">
+                	<h:form enctype="multipart/form-data" id="formId">
+                				<div class="form-row">
+									<div class="col-md-4 mb-3">
+										<label for="validationDefault01">photo of the product</label> 
+										<h:inputFile type="file" class="file-uploader pull-left"
+												 binding="#{image}" value="#{StoreController.productImage}">
+											</h:inputFile>
+									</div>
+									<div class="col-md-4 mb-3">
+										<h:commandButton class="btn btn-primary" value="add To Album "
+												action="#{StoreController.addPhoto()}">
+												<f:ajax execute="#{image.clientId}" render=""
+													onevent="function(data) { if (data.status === 'success') {
+													
+											
+											 }}" />
+											 </h:commandButton>	
+									</div>
+									
+									</div>
+									
+								<div class="form-row">
+									<div class="col-md-4 mb-3">
+										<label for="validationDefault01">ProductName</label>
+											 <h:inputText type="text" class="form-control"
+												id="productName" value="#{StoreController.productName}"></h:inputText>
+									</div>
+									</div>
+									<div class="form-row">
+									<div class="col-md-4 mb-3">		
+									<label for="validationDefault01">Categorie</label>																								 	
+									<h:selectOneMenu   styleClass="selectpicker adultTitle_" id="categorie" value="#{StoreController.categorie}">
+								   		<f:selectItem  itemValue="Furniture" itemLabel="Furniture" />
+								   		<f:selectItem  itemValue="HomeAppliance" itemLabel="Home Appliance" />
+								   		<f:selectItem  itemValue="Accessory" itemLabel="Accessory" />
+									</h:selectOneMenu>
+										</div>
+														
+								</div>		
+								<div class="form-row">				
+									<div class="col-md-3 mb-3">
+										<label for="validationDefault04">amount</label> 
+											 <h:inputText type="text" class="form-control"
+												value="#{StoreController.amount}"
+												id="amount"></h:inputText>
+									</div>
+									</div>
+									<div class="form-row">
+									<div class="col-md-3 mb-3">
+										<label for="validationDefault05">price par one amount</label>
+											 <h:inputText type="text" class="form-control"
+												value="#{StoreController.price}"
+												id="price"></h:inputText>
+									</div>
+									</div>
+								
+								<div class="form-row">
+								<h:commandButton class="btn btn-dark" value="save"
+												action="#{StoreController.addProduct()}">
+												
+											 </h:commandButton>	
+											 </div>								
+					</h:form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+  //Start Of Navigation Configuration
+	var AddProductButton = document
+			.getElementById("AddProductButton");
+	var displayProducts = document
+			.getElementById("displayProducts");
+	var AddProduct = document
+			.getElementById("AddProduct");	
+
+	AddProduct.style.display = "none";
+	var currentInterface;
+	currentInterface = displayProducts;
+
+	AddProductButton.addEventListener("click", function() {
+		currentInterface.style.display = "none";
+		AddProduct.style.display = "block";
+		currentInterface = AddProduct;
+	});
+
+	profileButton.addEventListener("click", function() {
+		currentInterface.style.display = "none"
+		profileInterface.style.display = "block";
+		currentInterface = profileInterface;
+	});
+	
+	friendsInterfaceButton.addEventListener("click",function(){
+	currentInterface.style.display = "none";
+	friendsInterface.style.display = "block";
+	currentInterface = friendsInterface ;
+	});
+	
+	myFriendsInterfaceButton.addEventListener("click",function(){
+		currentInterface.style.display = "none";
+		myFriendsInterface.style.display = "block";
+		currentInterface = myFriendsInterface ;
+		});
+    
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!--================End Category Product Area =================-->
+<h:outputScript library="jsStore" name="jquery-1.12.1.min.js" />
+    <!-- popper js -->
+    <h:outputScript library="jsStore" name="popper.min.js" />
+    <!-- bootstrap js -->
+    <h:outputScript library="jsStore" name="bootstrap.min.js" />
+    <!-- easing js -->
+    <h:outputScript library="jsStore" name="jquery.magnific-popup.js" />
+    <!-- swiper js -->
+    <h:outputScript library="jsStore" name="swiper.min.js" />
+    <!-- swiper js -->
+    <h:outputScript library="jsStore" name="masonry.pkgd.js" />
+    <!-- particles js -->
+    <h:outputScript library="jsStore" name="owl.carousel.min.js" />
+    <h:outputScript library="jsStore" name="jquery.nice-select.min.js" />
+    <!-- slick js -->
+    <h:outputScript library="jsStore" name="slick.min.js" />
+    <h:outputScript library="jsStore" name="jquery.counterup.min.js" />
+    <h:outputScript library="jsStore" name="waypoints.min.js" />
+    <h:outputScript library="jsStore" name="contact.js" />
+    <h:outputScript library="jsStore" name="jquery.ajaxchimp.min.js" />
+    <h:outputScript library="jsStore" name="jquery.form.js" />
+    <h:outputScript library="jsStore" name="jquery.validate.min.js" />
+    <h:outputScript library="jsStore" name="mail-script.js" />
+    <h:outputScript library="jsStore" name="stellar.js" />
+    <h:outputScript library="jsStore" name="price_rangs.js" />
+    <!-- custom js -->
+    <h:outputScript library="jsStore" name="custom.js" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ui:define>
+</ui:composition>

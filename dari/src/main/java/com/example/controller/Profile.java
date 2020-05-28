@@ -122,6 +122,7 @@ public class Profile {
 		 userWithImage  = connectedUser;
 		 userWithImage.setPhoto(AddedName);
 		 userService.addUser(userWithImage);
+
 		
 	 }
 	 
@@ -137,6 +138,9 @@ public class Profile {
 		{
 			if(allUsers.get(i).getId() == connectedUser.getId())
 				allUsers.remove(i);
+
+		// System.out.println(newfile.toURL().toString());
+
 		}
 		
 	 

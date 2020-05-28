@@ -145,7 +145,7 @@ public class ResersvationController {
 	 				 @PathVariable(value = "checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut,
 	 	    		@PathVariable(value = "priceMin") float priceMin,@PathVariable(value = "priceMax") float priceMax) throws Exception 
 	 	    {
-	 	    	return rS.findannonceby(type, region, checkIn, checkOut, priceMin, priceMax);
+	 	    	return rS.findannoncebyd (type,region,priceMin, priceMax,  checkIn, checkOut);
 	 	    
 	 	    }
 	    

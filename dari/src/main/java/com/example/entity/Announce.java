@@ -49,7 +49,9 @@ public class Announce {
 	private List<Appointment> Appointments;
 
 	@JsonBackReference
-	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="announce", fetch = FetchType.EAGER,cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH})
 	private List<Reservation> Reservation;	
 	
 	@OneToMany(mappedBy="announce",cascade = CascadeType.ALL)

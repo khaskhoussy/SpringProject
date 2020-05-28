@@ -26,13 +26,17 @@ public class Reservation implements Serializable  {
 
 
 	@JsonBackReference
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH})
     @JoinColumn(name = "iduser", referencedColumnName = "id")
 	private User user;
 	
 
 	//@JsonBackReference
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH})
     @JoinColumn(name = "idannounce", referencedColumnName = "id")
 	private Announce announce;
 	private LocalDateTime dateres;

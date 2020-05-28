@@ -1,10 +1,12 @@
 package com.example.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -93,9 +95,8 @@ public class User {
 	
 	public User() {
 		super();
-		
-		
 	}
+
 	public User(String userName,String mailAddress,String name,  String lastName, int phoneNumber,int nic, String password,String photo,  String roles,boolean active) 
 	{
 		super();
@@ -110,6 +111,7 @@ public class User {
 		this.active=active;
 		this.photo=photo;
 	}
+
 
 		
 	public User(String userName, String password, int phoneNumber, String name, String lastName, String roles,
@@ -235,5 +237,54 @@ public class User {
 		this.photo = photo;
 	}
 	
+	
+	
+	///////////////////////////// brahim///////////////////
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+	// @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private List<Simulation_Favoris> simulations_favoris = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.LAZY)
+	// @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private List<InsuranceSimulation_Favoris> insuranceSimulations_favoris = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+	private List<Poll> polls;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Insurance_Simulation> insurance_simulations;
+
+	@JsonIgnore
+	@OneToOne
+	Expert expert;
+
+	@JsonIgnore
+	@OneToOne
+	Expert_Insurance expert_insurance;
+	/////////////////////////////////////////
+
+	public Expert getExpert() {
+		return expert;
+	}
+
+
+
+	public void setExpert(Expert expert) {
+		this.expert = expert;
+	}
+
+
+
+	public Expert_Insurance getExpert_insurance() {
+		return expert_insurance;
+	}
+
+
+
+	public void setExpert_insurance(Expert_Insurance expert_insurance) {
+		this.expert_insurance = expert_insurance;
+	}
 	
 }

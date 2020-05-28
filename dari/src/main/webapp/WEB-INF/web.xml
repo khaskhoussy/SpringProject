@@ -9,7 +9,6 @@
 <servlet-name>Faces Servlet</servlet-name>
 <url-pattern>*.jsf</url-pattern>
 </servlet-mapping>
-
 <listener>
 <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 </listener>
@@ -20,5 +19,4 @@ org.springframework.web.context.request.RequestContextListener
 
 </listener-class>
 </listener>
-
 </web-app>
