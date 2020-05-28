@@ -64,61 +64,11 @@ public class DemandeController {
 	{
 		List<Demande> AcceptedDemande =demandeService.allDemande().stream().filter(d->d.getEtat().
 				equals("Accepted")).collect(Collectors.toList());
-		List<Demande> deletDemandeList =AcceptedDemande.stream().filter(d-> deleteAcceptedDemands(d.getDate())).collect(Collectors.toList());
+		List<Demande> deletDemandeList =AcceptedDemande.stream().filter(d-> demandeService.deleteAcceptedDemands(d.getDate())).collect(Collectors.toList());
 		deletDemandeList.forEach(d-> demandeService.DeleteDemande(d));
 				
 	}
 	
-	public boolean deleteAcceptedDemands(Date demandeDate) //this function check if demandeDate get over 7 Days(i considred February have 30 Day )
-	{													  //in java number of months is 11 starts from 0 and if you wanna put a year you need too substracted from 1900
-	
-		Date nowDate = new Date();
-		int test30 =nowDate.getDate()+30 - demandeDate.getDate();
-		int test31=nowDate.getDate()+31 - demandeDate.getDate();
-		float testPair=nowDate.getMonth()%2;
-		System.out.println(nowDate.getDate());
-		if(nowDate.getMonth() == demandeDate.getMonth())
-			{if ((nowDate.getDate() - demandeDate.getDate()) > 7)
-				return true;
-			else 
-				return false;
-			}
-		if(nowDate.getMonth()<7 && nowDate.getMonth()>0 )
-		{	
-			
-			if(testPair==0)
-				{if ( test30 > 7)
-					
-					return true;
-				}
-				else 
-					if (test31 > 7)
-					return true;
-							
-		}
-		else if(nowDate.getMonth()>7)
-		{ 
-			if(testPair==0)
-			{
-			if(test31>7)
-				return true ;
-			}
-			else
-				if  (test30 > 7)
-				return true;
-			
-		}
-		else if(nowDate.getMonth()==7)
-			{
-				if(test31>7)			
-				return true ;
-			}
-		else if(nowDate.getMonth()==0)
-		{
-			if(test31>7)		
-			return true ;
-		}			
-				return false ;	
-	}
 	*/
+	
 }

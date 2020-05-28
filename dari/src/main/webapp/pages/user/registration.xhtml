@@ -29,29 +29,29 @@
                     <h:form  class="signup-form">
                         <h2 class="form-title">Create account</h2>
                     
-                          <div class="form-group">
-                            <h:inputText type="text"  value="#{RegistrationController.userName}" class="form-input" name="userName" id="userName" a:placeholder="UserName"/>
+                          <div class="form-group">                           
+                            <h:inputText type="text"  value="#{RegistrationController.newUser.userName}" id="userName" class="form-input"  a:placeholder="userName"/>
                         </div>
                         
                         <div class="form-group">
-                            <h:inputText type="email" value="#{RegistrationController.email}" class="form-input" name="email" id="email" a:placeholder="Your Email"/>
+                            <h:inputText type="email" value="#{RegistrationController.newUser.mailAddress}" class="form-input" name="email" id="email" a:placeholder="Your Email"/>
                         </div>
                         
                         <div class="form-group">
-                            <h:inputText   value="#{RegistrationController.name}" class="form-input" name="name" id="name" a:placeholder="Your Name"/>
+                            <h:inputText   value="#{RegistrationController.newUser.name}" class="form-input" name="name" id="name" a:placeholder="Your Name"/>
                         </div>
                         
                         <div class="form-group">
-                            <h:inputText value="#{RegistrationController.lastName}"  class="form-input" name="Lastname" id="lastName" a:placeholder="Your LastName"/>
+                            <h:inputText value="#{RegistrationController.newUser.lastName}" id="lastName" class="form-input"  a:placeholder="Your LastName"/>
                         </div>
                         
                         <div class="form-group">
-                            <h:inputText value="#{RegistrationController.phoneNumber}" class="form-input" name="phoneNumber" id="phoneNumber" a:placeholder="Your PhoneNumber"
+                            <h:inputText value="#{RegistrationController.newUser.phoneNumber}" class="form-input" name="phoneNumber" id="phoneNumber" a:placeholder="Your PhoneNumber"
                              converterMessage="Please enter digits only." />
                         </div>
                         
                          <div class="form-group">
-                            <h:inputText value="#{RegistrationController.cin}" class="form-input" name="cin" id="cin" a:placeholder="Your national identity card"
+                            <h:inputText value="#{RegistrationController.newUser.nic}" class="form-input" name="cin" id="cin" a:placeholder="Your national identity card"
                              converterMessage="Please enter digits only." />
                         </div>
                         
@@ -66,7 +66,7 @@
                         <div class="form-group">
                         <h:commandButton action="#{RegistrationController.addUser()}"
 									class="form-submit"	value="Sign up"  >
-											<f:ajax execute="newPassword repeatdPassword" render="result" 
+											<f:ajax execute="newPassword repeatdPassword userName email name lastName cin phoneNumber" render="result" 
 											onevent="function(data) { if (data.status === 'success') {									
 											alert(document.getElementById('needResult').innerText); 
 											 }}"/>											 

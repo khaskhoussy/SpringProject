@@ -632,10 +632,11 @@ body {
 					<div class="module-inner">
 						<div class="side-bar">
 							<div class="user-info">
-								<!--<img class="img-profile img-circle img-responsive center-block"
-									src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" />-->
-									<h:graphicImage   class="img-profile img-circle img-responsive center-block" library="userImages" name ="#{ProfileController.connectedUser.photo}"  alt="..."></h:graphicImage> 
-											
+								<h:graphicImage
+									class="img-profile img-circle img-responsive center-block"
+									library="userImages"
+									name="#{ProfileController.connectedUser.photo}" alt="..."></h:graphicImage>
+
 								<ul class="meta list list-unstyled">
 									<li class="name">Rebecca Sanders <label
 										class="label label-info">UX Designer</label>
@@ -648,11 +649,12 @@ body {
 							<ul class="nav">
 								<li class="active"><a href="#" id="profileInterfaceButton"><span
 										class="fa fa-user"></span> Profile</a></li>
-								<li><a href="#" id="PasswordInterfaceButton"><span
+								<li><a href="#" id="passwordInterfaceButton"><span
 										class="fa fa-cog"></span> Change Password</a></li>
-								<li><a href="#"><span class="fa fa-cog"></span> Billing</a></li>
-								<li><a href="#"><span class="fa fa-envelope"></span>
-										Messages</a></li>
+								<li><a href="#" id="friendsInterfaceButton"><span
+										class="fa fa-cog"></span> Friends </a></li>
+								<li><a href="#" id="myFriendsInterfaceButton"><span class="fa fa-envelope"></span>
+										MyFriends</a></li>
 
 								<li><a href="user-drive.html"><span class="fa fa-th"></span>
 										Drive</a></li>
@@ -661,45 +663,47 @@ body {
 							</ul>
 							</nav>
 						</div>
-						<div class="content-panel" id="profileInterface">
-							<h:form enctype="multipart/form-data" id="formId">
+						<div class="content-panel" id="profileInterface"><!-- Start Of Profile Interface -->							
+							<h:form enctype="multipart/form-data" id="formId"><!-- Start Of Profile Form -->								
 								<h2 class="title">
 									Profile<span class="pro-label label label-warning">PRO</span>
-								</h2>
-								<!-- 	<form class="form-horizontal">-->
+								</h2>							
 								<fieldset class="fieldset">
 									<h3 class="fieldset-title">Personal Info</h3>
 									<div class="form-group avatar">
-										 <figure class="figure col-md-2 col-sm-3 col-xs-12">  
-											<!--<img src="file:/D:/1fSEUE950-Short-Haircuts-Hairstyle-Tips-for-Men.jpg" class="rounded float-left" alt="..."/>  -->
-										<!--  	<img src="#{request.contextPath}/resources/images/1fSEUE950-Short-Haircuts-Hairstyle-Tips-for-Men.jpg" class="img-profile img-circle img-responsive center-block"/>-->
-											
- 											<h:graphicImage  class="img-profile img-circle img-responsive center-block" library="userImages" name ="#{ProfileController.connectedUser.photo}"  alt="..."></h:graphicImage> 
-											 </figure>
-											
-											
+										<figure class="figure col-md-2 col-sm-3 col-xs-12">
+<!--Other methode to display image ===> <img src="#{request.contextPath}/resources/images/1fSEUE950-Short-Haircuts-Hairstyle-Tips-for-Men.jpg" class="img-profile img-circle img-responsive center-block"/>-->
+										<h:graphicImage
+											class="img-profile img-circle img-responsive center-block"
+											library="userImages"
+											name="#{ProfileController.connectedUser.photo}" alt="..."></h:graphicImage>
+										</figure>
 										<div class="form-inline col-md-10 col-sm-9 col-xs-12">
-											<h:inputFile type="file" class="file-uploader pull-left" value="#{ProfileController.myImage}"> </h:inputFile>  
+											<h:inputFile type="file" class="file-uploader pull-left"
+												value="#{ProfileController.myImage}">
+											</h:inputFile>
 
 											<h:commandButton action="#{ProfileController.addImage()}"
-											value="Update Image" class="btn btn-primary" ></h:commandButton>
+												value="Update Image" class="btn btn-primary"></h:commandButton>
 										</div>
 									</div>
 
-									<div class="form-group" style="margin-bottom:20px;">
+									<div class="form-group" style="margin-bottom: 20px;">
 										<label class="col-md-2 col-sm-3 col-xs-12 control-label">UserName</label>
-										<div class="col-md-10 col-sm-9 col-xs-12" style="margin-bottom:20px;">
+										<div class="col-md-10 col-sm-9 col-xs-12"
+											style="margin-bottom: 20px;">
 											<h:inputText binding="#{userName}" type="text"
-												class="form-control" 
+												class="form-control"
 												value="#{ProfileController.connectedUser.userName}"
 												disabled="true">
 											</h:inputText>
 										</div>
 									</div>
-									<div class="form-group" style="margin-bottom:20px;">
+									<div class="form-group" style="margin-bottom: 20px;">
 										<label class="col-md-2 col-sm-3 col-xs-12 control-label">First
 											Name</label>
-										<div class="col-md-10 col-sm-9 col-xs-12" style="margin-bottom:20px;">
+										<div class="col-md-10 col-sm-9 col-xs-12"
+											style="margin-bottom: 20px;">
 											<h:inputText type="text" class="form-control"
 												value="#{ProfileController.connectedUser.name}"
 												binding="#{firstName}"></h:inputText>
@@ -711,20 +715,20 @@ body {
 										<div class="col-md-10 col-sm-9 col-xs-12">
 											<h:inputText type="text" class="form-control"
 												value="#{ProfileController.connectedUser.lastName}"
-												binding="#{lastName}"></h:inputText>												
+												binding="#{lastName}"></h:inputText>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-md-2 col-sm-3 col-xs-12 control-label">National
 											ID Card </label>
 										<div class="col-md-10 col-sm-9 col-xs-12">
-											<h:inputText class="form-control" converterMessage="Please enter digits only."
+											<h:inputText class="form-control"
+												converterMessage="Please enter digits only."
 												value="#{ProfileController.connectedUser.nic}"
 												binding="#{nationalIdCard}"></h:inputText>
 										</div>
 									</div>
 								</fieldset>
-								<!-- </form>-->
 								<fieldset class="fieldset">
 									<h3 class="fieldset-title">Contact Info</h3>
 									<div class="form-group">
@@ -740,9 +744,10 @@ body {
 										<label class="col-md-2  col-sm-3 col-xs-12 control-label">Phone
 											Number</label>
 										<div class="col-md-10 col-sm-9 col-xs-12">
-											<h:inputText value="#{ProfileController.connectedUser.phoneNumber}" 
-											class="form-control" converterMessage="Please enter digits only."
-												
+											<h:inputText
+												value="#{ProfileController.connectedUser.phoneNumber}"
+												class="form-control"
+												converterMessage="Please enter digits only."
 												binding="#{phoneNumber}"></h:inputText>
 
 										</div>
@@ -753,75 +758,249 @@ body {
 
 								<div class="form-group">
 									<div
-										class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-										<!--<input class="btn btn-primary" type="submit"
-															value="Update Profile"/>-->
+										class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">										
 										<h:commandButton action="#{ProfileController.modify()}"
-											value="Submit" class="btn btn-primary" binding="#{submitting}" />
+											value="Submit" class="btn btn-primary"
+											binding="#{submitting}" />
 										<a class="btn btn-primary" onclick="enable()">modify</a>
 									</div>
 
 								</div>
-							</h:form>
-						</div>
-						<div class="content-panel" id="passwordInterface">
-							<h:form>
+							</h:form><!-- //ending Of ProfileForm -->							
+						</div><!-- //Ending Of Profile Interface -->						
+						<div class="content-panel" id="passwordInterface"><!-- Start Of  Password Interface-->							
+							<h:form><!-- Starting Of password Form -->							
 								<h2 class="title">
 									Change Password<span class="pro-label label label-warning">PRO</span>
 								</h2>
-								<!-- 	<form class="form-horizontal">-->
 								<fieldset class="fieldset">
 									<h3 class="fieldset-title">verification</h3>
 									<div class="form-group">
-										<label class="col-md-2 col-sm-3 col-xs-12 control-label">Current Password</label>
+										<label class="col-md-2 col-sm-3 col-xs-12 control-label">Current
+											Password</label>
 										<div class="col-md-10 col-sm-9 col-xs-12">
-											<h:inputSecret type="text" class="form-control" id="currentPassword"
+											<h:inputSecret type="text" class="form-control"
+												id="currentPassword"
 												value="#{ProfileController.currentPassword}"></h:inputSecret>
 										</div>
 									</div>
-								</fieldset>
-								<!-- </form>-->
+								</fieldset>								
 								<fieldset class="fieldset">
 									<h3 class="fieldset-title">New Password</h3>
 									<div class="form-group">
-										<label class="col-md-2  col-sm-3 col-xs-12 control-label">New Password</label>
+										<label class="col-md-2  col-sm-3 col-xs-12 control-label">New
+											Password</label>
 										<div class="col-md-10 col-sm-9 col-xs-12">
-											<h:inputSecret type="text" class="form-control" id="newPassword"
-												value="#{ProfileController.newPassword}"></h:inputSecret>
+											<h:inputSecret type="text" class="form-control"
+												id="newPassword" value="#{ProfileController.newPassword}"></h:inputSecret>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-2  col-sm-3 col-xs-12 control-label">Repeat New Password</label>
+										<label class="col-md-2  col-sm-3 col-xs-12 control-label">Repeat
+											New Password</label>
 										<div class="col-md-10 col-sm-9 col-xs-12">
 											<h:inputSecret type="text" class="form-control"
-												value="#{ProfileController.repeatdPassword}" id="repeatdPassword"></h:inputSecret>
-												<p id="needResult"><h:outputText type="text" class="form-control" id="result"
-												value="#{ProfileController.passwordResult}"></h:outputText></p>
+												value="#{ProfileController.repeatdPassword}"
+												id="repeatdPassword"></h:inputSecret>
+											<p id="needResult">
+												<h:outputText type="text" class="form-control" id="result"
+													value="#{ProfileController.passwordResult}"></h:outputText>
+											</p>
 										</div>
 									</div>
-
 								</fieldset>
 								<hr />
-
 								<div class="form-group">
 									<div
-										class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
-										<!--<input class="btn btn-primary" type="submit"
-															value="Update Profile"/>-->
-										<h:commandButton action="#{ProfileController.passwordUpdate()}"
-											value="Change Password" class="btn btn-primary" >
-											<f:ajax execute="newPassword repeatdPassword currentPassword" render="result" 
-											onevent="function(data) { if (data.status === 'success') {
+										class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">										
+										<h:commandButton
+											action="#{ProfileController.passwordUpdate()}"
+											value="Change Password" class="btn btn-primary">
+											<f:ajax execute="newPassword repeatdPassword currentPassword"
+												render="result"
+												onevent="function(data) { if (data.status === 'success') {
 										
 											alert(document.getElementById('needResult').innerText);
-											 }}"/>
-											</h:commandButton>
-											
+											 }}" />
+										</h:commandButton>
+
 									</div>
 
 								</div>
-							</h:form>
-						</div>
+							</h:form><!--Ending Of Password Form -->							
+						</div><!-- Ending Of Password Interface -->
+						<div class="content-panel" id="friendsInterface" style="overflow-y: scroll;"><!--Start Of  Friends Interface-->
+
+							<h2 class="title">
+								Friends <span class="pro-label label label-warning">PRO</span>
+							</h2>
+							<fieldset class="fieldset">
+								<h:form>
+									<h3 class="fieldset-title">find a Friend</h3>
+									<div class="form-group">
+
+										<label class="col-md-2 col-sm-3 col-xs-12 control-label">Look
+											For :</label>
+										<h:outputText class="usersSize" value="#{ProfileController.usersSize}"/>
+										<div class="col-md-10 col-sm-9 col-xs-12">
+											<h:inputText type="text" class="form-control"
+												id="searchInput" value="#{ProfileController.searchInput}"/>
+											<h:commandButton class="btn btn-dark" value="Search"
+												action="#{ProfileController.searchForFriend()}">
+												<f:ajax execute="searchInput" render="display "
+													onevent="function(data) { if (data.status === 'success') {
+													  hello();
+											
+											 }}" />
+											</h:commandButton>
+
+										</div>
+
+									</div>
+									<div>
+										<h:dataTable value="#{ProfileController.allUsers}" var="user"
+											class="table" id="display">
+											<h:column>
+												<h:graphicImage
+													class="img-profile img-circle img-responsive center-block"
+													library="userImages" name="#{user.photo}"
+													style="width:50px;height:50px;" alt="..."></h:graphicImage>
+											</h:column>
+
+											<h:column>
+												<h:outputText value="#{user.name}" />
+											</h:column>
+											<h:column>
+												<h:outputText value="#{user.lastName}" />
+											</h:column>
+											<h:column>
+												<div class="test">
+													<h:commandButton class="btn btn-primary"
+														value="Send Request " binding="#{sendButton}"
+														action="#{ProfileController.sendRequest(user.userName)}">
+														<f:ajax execute="" render="demandeResult"
+															onevent="function(data) { if (data.status === 'success') {		
+											 }}" />
+													</h:commandButton>
+													<p id="testResult">
+														<h:outputText id="demandeResult"
+															value="#{ProfileController.demandeResult}"></h:outputText>
+													</p>
+													<p>									
+														<h:outputText
+															class ="checking"  value="#{ProfileController.checkingIfFriendMethod(user.id)}" style="visibility : 'hidden';"></h:outputText>
+															<button type="button" class="btn btn-secondary" >Friend</button>
+													</p>	
+												</div>
+											</h:column>
+										</h:dataTable>
+
+									</div>
+								</h:form>
+							</fieldset>
+							<fieldset class="fieldset">
+								<h3 class="fieldset-title">My requests</h3>
+
+								<div>
+									<h:form>
+										<h:dataTable
+											value="#{ProfileController.usersWhoSendedMeRequests}"
+											var="user" class="table" id="displayUsers">
+											<h:column>
+												<h:graphicImage
+													class="img-profile img-circle img-responsive center-block"
+													library="userImages" name="#{user.photo}"
+													style="width:50px;height:50px;" alt="..."></h:graphicImage>
+											</h:column>
+
+											<h:column>
+												<h:outputText value="#{user.name}" />
+											</h:column>
+											<h:column>
+												<h:outputText value="#{user.lastName}" />
+											</h:column>
+											<h:column>
+												<h:commandButton class="btn btn-success" value="accept "
+													action="#{ProfileController.changeDemandeEtat('Accepted',user.id)}">
+													<f:ajax execute="" render="displayUsers"
+														onevent="function(data) { if (data.status === 'success') {	
+	
+											 }}" />
+												</h:commandButton>
+												
+											</h:column>
+											<h:column>
+												<h:commandButton class="btn btn-danger" value="decline "
+													action="#{ProfileController.changeDemandeEtat('Refuse',user.id)}">
+													<f:ajax execute="" render="displayUsers"
+														onevent="function(data) { if (data.status === 'success') {	
+	
+											 }}" />
+												</h:commandButton>
+												
+											</h:column>
+										</h:dataTable>
+									</h:form>
+								</div>
+							</fieldset>
+							<hr />
+						</div><!-- Ending Of Friends Interface -->	
+						
+						<div class="content-panel" id="myFriendsInterface" style="overflow-y: scroll;"><!--Start Of  MyFriends Interface-->
+
+							<h2 class="title">
+								Friends <span class="pro-label label label-warning">PRO</span>
+							</h2>
+							<fieldset class="fieldset">
+								<h:form>
+									<h3 class="fieldset-title">MyFriends</h3>
+									<div class="form-group">
+
+										<label class="col-md-2 col-sm-3 col-xs-12 control-label">Look
+											For :</label>										
+										<div class="col-md-10 col-sm-9 col-xs-12">
+											<h:inputText type="text" class="form-control"
+												id="searchInput" value="#{ProfileController.searchInput}"/>
+											<h:commandButton class="btn btn-dark" value="Search"
+												action="#{ProfileController.searchInMyfriends()}">
+												<f:ajax execute="searchInput" render="display "
+													onevent="function(data) { if (data.status === 'success') {
+													  hello();
+											
+											 }}" />
+											</h:commandButton>
+
+										</div>
+
+									</div>
+									<div>
+										<h:dataTable value="#{ProfileController.myFriends}" var="user"
+											class="table" id="display">
+											<h:column>
+												<h:graphicImage
+													class="img-profile img-circle img-responsive center-block"
+													library="userImages" name="#{user.photo}"
+													style="width:50px;height:50px;" alt="..."></h:graphicImage>
+											</h:column>
+
+											<h:column>
+												<h:outputText value="#{user.name}" />
+											</h:column>
+											<h:column>
+												<h:outputText value="#{user.lastName}" />
+											</h:column>
+											<h:column>
+												<button type="button" class="btn btn-outline-success">Send Message</button>
+											</h:column>
+												
+										</h:dataTable>
+
+									</div>
+								</h:form>
+							</fieldset>							
+							<hr />
+						</div><!-- Ending Of MyFriends Interface -->
+										
 					</div>
 					</section>
 				</div>
@@ -830,58 +1009,89 @@ body {
 
 
 
-			<script>			
-			var firstName =document.getElementById("#{firstName.clientId}");
-			var lastName =document.getElementById("#{lastName.clientId}");
-			var nationalIdCard =document.getElementById("#{nationalIdCard.clientId}");
-			var phoneNumber =document.getElementById("#{phoneNumber.clientId}");
-			
-			
+			<script>
+				
+			//Start Of Disabling Profile inputs ByDefault
+			var firstName = document
+					.getElementById("#{firstName.clientId}");
+			var lastName = document.getElementById("#{lastName.clientId}");
+			var nationalIdCard = document
+					.getElementById("#{nationalIdCard.clientId}");
+			var phoneNumber = document
+					.getElementById("#{phoneNumber.clientId}");
+
 			firstName.disabled = true;
 			lastName.disabled = true;
 			nationalIdCard.disabled = true;
 			phoneNumber.disabled = true;
-			
-			function enable(){
+
+			function enable() {
 				firstName.disabled = false;
 				lastName.disabled = false;
 				nationalIdCard.disabled = false;
 				phoneNumber.disabled = false;
-				 
-				 
+
 			}
-			var profileButton = document.getElementById("profileInterfaceButton");
-			var profileInterface = document.getElementById("profileInterface");
-			var PasswordInterfaceButton = document.getElementById("PasswordInterfaceButton");
-			var passwordInteface = document.getElementById("passwordInterface");
-			
-			passwordInterface.style.display ="none";
-			var currentInterface;					
+			//End Of Dissabling
+
+			//Start Of Navigation Configuration
+			var profileButton = document
+					.getElementById("profileInterfaceButton");
+			var profileInterface = document
+					.getElementById("profileInterface");
+			var passwordInterfaceButton = document
+					.getElementById("passwordInterfaceButton");
+			var passwordInteface = document
+					.getElementById("passwordInterface");
+			var friendsInterfaceButton = document
+			.getElementById("friendsInterfaceButton");
+				var friendsInterface = document
+			.getElementById("friendsInterface");
+			var myFriendsInterfaceButton = document
+			.getElementById("myFriendsInterfaceButton");
+			var myFriendsInterface=document
+			.getElementById("myFriendsInterface");
+
+			friendsInterface.style.display = "none";
+			passwordInterface.style.display = "none";
+			myFriendsInterface.style.display = "none";
+			var currentInterface;
 			currentInterface = profileInterface;
-			
-			PasswordInterfaceButton.addEventListener("click",
-			function(){			
+
+			passwordInterfaceButton.addEventListener("click", function() {
 				currentInterface.style.display = "none";
 				passwordInteface.style.display = "block";
 				currentInterface = passwordInteface;
 			});
-			
-			profileButton.addEventListener("click",function(){			
-				currentInterface.style.display = "none"
-					profileInterface.style.display = "block";
-				currentInterface = profileInterface;
-		});
-			
-			
-			
-			</script>
 
+			profileButton.addEventListener("click", function() {
+				currentInterface.style.display = "none"
+				profileInterface.style.display = "block";
+				currentInterface = profileInterface;
+			});
+			
+			friendsInterfaceButton.addEventListener("click",function(){
+			currentInterface.style.display = "none";
+			friendsInterface.style.display = "block";
+			currentInterface = friendsInterface ;
+			});
+			
+			myFriendsInterfaceButton.addEventListener("click",function(){
+				currentInterface.style.display = "none";
+				myFriendsInterface.style.display = "block";
+				currentInterface = myFriendsInterface ;
+				});
+											
+//document.getElementsByClassName('test')[1].getElementsByClassName('btn btn-primary')[0].style.visibility = 'hidden';
+				
+			</script>
+				<h:outputScript library="js" name="Profile.js" />
 			<script
 				src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 			<script type="text/javascript">
-	
-</script>
+				
+			</script>
 		</body>
 	</ui:define>
 </ui:composition>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -20,6 +21,7 @@ public class Rent  implements Serializable {
 	private String garantor;
 	private String letterOfCommitment;
 	private String proofOfPayment;
+
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;

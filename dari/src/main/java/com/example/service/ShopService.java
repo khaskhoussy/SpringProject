@@ -58,7 +58,20 @@ public class ShopService {
 			imagesRepository.save(newone);			
 		});	*/			
    }
-	
+	public void addProductJsf(String username,Shop product,String photos)
+	{
+		
+		product.setPostDate(new Date());
+		product.setOwnerUser(userRepository.findByUserName(username).get());
+		shopRepository.save(product);		
+		List<String> productImages = new ArrayList<String>();
+		productImages = Arrays.asList(photos.split(","));
+		productImages.stream().forEach(ph->
+		{
+			ProductImages newone = new ProductImages(ph, product);
+			imagesRepository.save(newone);			
+		});				
+   }
 	
 	public List<Shop> myBasket(String ids,String mounts)
 	{

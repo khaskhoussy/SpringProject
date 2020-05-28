@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Demande {
 	
@@ -22,7 +24,8 @@ public class Demande {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne()
 	private User userReciver;
 	
 

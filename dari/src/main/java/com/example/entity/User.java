@@ -24,7 +24,7 @@ public class User {
 	
 	
 	
-	
+	//cascade should bee in the child
 	@OneToMany(mappedBy="userReciver",cascade = CascadeType.ALL)
 	private List<Demande> Demandes;
 	
@@ -65,7 +65,7 @@ public class User {
 		Reservation = reservation;
 	}
 
-	@JsonBackReference
+	//@JsonBackReference
 	@OneToOne(mappedBy="user")
 	private Rent rent;
 
@@ -96,7 +96,7 @@ public class User {
 		
 		
 	}
-	public User(String userName,String mailAddress,String name,  String lastName, int phoneNumber,int nic, String password,  String roles,boolean active) 
+	public User(String userName,String mailAddress,String name,  String lastName, int phoneNumber,int nic, String password,String photo,  String roles,boolean active) 
 	{
 		super();
 		this.userName = userName;
@@ -108,6 +108,7 @@ public class User {
 		this.mailAddress = mailAddress;
 		this.nic = nic;
 		this.active=active;
+		this.photo=photo;
 	}
 
 		
