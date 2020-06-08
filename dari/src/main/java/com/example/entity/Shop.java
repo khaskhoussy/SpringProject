@@ -30,6 +30,8 @@ public class Shop  {
 	
 	private float price;
 	
+	private String photo;
+	
 	
 	@ManyToOne()
 	private User ownerUser ;
@@ -113,6 +115,14 @@ public class Shop  {
 
 	public void setOwnerUser(User ownerUser) {
 		this.ownerUser = ownerUser;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	

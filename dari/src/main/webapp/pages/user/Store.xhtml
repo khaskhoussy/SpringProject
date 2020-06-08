@@ -6,6 +6,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/template.xhtml">
+	<f:metadata>
+		<f:viewAction action="#{StoreController.shopTable()}" />
+	</f:metadata>
 	
 
 	<ui:param name="page_name" value="Store"/>
@@ -32,6 +35,7 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="/resources/cssStore/style.css"/>
 	 <!--================Category Product Area =================-->
+	 <body onload="myFunction()">
     <section class="cat_product_area section_padding">
         <div class="container">
             <div class="row">
@@ -64,10 +68,32 @@
                             </div>
                             <div class="widgets_inner">
                                 <ul class="list">
-                                    <li>
-                                    	
-                                    	 <a href="#" id="AddProductButton"><span
-										class="btn btn-secondary"> Add</span></a>
+                                    <li>                                  	
+                                    	 <a href="#" id="AddProductButton" class="btn btn-primary">Add</a>
+                                    </li>                                 
+                                </ul>
+                            </div>
+                        </aside>
+                         <aside class="left_widgets p_filter_widgets price_rangs_aside">                            
+                           <div class="l_w_title">
+                                <h3>MyBasket</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+                                    <li>           
+                                    	<h:form id="myForm">
+										<h:inputText id="ids" value="#{StoreController.ids}" style=" position: absolute;  width: 1px;  height: 1px;  margin: -1px;  border: 0;  padding: 0; clip: rect(0 0 0 0);  overflow: hidden;"></h:inputText>
+										<h:inputText id="amounts" value="#{StoreController.amounts}" style=" position: absolute;  width: 1px;  height: 1px;  margin: -1px;  border: 0;  padding: 0; clip: rect(0 0 0 0);  overflow: hidden;"></h:inputText>
+										<h:commandButton action="#{StoreController.desplayButton()}"
+											value="checkMyBasket" class="btn btn-primary">
+											<f:ajax execute="ids amounts" render="#{table.clientId}"
+												onevent="function(data) { if (data.status === 'success') {													
+												busketInterface();												
+											 }}" />
+										</h:commandButton>
+									</h:form>
+ <!-- <a href="#" id="Basketbutton" onclick="myFunction()"><span -->
+<!-- 										class="btn btn-secondary"> Basket</span></a> -->
                                     </li>                                 
                                 </ul>
                             </div>
@@ -114,96 +140,27 @@
                     </div>
 
                     <div class="row align-items-center latest_product_inner">
+                    <h:form>
+                    <h:dataTable value="#{StoreController.shops}" var="product" id="display">
+											<h:column>
                         <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <img src="img/product/product_1.png" alt=""/>
+                               <h:graphicImage													
+													library="productImages" name="#{product.photo}"
+													class="img-thumbnail"  ></h:graphicImage>
                                 <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                    <h4><h:outputLabel value="#{product.productName}"></h:outputLabel> </h4>
+                                    <h3><h:outputLabel value="#{product.price}" ></h:outputLabel></h3>
+                                    	<h:commandButton class="btn btn-primary" value="Buy"
+												action="#{StoreController.passingParameters()}">	
+												<f:param id="param1" name="param1Name" value="#{product.id}"/>											
+											 </h:commandButton>	
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_2.png" alt=""/>
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_3.png" alt=""/>
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_4.png" alt=""/>
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_5.png" alt=""/>
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_6.png" alt=""/>
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_7.png" alt=""/>
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_8.png" alt=""/>
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                <img src="img/product/product_2.png" alt=""/>
-                                <div class="single_product_text">
-                                    <h4>Quartz Belt Watch</h4>
-                                    <h3>$150.00</h3>
-                                    <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        </h:column>
+                        </h:dataTable>
+                        </h:form>
                         <div class="col-lg-12">
                             <div class="pageination">
                                 <nav aria-label="Page navigation example">
@@ -228,6 +185,7 @@
                                 </nav>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 <div class="col-lg-9" id="AddProduct">
@@ -295,9 +253,62 @@
 											 </div>								
 					</h:form>
                 </div>
+                
+                                <div class="col-lg-9" id="basketDisplay" >
+						<h:form>
+							<h:dataTable value="#{StoreController.myBusket}" var="product"
+								binding="#{table}" class="table" id="display">
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="ProductName" />
+									</f:facet>
+									<h:outputLabel value="#{product.productName}"></h:outputLabel>
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="SelectedAmount" />
+									</f:facet>
+									<h:outputLabel value="#{product.amount}"></h:outputLabel>
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="photo" />
+									</f:facet>
+									<h:graphicImage library="productImages" name="#{product.photo}"
+										class="img-thumbnail" style="width:50px;height:50px;"
+										alt="..."></h:graphicImage>
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="PriceParUnit" />
+									</f:facet>
+									<h:outputLabel value="#{product.price}"></h:outputLabel>
+								</h:column>
+								<p:column>									
+									<f:facet name="footer">
+									<label><strong> Total price : </strong>	<h:outputText value="#{StoreController.totalPrice}" /></label>
+									</f:facet>
+								</p:column>
+
+							</h:dataTable>					
+							<h:commandButton class="btn btn-success" value="ValidateBusket"
+								action="#{StoreController.validateBasket()}">
+								<f:ajax execute="" render="display"
+									onevent="function(data) { if (data.status === 'success') {				
+											deleteCookie();
+											 }}" />
+							</h:commandButton>
+						</h:form>
+					</div>
             </div>
         </div>
     </section>
+    </body>
+    
     <script>
   //Start Of Navigation Configuration
 	var AddProductButton = document
@@ -306,7 +317,11 @@
 			.getElementById("displayProducts");
 	var AddProduct = document
 			.getElementById("AddProduct");	
-
+	var basketButton=document.getElementById("Basketbutton");
+	
+	var displayBasket=document.getElementById("basketDisplay");
+	
+	displayBasket.style.display="none";
 	AddProduct.style.display = "none";
 	var currentInterface;
 	currentInterface = displayProducts;
@@ -316,26 +331,44 @@
 		AddProduct.style.display = "block";
 		currentInterface = AddProduct;
 	});
-
-	profileButton.addEventListener("click", function() {
-		currentInterface.style.display = "none"
-		profileInterface.style.display = "block";
-		currentInterface = profileInterface;
-	});
+function busketInterface(){
 	
-	friendsInterfaceButton.addEventListener("click",function(){
-	currentInterface.style.display = "none";
-	friendsInterface.style.display = "block";
-	currentInterface = friendsInterface ;
-	});
+	currentInterface.style.display="none";
+	displayBasket.style.display = "block";
+	currentInterface = displayBasket;
+}
 	
-	myFriendsInterfaceButton.addEventListener("click",function(){
-		currentInterface.style.display = "none";
-		myFriendsInterface.style.display = "block";
-		currentInterface = myFriendsInterface ;
-		});
-    
-    
+	/*basketButton.addEventListener("click",function(){
+		currentInterface.style.display="none";
+		displayBasket.style.display = "block";
+		currentInterface = displayBasket;
+	})*/
+	
+	//cookie Configurations
+	
+	var valueOfIdCookie = document.cookie.split(";")[0].split("=")[1];
+	var valueOfAmountCookie= document.cookie.split(";")[1].split("=")[1];
+	document.getElementById("idCookie").innerText=valueOfIdCookie;
+	document.getElementById("amountCookie").innerHTML=valueOfAmountCookie;
+	function  myFunction(){
+	var checkId = document.cookie.split(";")[0].split("=")[0];
+	if(checkId =='idProduct'){
+	document.getElementById("myForm:ids").value = valueOfIdCookie;
+    document.getElementById("myForm:amounts").value = valueOfAmountCookie;
+	}
+	else
+		{
+		document.getElementById("myForm:ids").value = 0;
+	    document.getElementById("myForm:amounts").value =0;
+		}
+	}
+	function deleteCookie()
+	{
+		 document.cookie = "idProduct" + '=; Max-Age=0'
+		 document.cookie = "amountProduct" + '=; Max-Age=0'
+	}
+	
+	
     </script>
     
     

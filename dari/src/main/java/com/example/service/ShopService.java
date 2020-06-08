@@ -146,4 +146,14 @@ public class ShopService {
 		}
 		return price;
 	}
+	
+	public float basketPriceJsf(List<Shop> basket)
+	{
+		float price = 0;
+		for(Shop p : basket){
+			price =	price +(p.getAmount()*p.getPrice());
+		}
+		return price;
+	}
+
 }
