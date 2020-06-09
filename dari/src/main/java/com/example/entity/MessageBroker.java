@@ -16,7 +16,7 @@ public class MessageBroker {
 	private String userReciver;
 	private Date sendDate;
 	private String messageContent;
-	private boolean status ;
+	private boolean status;
 	
 	
 	

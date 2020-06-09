@@ -49,6 +49,7 @@ public class StoreController {
 	public List<Shop> myBusket ;
 	private float totalPrice = 0;
 	public float relatedTobasket =0;
+
 	
 	public String passingParameters(){
         FacesContext fc = FacesContext.getCurrentInstance();
