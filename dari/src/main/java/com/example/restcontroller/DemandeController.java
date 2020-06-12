@@ -59,7 +59,7 @@ public class DemandeController {
 	}
 	final String temp = "PT1M";
 	
-	/*@Scheduled(initialDelay=1000L,fixedDelayString= temp)
+	@Scheduled(initialDelay=1000L,fixedDelayString= temp)
 	public void test()
 	{
 		List<Demande> AcceptedDemande =demandeService.allDemande().stream().filter(d->d.getEtat().
@@ -69,6 +69,6 @@ public class DemandeController {
 				
 	}
 	
-	*/
+	
 	
 }

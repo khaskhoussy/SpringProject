@@ -67,7 +67,7 @@ public class User {
 		Reservation = reservation;
 	}
 
-	//@JsonBackReference
+	@JsonBackReference
 	@OneToOne(mappedBy="user")
 	private Rent rent;
 

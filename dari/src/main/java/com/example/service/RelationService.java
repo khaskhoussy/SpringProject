@@ -50,5 +50,14 @@ public class RelationService {
 		});
 		return MyFriends;
 	}
-	
+	public void deleteFriend(String connectedUserName,String userName)
+	{
+		int idFriend = userService.findUserByName(userName).getId();
+		int idconnectedUser = userService.findUserByName(connectedUserName).getId();
+		
+		Relation slectedRelation =allRelation().stream().filter(r->(r.getIdUser1() == idconnectedUser && r.getIdUser2() ==idFriend)
+																							||
+															       (r.getIdUser1() == idFriend && r.getIdUser2() == idconnectedUser)).findFirst().get();
+		relationRepository.delete(slectedRelation);
+	}
 }

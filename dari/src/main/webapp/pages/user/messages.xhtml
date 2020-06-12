@@ -180,77 +180,72 @@ img{ max-width:100%;}
 									</h:graphicImage>     
                  </div>
                 <div class="chat_ib">
-                  <h5><h:outputLabel value="#{item.lastName}"/> <br/><h:outputLabel value="#{item.name}"/></h5>
+                  <h5><h:outputLabel value="#{item.lastName}"/> <br/><h:outputLabel value="#{item.name}"/> 
+                 <br/> <h:commandButton class="btn btn-outline-success" value="see"
+												action="#{MessagesController.desplayMessages(item.lastName)}">
+												<f:ajax execute="" render="affichage"
+													onevent="function(data) { if (data.status === 'success') {
+																testnotification();		
+											 }}" />
+											</h:commandButton>
+											<h:outputLabel value="#{item.userName}" class="selectedName" style=" position: absolute;  width: 1px;  height: 1px;  margin: -1px;  border: 0;  padding: 0; clip: rect(0 0 0 0);  overflow: hidden;"/>
+											</h5>
                 </div>
               </div>
             </div>
           </c:forEach>  
-			
-					
-			
-           
              </h:form>
           </div>
          
         </div>
-        <div class="mesgs" id="Test">
-          <div class="msg_history">
-            <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"/> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p class="out"></p>
+        <div class="mesgs">
+           
+          <div class="msg_history"> 
+              <h:form id="affichage">
+          <c:forEach  var="item" items="#{MessagesController.messages}">
+          <c:if test="#{item.sender == MessagesController.selectedPerson}"> 
+            <div class="incoming_msg">                          
+              <div class="received_msg">             
+                <div class="received_withd_msg">                            
+                  <p class="out"><h:outputLabel value="#{item.messageContenu}" /></p>
                   <span class="time_date"></span></div>
-              </div>
+              </div>                                 
             </div>
+            </c:if> 
+              <c:if test="#{item.sender != MessagesController.selectedPerson}">  
             <div class="outgoing_msg">
               <div class="sent_msg">
-                <p>Test which is a new approach to have all
-                  solutions</p>
-                <span class="time_date"> 11:01 AM    |    June 9</span> </div>
-            </div>
-            <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"/> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>Test, which is a new approach to have</p>
-                  <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-              </div>
-            </div>
-            <div class="outgoing_msg">
-              <div class="sent_msg">
-                <p>Apollo University, Delhi, India Test</p>
-                <span class="time_date"> 11:01 AM    |    Today</span> </div>
-            </div>
-            <div class="incoming_msg">
-              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"/> </div>
-              <div class="received_msg">
-                <div class="received_withd_msg">
-                  <p>We work directly with our designers and suppliers,
-                    and sell direct to you, which means quality, exclusive
-                    products, at a price anyone can afford.</p>
-                  <span class="time_date"> 11:01 AM    |    Today</span></div>
-              </div>
-            </div>
+                <p><h:outputLabel value="#{item.messageContenu}" />
+                </p>
+                <span class="time_date"></span> </div>
+            </div>  
+            </c:if>
+            </c:forEach>  
+             </h:form>                
           </div>
+          <h:form id="Form">
           <div class="type_msg">
-            <div class="input_msg_write">
-              <input type="text" class="write_msg" placeholder="Type a message" />
-              <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-            </div>
+           <h:inputText type="text" class="form-control"
+												id="searchInput" value="#{MessagesController.message}"/>
+											<h:commandButton class="btn btn-dark" value="send"
+												action="#{MessagesController.sendTheMessage()}">
+												<f:ajax execute="searchInput" render=""
+													onevent="function(data) { if (data.status === 'success') {
+											sendMessage();
+											 }}" />
+											</h:commandButton>       
           </div>
+              </h:form>    
         </div>
-      </div>
-      
-      
+      </div>           
       <p class="text-center top_spac"> Design by <a target="_blank" href="#">Sunil Rajput</a></p>
-     <p class="in">Hello!</p>
     </div></div>
     </body>
 	
 	<script>
 	
-		var user = document.getElementsByClassName('chat_people')[0];
+		/*var user = document.getElementsByClassName('chat_people')[0];
+		var userName = document.getElementsByClassName('userName')[0];
 	 	user.addEventListener('click',function()
 	 			{	 				
 	 			$.ajax({
@@ -259,29 +254,37 @@ img{ max-width:100%;}
 				
 					success: function(data){
 						//$('.in').append("Message : "+data.messageContenu);
-				
-							  $.each(data, function(id, obj){ 
-							        $.each(obj, function(message, messageContenu){
-							        	$('.in').append(messageContenu + ": " + value+"<br/>");
-							        });
-							    });
-							
-							
-							
-						})
-						
 					
-						
-						
+					//	console.log("message : "+data[0].messageContenu);
+						data.forEach(message =>console.log("Message :"+message.messageContenu))														
 					},
-					error: function(jqXHR,textStatus,errorThrown){
-						
+					error: function(jqXHR,textStatus,errorThrown){						
 					}
-				})
-		 		
-	 			});
+						})		 		
+	 			});*/
+	 			
+	 			//messaging
+	 		 	var message = document.getElementsByClassName('msg_history')[0];
+	 			var myMessage = document.getElementById("Form:searchInput");
+	 			
+	 			
+	 			
+	 			function sendMessage()
+	 			{
+	 			
+	 				message.innerHTML = message.innerHTML+'<div class="outgoing_msg"><div class="sent_msg"><p>'+myMessage.value+'</p><span class="time_date"></span></div></div>';
+	 			}
+	 			//notification
+	 			var selectedPersone =document.getElementsByClassName('selectedName')[1];
+	 			function testnotification(){
+	 				console.log(selectedPersone.innerText);	
+	 			}
+	 			
+	 		 	
+ 	
 	</script>
-				<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+			<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 			<script type="text/javascript"></script>
 	</ui:define>

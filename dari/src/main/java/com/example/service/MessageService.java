@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Message;
 import com.example.entity.MessageBroker;
+import com.example.entity.User;
 import com.example.repository.MessageBrokerRepository;
 import com.example.repository.MessageRepository;
 import com.example.repository.UserRepository;
@@ -23,6 +24,8 @@ public class MessageService {
 	MessageBrokerRepository messageBrokerRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	UserService userService;
 	
 	public List<Message> AllMessages()
 	{
@@ -62,5 +65,15 @@ public class MessageService {
 		return myMessages;
 					
 		}
+		public void sendMessageJsf(String sender ,String reciver,String message)
+		{
+			User userReciver =userService.findUserByName(reciver);
+			Message newMessage = new Message(new Date(), message,sender,userReciver);
+			newMessage.setNotification(false);
+			messageRepository.save(newMessage);
+			
+		}
+		
+	
 
 }
