@@ -49,6 +49,8 @@ public class StoreController {
 	public List<Shop> myBusket ;
 	private float totalPrice = 0;
 	public float relatedTobasket =0;
+	private int idToDelete ; 
+	private int amountToDelete;
 
 	
 	public String passingParameters(){
@@ -106,6 +108,28 @@ public class StoreController {
 		myBusket = null;
 		totalPrice=0;
 	}
+	
+	
+	public void deleteProduct(int id ,int amount){
+		logger.info(ids);
+		logger.info(amounts);
+		idToDelete = id;
+		amountToDelete = amount;
+		for (int i = 0;i<ids.length();i++)
+		{
+			if(ids.charAt(i) == Integer.toString(id).charAt(0))
+				{ids = charRemoveAt(ids,i);
+				ids = charRemoveAt(ids, i);
+				amounts = charRemoveAt(amounts,i);
+				amounts = charRemoveAt(amounts,i);
+				}
+		}
+		myBusket = shopService.myBasket(ids,amounts);
+	}
+	
+	public static String charRemoveAt(String str, int p) {
+		return str.substring(0, p) + str.substring(p + 1);
+		}
 	
 	public Part getProductImage() {
 		return productImage;
@@ -204,6 +228,26 @@ public class StoreController {
 
 	public void setTotalPrice(float totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+
+	public int getIdToDelete() {
+		return idToDelete;
+	}
+
+
+	public void setIdToDelete(int idToDelete) {
+		this.idToDelete = idToDelete;
+	}
+
+
+	public int getAmountToDelete() {
+		return amountToDelete;
+	}
+
+
+	public void setAmountToDelete(int amountToDelete) {
+		this.amountToDelete = amountToDelete;
 	}
 	
 	

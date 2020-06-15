@@ -255,7 +255,8 @@
                 </div>
                 
                                 <div class="col-lg-9" id="basketDisplay" >
-						<h:form>
+						<h:form id="validation">
+
 							<h:dataTable value="#{StoreController.myBusket}" var="product"
 								binding="#{table}" class="table" id="display">
 
@@ -293,6 +294,19 @@
 									<label><strong> Total price : </strong>	<h:outputText value="#{StoreController.totalPrice}" /></label>
 									</f:facet>
 								</p:column>
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Delete From Busket" />
+									</f:facet>
+									
+									<h:commandButton class="btn btn-outline-danger" value="Delete"
+								action="#{StoreController.deleteProduct(product.id,product.amount)}">
+								<f:ajax execute="" render="display #{idToDelete.clientId} #{amountDelete.clientId} #{newIds.clientId} #{newAmounts.clientId}"
+									onevent="function(data) { if (data.status === 'success') {	
+										testCall();
+											 }}" />
+							</h:commandButton>
+								</h:column>
 
 							</h:dataTable>					
 							<h:commandButton class="btn btn-success" value="ValidateBusket"
@@ -302,14 +316,20 @@
 											deleteCookie();
 											 }}" />
 							</h:commandButton>
+					<h:outputLabel value="#{StoreController.idToDelete}" id="idProductCookie" binding="#{idToDelete}"/>
+					<h:outputLabel value="#{StoreController.amountToDelete}" id="amountProductCookie" binding="#{amountDelete}"/>
+					<h:outputLabel value="#{StoreController.ids}" id="newIds" binding="#{newIds}"/>
+					<h:outputLabel value="#{StoreController.amounts}" id="newAmounts" binding="#{newAmounts}"/>
+						
 						</h:form>
+						
 					</div>
             </div>
         </div>
     </section>
     </body>
     
-    <script>
+    <script >
   //Start Of Navigation Configuration
 	var AddProductButton = document
 			.getElementById("AddProductButton");
@@ -368,10 +388,31 @@ function busketInterface(){
 		 document.cookie = "amountProduct" + '=; Max-Age=0'
 	}
 	
+
+	
+	
+	function alertFunction()
+	{
+	//var idToDeleteFromCookie = document.getElementById('validation:idProductCookie');
+	//var amountToDeleteFromCookie = document.getElementById("#{amountDelete.clientId}");
+		alert(idToDeleteFromCookie);
+	}
+	
+	function testCall()
+	{
+		var idCookieToDelete = document.getElementById("validation:idProductCookie").innerText;		
+		var idCookieValue =document.cookie.split(";")[0].split("=")[1];
+	
+		var newIdCookieValue=document.getElementById("validation:newIds").innerText;
+		var newAmountCookieValue=document.getElementById("validation:newAmounts").innerText;
+		document.cookie ="idProduct="+newIdCookieValue;
+		document.cookie="amountProduct="+newAmountCookieValue;
+		
+	}
+
 	
     </script>
-    
-    
+
     
     
     
@@ -409,7 +450,8 @@ function busketInterface(){
     <h:outputScript library="jsStore" name="price_rangs.js" />
     <!-- custom js -->
     <h:outputScript library="jsStore" name="custom.js" />
-
+	<h:outputScript library="jsStore" name="Store.js"/>
+		
 
 
 
