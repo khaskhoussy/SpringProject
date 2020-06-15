@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -23,15 +22,11 @@ public class Rent  implements Serializable {
 	private String letterOfCommitment;
 	private String proofOfPayment;
 	private LocalDateTime daterent;
-
-
-
-	//@OneToOne(cascade = CascadeType.ALL)
+	private Boolean verif ; 
 
 	@OneToOne(fetch = FetchType.EAGER,cascade = {
             CascadeType.MERGE,
             CascadeType.REFRESH})
-
 	private User user;
 	
 
@@ -46,6 +41,8 @@ public class Rent  implements Serializable {
 
 
 
+
+
 	public LocalDateTime getDaterent() {
 		return daterent;
 	}
@@ -56,6 +53,24 @@ public class Rent  implements Serializable {
 	public void setDaterent(LocalDateTime daterent) {
 		this.daterent = daterent;
 	}
+
+
+
+
+	public Boolean getVerif() {
+		return verif;
+	}
+
+
+
+
+
+
+	public void setVerif(Boolean verif) {
+		this.verif = verif;
+	}
+
+
 
 
 

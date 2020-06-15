@@ -201,18 +201,10 @@ to {
 									</div>
 								</div>
 								<div class="row">
-								   <c:if test="${reservationcontroller.type =='location'}">
 									<button id="button" type="button" class="btn btn-primary"
 										data-toggle="modal" data-target=".bs-example-modal-lg">Add dates</button>
-										</c:if>
-										 <c:if test="${reservationcontroller.type =='location/mois'}">
-												<h:commandButton value="Reserver"
-													action="#{reservationcontroller.ajouterReservationLong}"
-													class="btn btn-primary" >
-
-												</h:commandButton>	
-										</c:if>
-
+										
+										
 								</div>
 							</div>
 							<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
@@ -244,7 +236,7 @@ to {
 										<div class="col-md-12">
 											<div class="form-group">
 												<h:commandButton value="Reserver"
-													action="#{reservationcontroller.ajouterReservation}"
+													action="#{reservationcontroller.modifierres()}"
 													class="btn btn-primary" binding="#{submitting}">
 
 												</h:commandButton>												
@@ -273,7 +265,6 @@ to {
 
 			<script
 				src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-			<script src="js/bootstrap.min.js"></script>
 			<script>
 				$('#button').click(function() {
 					$('#myModal').modal('show');
@@ -297,8 +288,6 @@ to {
 			<script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
 
 
-
-
 			<script>
 				$(document).on("ready", function() {
 					$('#login-page').css({
@@ -306,7 +295,6 @@ to {
 					});
 				});
 			</script>
-
 
 
 		</body>

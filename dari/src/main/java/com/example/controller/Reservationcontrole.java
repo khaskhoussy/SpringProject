@@ -5,27 +5,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.entity.Announce;
+import com.example.entity.Pictures;
 import com.example.entity.Reservation;
 import com.example.entity.User;
-import com.example.restcontroller.Home;
 import com.example.service.reservationService;
 
 
@@ -53,10 +42,31 @@ public class Reservationcontrole {
 	private String mailAddress;
 	private String img;
 	private int phoneNumber,nbrchambre;
-	private float price,superficie;
+	private float price,superficie,prixtotla;
 	private int idannonce;
+	private int idupdate;
 	
 	
+	public int getIdupdate() {
+		return idupdate;
+	}
+
+	public void setIdupdate(int idupdate) {
+		this.idupdate = idupdate;
+	}
+
+	public float getPrixtotla() {
+		prixtotla=rS.calculprix(idannonce,checkIn,checkOut);
+    	System.out.println("  idrannonce ="+idannonce+"  CheckIn ="+checkIn+"   CheckOut ="+checkOut);
+
+		return prixtotla;
+	}
+
+	public void setPrixtotla(float prixtotla) {
+		this.prixtotla = prixtotla;
+	}
+	
+
 	public int getIdannonce() {
 		return idannonce;
 	}
@@ -135,9 +145,29 @@ public class Reservationcontrole {
 	this.setPrice(an.getPrice());
 	this.setPhoneNumber(an.getUser().getPhoneNumber());
 	this.setMailAddress(an.getUser().getMailAddress());
-	navigateTo = "/pages/user/reserve.xhtml?faces-redirect=false";
+	this.setUser(HomeController.connectedUser);
+	navigateTo = "/pages/user/reserve.xhtml?faces-redirect=true";
 		return navigateTo;
 	}
+	public String res(Reservation res)
+	{
+		String navigateTo ="null";
+	this.setIdupdate(res.getId());
+	this.setAnnonce(res.getAnnounce());
+	this.setIdannonce(res.getAnnounce().getId());
+	this.setDescription(res.getAnnounce().getDescription());
+	this.setImg(res.getAnnounce().getImg());
+	this.setNbrchambre(res.getAnnounce().getNbrchambre());
+	this.setSuperficie(res.getAnnounce().getSuperficie());
+	this.setPrice(res.getAnnounce().getPrice());
+	this.setPhoneNumber(res.getAnnounce().getUser().getPhoneNumber());
+	this.setMailAddress(res.getAnnounce().getUser().getMailAddress());
+    System.out.println("id="+idupdate);
+
+	navigateTo = "/pages/user/modifres.xhtml?faces-redirect=true";
+		return navigateTo;
+	}
+	
 	
 
 	public void setRechercher(List<Announce> rechercher) {
@@ -218,11 +248,8 @@ public class Reservationcontrole {
 	}
 	
 	
-	    public String ajouterReservation() throws Exception {
-	    	String navigateTo ="null";
+	    public void ajouterReservation() throws Exception {
 	    	rS.ajouterReservation(idannonce,HomeController.connectedUser.getUserName(),checkIn,checkOut);
-	         navigateTo = "/pages/user/recherche.xhtml?faces-redirect=true";
-	 		return navigateTo;
 	    }
 	    
 	    public List<Reservation> getAllreservation() 
@@ -231,22 +258,24 @@ public class Reservationcontrole {
 	    }
 	    
 
-		public void modifierReservation() throws Exception {
-		    
-	    	rS.modifierReservation(id,announce.getId(),HomeController.connectedUser.getUserName(), checkIn, checkOut);
+		public void modifierres() throws Exception {
+	    	rS.modifierReservation(idupdate,idannonce,HomeController.connectedUser.getUserName(), checkIn, checkOut);
+	    	System.out.println("idreservation ="+idupdate+"  idrannonce ="+idannonce+"  CheckIn ="+checkIn+"   CheckOut ="+checkOut);
+		}		
+		
+		
 
+
+		public void deleteReservationById(int id) {
+			rS.deleteReservation(id);
+			
 		}
 		
 
-		public void deleteReservationById() {
-			rS.deleteReservationById(id,HomeController.connectedUser.getUserName());
-			
-		}
-
 	    public void ajouterReservationLong() throws Exception {
-	         rS.ajouterReservationLong(announce.getId(),HomeController.connectedUser.getUserName());
+	         rS.ajouterReservationLong(idannonce,HomeController.connectedUser.getUserName());
 	    }
-	    private List<Reservation> findReservationByUser;
+	    private List<Reservation> findReservationByUser=new ArrayList<>();;
 	    
 	    public List<Reservation> getFindReservationByUser() {
 	    	
@@ -257,6 +286,30 @@ public class Reservationcontrole {
 		public void setFindReservationByUser(List<Reservation> findReservationByUser) {
 			this.findReservationByUser = findReservationByUser;
 		}
+private List<Reservation> findReservationByUsern;
+	    
+	    public List<Reservation> getFindReservationByUsern() {
+	    	
+	    	findReservationByUsern=rS.findReservationByUsernow(HomeController.connectedUser.getUserName());
+	    	return findReservationByUsern;
+		}
+
+		public void setFindReservationByUsern(List<Reservation> findReservationByUsern) {
+			this.findReservationByUsern = findReservationByUsern;
+		}
+		
+private List<Reservation> findReservationByUsert;
+	    
+	    public List<Reservation> getFindReservationByUsert() {
+	    	
+	    	findReservationByUsert=rS.findReservationByUserhis(HomeController.connectedUser.getUserName());
+	    	return findReservationByUsert;
+		}
+
+		public void setFindReservationByUsert(List<Reservation> findReservationByUsert) {
+			this.findReservationByUsert = findReservationByUsert;
+		}
+		
 
 
 	    private Announce annonce;
@@ -298,6 +351,25 @@ public class Reservationcontrole {
 				return rS.findannonceby(type,region,chambremin, priceMin, priceMax, checkIn, checkOut);
 	    	
 		}
+
+		}
+		private ArrayList<Pictures> images=new ArrayList<Pictures>();
+		
+		
+		public ArrayList<Pictures> getImages() {
+			return images;
+		}
+
+		public void setImages(ArrayList<Pictures> images) {
+			this.images = images;
+		}
+
+		public List<Pictures> findAllimages() {
+
+
+
+			return rS.findAllimages(idannonce);
+
 
 		}
 	    

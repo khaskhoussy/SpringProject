@@ -41,8 +41,14 @@ public interface reservationRepository  extends CrudRepository<Reservation,Integ
 	@Query(value="Select r from Reservation r  where r.announce.id= :idannounce and r.checkIn= :checkIn and r.checkOut= :checkOut ")
     public Reservation verif(@Param("idannounce")int idannounce, @Param("checkIn")Date checkIn, @Param("checkOut")Date checkOut);
 
-	@Query(value="Select r from Reservation r  where r.user.userName= :userName ")
+	@Query(value="Select r from Reservation r  where r.user.userName= :userName ORDER BY r.checkIn  ")
     public List<Reservation> findReservationByUser(@Param("userName")String userName);
+	
+	@Query(value="Select r from Reservation r  where r.user.userName= :userName and r.checkOut>= :now and r.checkIn<= :now ")
+    public List<Reservation> findReservationByUsercourante(@Param("userName")String userName,@Param("now")Date now);
+	
+	@Query(value="Select r from Reservation r  where r.user.userName= :userName and r.checkOut< :now")
+    public List<Reservation> findReservationByUserhis(@Param("userName")String userName,@Param("now")Date now);
 	
 	@Query(value="Select r from Reservation r  where r.user.id=r.user.rent.id ")
     public List<Reservation> findReservation();

@@ -3,6 +3,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:o="http://omnifaces.org/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/pages/template/template.xhtml">
 	<ui:param name="page_name" value="mySpace" />
@@ -631,7 +634,6 @@ body {
 	width: 100%;
 	max-width: 100%;
 	margin-bottom: 1rem;
-	background-color: transparent;
 }
 
 .table-responsive {
@@ -654,7 +656,6 @@ body {
 
 .table-data2 .spacer {
 	height: 5px;
-	background: 0 0;
 }
 
 .section__content--p30 {
@@ -693,14 +694,238 @@ body {
 	margin: 0 auto;
 	z-index: 1;
 }
+
 .bgSizeContain {
-  height: 200px;
-  }
+	height: 200px;
+}
+
+.label-file {
+	cursor: pointer;
+	color: #00b1ca;
+	font-weight: bold;
+}
+
+.label-file:hover {
+	color: #25a5c4;
+}
+
+.ui-datatable table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer {
+	text-align: center;
+	padding: 4px 10px;
+}
+
+.ui-datatable .ui-datatable-header {
+	border-bottom: 0px none;
+}
+
+.ui-datatable .ui-datatable-footer {
+	border-top: 0px none;
+}
+
+.ui-datatable thead th, .ui-datatable tfoot td {
+	text-align: center;
+}
+
+.ui-datatable thead th, .ui-datatable tbody td, .ui-datatable tfoot td {
+	padding: 4px 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	border-width: 1px;
+	border-style: solid;
+}
+
+.ui-datatable tbody td {
+	border-color: inherit;
+}
+
+.ui-datatable .ui-sortable-column {
+	cursor: pointer;
+}
+
+.ui-datatable div.ui-dt-c {
+	position: relative;
+}
+
+.ui-datatable .ui-sortable-column-icon {
+	display: inline-block;
+	margin: -3px 0px -3px 2px;
+}
+
+.ui-datatable .ui-column-filter {
+	display: block;
+	width: 100px;
+	margin: auto;
+}
+
+.ui-datatable .ui-expanded-row {
+	border-bottom: 0px none;
+}
+
+.ui-datatable .ui-expanded-row-content {
+	border-top: 0px none;
+}
+
+.ui-datatable .ui-row-toggler {
+	cursor: pointer;
+}
+
+.ui-datatable tr.ui-state-highlight {
+	cursor: pointer;
+}
+
+.ui-datatable .ui-selection-column .ui-chkbox-all {
+	display: block;
+	margin: 0px auto;
+	width: 16px;
+	height: 16px;
+}
+
+.ui-datatable-scrollable table {
+	table-layout: fixed;
+}
+
+.ui-datatable-scrollable-body {
+	overflow: auto;
+}
+
+.ui-datatable-scrollable-header, .ui-datatable-scrollable-footer {
+	overflow: hidden;
+	border: 0px none;
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header,
+	.ui-datatable-scrollable .ui-datatable-scrollable-footer {
+	position: relative;
+}
+
+.ui-datatable-scrollable .ui-datatable-scrollable-header td {
+	font-weight: normal;
+}
+
+.ui-datatable-scrollable-body::-webkit-scrollbar {
+	-webkit-appearance: none;
+	width: 15px;
+	background-color: transparent;
+}
+
+.ui-datatable-scrollable-body::-webkit-scrollbar-thumb {
+	border-radius: 8px;
+	border: 1px solid white;
+	background-color: rgba(194, 194, 194, .5);
+}
+
+.ui-datatable .ui-datatable-data tr.ui-state-hover {
+	border-color: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+}
+
+.ui-datatable .ui-paginator, .ui-datatable .ui-paginator {
+	padding: 2px;
+}
+
+.ui-column-dnd-top, ui-column-dnd-bottom {
+	display: none;
+	position: absolute;
+}
+
+.ui-column-dnd-top .ui-icon, ui-column-dnd-bottom .ui-icon {
+	position: absolute;
+	top: -4px;
+}
+/* InCell Editing */
+.ui-datatable .ui-cell-editor-input {
+	display: none;
+}
+
+.ui-datatable .ui-row-editing .ui-cell-editor .ui-cell-editor-output {
+	display: none;
+}
+
+.ui-datatable .ui-row-editing .ui-cell-editor .ui-cell-editor-input {
+	display: block;
+}
+
+.ui-datatable .ui-row-editor span {
+	cursor: pointer;
+	display: inline-block;
+}
+
+.ui-datatable .ui-row-editor .ui-icon-pencil {
+	display: inline-block;
+}
+
+.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-pencil {
+	display: none;
+}
+
+.ui-datatable .ui-row-editor .ui-icon-check, .ui-datatable .ui-row-editor .ui-icon-close
+	{
+	display: none;
+}
+
+.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-check,
+	.ui-datatable .ui-row-editing .ui-row-editor .ui-icon-close {
+	display: inline-block;
+}
+
+.ui-datatable .ui-datatable-data tr.ui-row-editing td.ui-editable-column,
+	.ui-datatable .ui-datatable-data td.ui-cell-editing {
+	padding: 0;
+	margin: 0;
+}
+/*resizer */
+.ui-datatable .ui-column-resizer {
+	width: 8px;
+	height: 20px;
+	padding: 0px;
+	cursor: col-resize;
+	background-image:
+		url("/ScraperOnWeb/javax.faces.resource/spacer/dot_clear.gif.jsf?ln=primefaces");
+	margin: -4px -10px -4px 0px;
+	float: right;
+}
+
+.ui-datatable .ui-filter-column .ui-column-resizer {
+	height: 45px;
+}
+
+.ui-datatable .ui-column-resizer-helper {
+	width: 1px;
+	position: absolute;
+	z-index: 10;
+	display: none;
+}
+
+.ui-datatable-resizable {
+	padding-bottom: 1px; /*fix for webkit overlow*/
+	overflow: auto;
+}
+
+.ui-datatable-resizable table {
+	table-layout: fixed;
+}
+
+.ui-datatable-rtl {
+	direction: rtl;
+}
+
+.ui-datatable-rtl.ui-datatable thead th, .ui-datatable-rtl.ui-datatable tfoot td
+	{
+	text-align: right;
+}
 </style>
 		</head>
 
 		<body>
-		<br/><br/><br/>
+			<br />
+			<br />
+			<br />
 			<div class="container">
 				<div class="view-account">
 					<section class="module">
@@ -735,105 +960,151 @@ body {
 									<div class="form-group">
 										<h3 class="title-5 m-b-35">Ajouter des documents</h3>
 
+										<div class="row">
+
+											<div class="col-md col-sm col-xs">
+
+												<h3>cin</h3>
+												<h:inputFile accept="image/*" value="#{rentcontroller.cinf}"></h:inputFile>
+
+												<h:commandButton id="modifc" class="btn btn-default btn-lg"
+													action="#{rentcontroller.updateRentc()}">
+												</h:commandButton>
 
 
-										<div class="col-md-10 col-sm-9 col-xs-12">
+											</div>
+											<br /> <br />
+											<div class="col-md col-sm col-xs">
+												<h3>garantor</h3>
+												<h:inputFile accept="image/*" type="file"
+													value="#{rentcontroller.garantorf}"></h:inputFile>
+												<h:commandButton id="modifg" class="btn btn-default btn-lg"
+													action="#{rentcontroller.updateRentg()}">
+												</h:commandButton>
 
-											<h:outputText value="cin"></h:outputText>
-											<h:inputFile type="file" class="file-uploader pull-left"
-												value="#{rentcontroller.cinf}" required="true">
-											</h:inputFile>
-
+											</div>
+											<br /> <br />
 										</div>
-										<div class="col-md-10 col-sm-9 col-xs-12">
-											<h:outputText value="garantor"></h:outputText>
-											<h:inputFile type="file" class="file-uploader pull-left"
-												value="#{rentcontroller.garantorf}" required="true">
-											</h:inputFile>
-										</div>
-										<div class="col-md-10 col-sm-9 col-xs-12">
-											<h:outputText value="letterOfCommitment"></h:outputText>
-											<h:inputFile type="file" class="file-uploader pull-left"
-												value="#{rentcontroller.letterOfCommitmentf}"
-												required="true">
-											</h:inputFile>
-										</div>
-										<div class="col-md-10 col-sm-9 col-xs-12">
-											<h:outputText value="proofOfPayment"></h:outputText>
-											<h:inputFile type="file" class="file-uploader pull-left"
-												value="#{rentcontroller.proofOfPaymentf}" required="true">
-											</h:inputFile>
+										<div class="row">
+											<div class="col-md col-sm col-xs">
+												<h3>letterOfCommitment</h3>
+												<h:inputFile accept="image/*"
+													value="#{rentcontroller.letterOfCommitmentf}"></h:inputFile>
+												<h:commandButton id="modifl" class="btn btn-default btn-lg"
+													action="#{rentcontroller.updateRentl()}">
+												</h:commandButton>
 
-										</div>
+											</div>
+											<br /> <br />
+											<div class="col-md col-sm col-xs">
+												<h3>proofOfPayment</h3>
+												<h:inputFile accept="image/*"
+													value="#{rentcontroller.proofOfPaymentf}"></h:inputFile>
+												<h:commandButton id="modifp" class="btn btn-default btn-lg"
+													action="#{rentcontroller.updateRentp()}">
+												</h:commandButton>
 
-										<div class="col-md-10 col-sm-9 col-xs-12">
-											<h:commandButton  value="Ajouter Documents"
-												action="#{rentcontroller.adddocs()}" class="btn btn-primary"
-												binding="#{submitting}" />
-											<div class="col-md-10 col-sm-9 col-xs-12">
-												<h:commandButton value="Mettre A jour Documents"
-													class="btn btn-primary"
-													action="#{rentcontroller.updateRent()}" />
+
 											</div>
 										</div>
-									</div>
+										<br /> <br />
+										<div class="row">
+											<div class="col-md col-sm col-xs"></div>
+											<div class="col-md col-sm col-xs">
+												<c:if test="#{empty rentcontroller.rentD}">
 
+
+													<h:commandButton id="ajout" value="Ajouter Documents"
+														action="#{rentcontroller.adddocs()}"
+														class="btn btn-primary" binding="#{submitting}" />
+												</c:if>
+												<c:if test="#{not empty rentcontroller.rentD}">
+													<div class="col-md-10 col-sm-9 col-xs-12">
+														<h:commandButton id="modif"
+															value="Mettre A jour Documents" class="btn btn-primary"
+															action="#{rentcontroller.updateRent()}" />
+													</div>
+												</c:if>
+											</div>
+											<div class="col-md col-sm col-xs"></div>
+										</div>
+									</div>
 								</h:form>
 							</h:panelGroup>
 						</div>
 						<div class="content-panel" id="afficheInterface">
 							<h:panelGroup columns="2">
 								<h:form>
-									<div class="section__content section__content--p30">
+									<div class="section__content">
 										<div class="container-fluid">
 											<div class="row">
-												<h3 class="title-5 m-b-35">Mes documents</h3>
-												<div class="col-md-12">
-													<div class="table-responsive table-responsive-data2">
-														<h:dataTable value="#{rentcontroller.rentD}" var="rent"
-															styleClass="table table-data2" rowClasses="tr-shadow">
+												<c:if test="#{not empty rentcontroller.rentD}">
+													<h3 class="title-5 m-b-35">Mes documents</h3>
+													<div class="col-md-12">
+														<div class="table-responsive table-responsive-data2">
+															<h:dataTable value="#{rentcontroller.rentD}" var="rent"
+																styleClass="table table-data2" rowClasses="tr-shadow">
 
-															<h:column>
-																<f:facet name="header">
-																	<h:outputText value="cin" />
-																</f:facet>
-																<h:graphicImage class="bgSizeContain" library="usersdocs"  name ="#{rent.cin}" />
-															</h:column>
-															<h:column>
-																<f:facet name="header">
-																	<h:outputText value="garantor" />
-																</f:facet>
-																<h:graphicImage class="bgSizeContain" library="usersdocs" name ="#{rent.garantor}" />
-															</h:column>
+																<h:column>
+																	<f:facet name="header">
+																		<h:outputText value="cin" />
+
+																	</f:facet>
+																	<h:graphicImage class="bgSizeContain"
+																		library="usersdocs" name="#{rent.cin}" />
+																</h:column>
+																<h:column>
+																	<f:facet name="header">
+																		<h:outputText value="garantor" />
+																	</f:facet>
+																	<h:graphicImage class="bgSizeContain"
+																		library="usersdocs" name="#{rent.garantor}" />
+																</h:column>
 															</h:dataTable>
 															<h:dataTable value="#{rentcontroller.rentD}" var="rent"
-															styleClass="table table-data2" rowClasses="tr-shadow">
-															<h:column>
-																<f:facet name="header">
-																	<h:outputText value="letterOfCommitment" />
-																</f:facet>
-																<h:graphicImage class="bgSizeContain" library="usersdocs"  name ="#{rent.letterOfCommitment}" />
-															</h:column>
-															<h:column>
-																<f:facet name="header">
-																	<h:outputText value="proofOfPayment" />
-																</f:facet>
-																<h:graphicImage class="bgSizeContain" library="usersdocs"  name ="#{rent.proofOfPayment}" />
-															</h:column>
+																styleClass="table table-data2" rowClasses="tr-shadow">
+																<h:column>
+																	<f:facet name="header">
+																		<h:outputText value="letterOfCommitment" />
+																	</f:facet>
+																	<h:graphicImage class="bgSizeContain"
+																		library="usersdocs" name="#{rent.letterOfCommitment}" />
+																</h:column>
+																<h:column>
+																	<f:facet name="header">
+																		<h:outputText value="proofOfPayment" />
+																	</f:facet>
+																	<h:graphicImage class="bgSizeContain"
+																		library="usersdocs" name="#{rent.proofOfPayment}" />
+																</h:column>
 															</h:dataTable>
 															<h:dataTable value="#{rentcontroller.rentD}" var="rent"
-															styleClass="table table-data2" rowClasses="tr-shadow">
-															<h:column>
-																<f:facet name="header">
-																	<h:outputText  value="Date de creation" />
-																</f:facet>
-																<h:outputText value="#{rent.daterent}" />
-															</h:column>
+																styleClass="table table-data2" rowClasses="tr-shadow">
+																<h:column>
+																	<f:facet name="header">
+																		<h:outputText value="Date de creation" />
+																	</f:facet>
+																	<h:outputText value="#{rent.daterent}" />
+																</h:column>
+																<h:column>
+																	<h:commandButton id="supprimer"
+																		value="supprimer les documents"
+																		action="#{rentcontroller.deleteRentById(rent.id)}"
+																		class="btn btn-primary" binding="#{submitting}" />
 
-														</h:dataTable>
+																</h:column>
+
+															</h:dataTable>
+														</div>
 													</div>
-												</div>
+												</c:if>
+												<c:if test="#{empty rentcontroller.rentD}">
+													<h3 class="title-5 m-b-35">You don't have documents</h3>
+													<br />
+													<h4>Please add the needed documents to continue</h4>
+												</c:if>
 											</div>
+
 										</div>
 									</div>
 
@@ -844,50 +1115,178 @@ body {
 
 
 						<div class="content-panel" id="reserveInterface">
-						<h:panelGroup columns="2">
+							<h:panelGroup columns="2">
 								<h:form>
-									<div class="section__content section__content--p30">
+									<div class="section__content ">
 										<div class="container-fluid">
 											<div class="row">
-												<h3 class="title-5 m-b-35">Mes Reservation	</h3>
-												<div class="col-md-12">
-													<div class="table-responsive table-responsive-data2">
-														<h:dataTable value="#{reservationcontroller.findReservationByUser}" var="mesres"
-															styleClass="table table-data2" rowClasses="tr-shadow">
 
-															
-															<h:column>
+												<div class="col-md-12">
+													
+														<p:dataTable id="tab2"
+															value="#{reservationcontroller.findReservationByUsern}"
+															var="mesres" sortMode="simple">
+															<f:facet name="header">
+																<h3 class="title-5 m-b-35">Courrent Bookings</h3>
+															</f:facet>
+															<p:column>
 																<f:facet name="header">
-																	<h:outputText value="id" />
+																	<h:outputText value="region" />
 																</f:facet>
-																<h:outputText value ="#{mesres.announce.id}" />
-															</h:column>
-															<h:column>
+																<h:outputText value="#{mesres.announce.regions}" />
+															</p:column>
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="type" />
+																</f:facet>
+																<h:outputText value="#{mesres.announce.type}" />
+															</p:column>
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="Valide" />
+																</f:facet>
+																<h:outputText value="#{mesres.isValide}" />
+															</p:column>
+															<p:column>
 																<f:facet name="header">
 																	<h:outputText value="Date of Reservation" />
 																</f:facet>
-																<h:outputText  value ="#{mesres.dateres}" />
-															</h:column>
-															<h:column>
+																<h:outputText value="#{mesres.dateres}" />
+															</p:column>
+															<p:column sortBy="#{mesres.checkIn}">
 																<f:facet name="header">
 																	<h:outputText value="CheckIn" />
 																</f:facet>
-																<h:outputText class="bgSizeContain" library="usersdocs"  value ="#{mesres.checkIn}" />
-															</h:column>
-															<h:column>
+																<h:outputText class="bgSizeContain" library="usersdocs"
+																	value="#{mesres.checkIn}" />
+															</p:column>
+															<p:column>
 																<f:facet name="header">
 																	<h:outputText value="CheckOut" />
 																</f:facet>
-																<h:outputText value ="#{mesres.checkOut}" />
-															</h:column>
-															<h:column>
+																<h:outputText value="#{mesres.checkOut}" />
+															</p:column>
+														</p:dataTable>
+												</div>
+
+
+												<div class="col-md-12">
+													<div class="table-responsive table-responsive-data2">
+														<p:dataTable
+															value="#{reservationcontroller.findReservationByUsert}"
+															var="mesres"
+															sortBy="#{reservationcontroller.checkIn.time}"
+															sortOrder="ascending"
+															styleClass="table table-data2 w3-red"
+															rowClasses="tr-shadow">
+															<f:facet name="header">
+																<h3 class="title-5 m-b-35">Past Bookings</h3>
+															</f:facet>
+															<p:column>
 																<f:facet name="header">
-																	<h:outputText value="Action" />
+																	<h:outputText value="region" />
 																</f:facet>
-															</h:column>
-														</h:dataTable>
+																<h:outputText value="#{mesres.announce.regions}" />
+															</p:column>
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="type" />
+																</f:facet>
+																<h:outputText value="#{mesres.announce.type}" />
+															</p:column>
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="Valide" />
+																</f:facet>
+																<h:outputText value="#{mesres.isValide}" />
+															</p:column>
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="Date of Reservation" />
+																</f:facet>
+																<h:outputText value="#{mesres.dateres}" />
+															</p:column>
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="CheckIn" />
+																</f:facet>
+																<h:outputText class="bgSizeContain" library="usersdocs"
+																	value="#{mesres.checkIn}" />
+															</p:column>
+															<p:column>
+																<f:facet name="header">
+																	<h:outputText value="CheckOut" />
+																</f:facet>
+																<h:outputText value="#{mesres.checkOut}" />
+															</p:column>
+														</p:dataTable>
 													</div>
 												</div>
+
+												<div class="col-md-12">
+																									<div class="table-responsive table-responsive-data2">
+												
+													<p:dataTable
+														value="#{reservationcontroller.findReservationByUser}"
+														var="mesres" dynamic="true"
+														tableStyleClass="table table-hover" sortMode="simple"
+														rowClasses="tr-shadow">
+														<f:facet name="header">
+															<h3 class="title-5 m-b-35">All My Bookings</h3>
+														</f:facet>
+														<p:column>
+															<f:facet name="header">
+																<h:outputText value="Region" />
+															</f:facet>
+															<h:outputText value="#{mesres.announce.regions}" />
+														</p:column>
+														<p:column>
+															<f:facet name="header">
+																<h:outputText value="type" />
+															</f:facet>
+															<h:outputText value="#{mesres.announce.type}" />
+														</p:column>
+														<p:column>
+															<f:facet name="header">
+																<h:outputText value="Valide" />
+															</f:facet>
+															<h:outputText value="#{mesres.isValide}" />
+														</p:column>
+														<p:column>
+															<f:facet name="header">
+																<h:outputText value="Date of Reservation" />
+															</f:facet>
+															<h:outputText value="#{mesres.dateres}" />
+														</p:column>
+														<p:column sortBy="#{mesres.checkIn}">
+															<f:facet name="header">
+																<h:outputText value="CheckIn" />
+															</f:facet>
+															<h:outputText class="bgSizeContain" library="usersdocs"
+																value="#{mesres.checkIn}" />
+														</p:column>
+														<p:column>
+															<f:facet name="header">
+																<h:outputText value="CheckOut" />
+															</f:facet>
+															<h:outputText value="#{mesres.checkOut}" />
+														</p:column>
+														<p:column>
+															<f:facet name="header">
+																<h:outputText value="Action" />
+															</f:facet>
+															<h:commandButton id="supprimerres" class="btn btn-danger"
+																value="supprimer"
+																action="#{reservationcontroller.deleteReservationById(mesres.id)}" />
+
+															<h:commandButton id="modifierres" class="btn btn-info"
+																value="modifier"
+																action="#{reservationcontroller.res(mesres)}" />
+														</p:column>
+													</p:dataTable>
+												</div>
+												</div>
+
 											</div>
 										</div>
 									</div>
@@ -922,31 +1321,48 @@ body {
 
 				var currentInterface;
 				currentInterface = ajoutInterface;
+				ajoutInterface.style.display = "none";
+				reserveInteface.style.display = "none";
+				addsInteface.style.display = "none";
 
 				afficheInterfaceButton.addEventListener("click", function() {
 					currentInterface.style.display = "none";
+					ajoutInterface.style.display = "none";
+					reserveInteface.style.display = "none";
+					addsInteface.style.display = "none";
+
 					afficheInteface.style.display = "block";
 					currentInterface = afficheInteface;
 				});
 
 				ajoutButton.addEventListener("click", function() {
-					currentInterface.style.display = "none"
+					currentInterface.style.display = "none";
+					reserveInteface.style.display = "none";
+					addsInteface.style.display = "none";
+					afficheInteface.style.display = "none";
 					ajoutInterface.style.display = "block";
 					currentInterface = ajoutInterface;
 				});
 
 				reserveInterfaceButton.addEventListener("click", function() {
 					currentInterface.style.display = "none";
+					ajoutInterface.style.display = "none";
+					addsInteface.style.display = "none";
+					afficheInteface.style.display = "none";
 					reserveInteface.style.display = "block";
 					currentInterface = reserveInteface;
 				});
 
 				addsInterfaceButton.addEventListener("click", function() {
 					currentInterface.style.display = "none";
+					ajoutInterface.style.display = "none";
+					reserveInteface.style.display = "none";
+					afficheInteface.style.display = "none";
 					addsInteface.style.display = "block";
 					currentInterface = addsInteface;
 				});
 			</script>
+
 
 		</body>
 

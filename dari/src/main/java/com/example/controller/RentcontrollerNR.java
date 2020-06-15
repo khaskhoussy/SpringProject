@@ -1,37 +1,23 @@
 package com.example.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.Part;
+
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.List;
-
-import javax.annotation.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.entity.Rent;
 import com.example.entity.User;
 import com.example.repository.rentRepository;
-import com.example.restcontroller.Home;
 import com.example.service.FileStorageService;
 import com.example.service.rentService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 
 
@@ -189,15 +175,6 @@ public class  RentcontrollerNR{
 		this.rents = rents;
 	}
 
-	public String doLogin() {
-		String navigateTo = "null";
-
-			navigateTo = "/pages/admin/welcome.xhtml?faces-redirect=fase";
-		
-		
-		return navigateTo;
-	}
-	
 	public String getCin() {
 		return cin;
 	}
@@ -225,6 +202,49 @@ public class  RentcontrollerNR{
 	public void addrent() throws Exception
 	{	
 	 rentservice.saveRent(HomeController.connectedUser.getUserName(),cin, letterOfCommitment, proofOfPayment, garantor);
+	}
+	
+	public void updateRentc() throws IOException
+	{
+		cinf.write("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+cinf.getSubmittedFileName());		 		 
+		File oldFile=new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+cinf.getSubmittedFileName());
+		String AddedName= rentservice.getAlphaNumericString(7)+cinf.getSubmittedFileName();
+		File newfile =new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+AddedName);
+		oldFile.renameTo(newfile);
+		
+		rentservice.updateRentc(HomeController.connectedUser.getUserName(),AddedName);
+	}
+	public void updateRentl() throws IOException
+	{
+		
+		letterOfCommitmentf.write("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+letterOfCommitmentf.getSubmittedFileName());		 		 
+		File oldFilel=new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+letterOfCommitmentf.getSubmittedFileName());
+		String AddedNamel= rentservice.getAlphaNumericString(7)+letterOfCommitmentf.getSubmittedFileName();
+		File newfilel =new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+AddedNamel);
+		oldFilel.renameTo(newfilel);
+		
+		rentservice.updateRentl(HomeController.connectedUser.getUserName(), AddedNamel);
+	}
+	public void updateRentp() throws IOException
+	{
+		
+		proofOfPaymentf.write("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+proofOfPaymentf.getSubmittedFileName());		 		 
+		File oldFilep=new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+proofOfPaymentf.getSubmittedFileName());
+		String AddedNamep= rentservice.getAlphaNumericString(7)+proofOfPaymentf.getSubmittedFileName();
+		File newfilep =new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+AddedNamep);
+		oldFilep.renameTo(newfilep);
+		
+		rentservice.updateRentp(HomeController.connectedUser.getUserName(), AddedNamep);
+	}
+	public void updateRentg() throws IOException
+	{
+		
+		garantorf.write("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+garantorf.getSubmittedFileName());		 		 
+		File oldFileg=new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+garantorf.getSubmittedFileName());
+		String AddedNameg= rentservice.getAlphaNumericString(7)+garantorf.getSubmittedFileName();
+		File newfileg =new File("C:\\Users\\hp\\git\\SpringProject2\\dari\\src\\main\\webapp\\resources\\usersdocs\\"+AddedNameg);
+		oldFileg.renameTo(newfileg);
+		rentservice.updateRentg(HomeController.connectedUser.getUserName() ,AddedNameg);
 	}
 	public void updateRent() throws IOException
 	{

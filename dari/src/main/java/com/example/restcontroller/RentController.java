@@ -1,11 +1,13 @@
 package com.example.restcontroller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,10 +38,7 @@ public class RentController {
     }
 
 
-    @RequestMapping(value="/allrent")
-    public List<Rent> getAllUser() {
-        return rentservice.getAllRentList();
-    }
+ 
     @PutMapping(path ="/update/{cin}/{LetterOfCommitment}/{proofOfPayment}/{garantor}")
     @ResponseBody
     public void update(@PathVariable("cin")String cin,@PathVariable("LetterOfCommitment")String LetterOfCommitment,@PathVariable("proofOfPayment")String proofOfPayment,@PathVariable("garantor")String garantor ,HttpServletResponse response,HttpServletRequest request){
@@ -57,7 +56,7 @@ public class RentController {
     }
 
 
-
+  
  
 
     }

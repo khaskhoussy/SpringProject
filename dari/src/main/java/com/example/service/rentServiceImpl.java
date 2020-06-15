@@ -1,28 +1,17 @@
 package com.example.service;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import javax.servlet.http.Part;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.entity.Announce;
 import com.example.entity.Rent;
 import com.example.entity.User;
 import com.example.repository.UserRepository;
 import com.example.repository.rentRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -34,7 +23,7 @@ public class rentServiceImpl implements rentService {
 	 @Autowired
 	 UserRepository userRepository;
 	 @Autowired 
-	 private FileStorageService fileStorageService; 
+	 //private FileStorageService fileStorageService; 
 
 	 private static final Logger l=LogManager.getLogger(rentServiceImpl.class);
 	 ObjectMapper objectMapper = new ObjectMapper();
@@ -52,6 +41,7 @@ public class rentServiceImpl implements rentService {
 		rent.setDaterent(localDate);
 		rent.setUser(user);
 		rent.setCin(cin);
+		rent.setVerif(false);
 		rent.setLetterOfCommitment(LetterOfCommitment);
 		rent.setProofOfPayment(proofOfPayment);
 		rent.setGarantor(garantor);
@@ -72,11 +62,65 @@ public class rentServiceImpl implements rentService {
 		 rent.setDaterent(localDate);
 		 rent.setUser(u);
 		 rent.setCin(cin);
+		 rent.setVerif(false);
 		 rent.setLetterOfCommitment(LetterOfCommitment);
 		 rent.setProofOfPayment(proofOfPayment);
 		 rent.setGarantor(garantor);
 		 rentRepository.save(rent);
 	}
+	@Override
+	public void updateRentc(String username,String cin) {
+		User u =userRepository.findByUserName(username).get();
+		Rent rent = rentRepository.user(username);
+		LocalDateTime localDate = LocalDateTime.now();
+		 
+		 rent.setDaterent(localDate);
+		 rent.setCin(cin);
+		 rent.setVerif(false);
+		 rentRepository.save(rent);
+	}
+	@Override
+	public void updateRentl(String username,String LetterOfCommitment ) {
+		User u =userRepository.findByUserName(username).get();
+		Rent rent = rentRepository.user(username);
+		LocalDateTime localDate = LocalDateTime.now();
+		 
+		 rent.setDaterent(localDate);
+		 rent.setVerif(false);
+		 rent.setLetterOfCommitment(LetterOfCommitment);
+		 rentRepository.save(rent);
+	}
+	@Override
+	public void updateRentp(String username,String proofOfPayment) {
+		User u =userRepository.findByUserName(username).get();
+		Rent rent = rentRepository.user(username);
+		LocalDateTime localDate = LocalDateTime.now();
+		 
+		 rent.setDaterent(localDate);
+		 rent.setVerif(false);
+		 rent.setProofOfPayment(proofOfPayment);
+		 rentRepository.save(rent);
+	}
+	@Override
+	public void updateRentg(String username,String garantor) {
+		User u =userRepository.findByUserName(username).get();
+		Rent rent = rentRepository.user(username);
+		LocalDateTime localDate = LocalDateTime.now();
+		 
+		 rent.setDaterent(localDate);
+		 rent.setVerif(false);
+		 rent.setGarantor(garantor);
+		 rentRepository.save(rent);
+	}
+	@Override
+	public void verif(String username) {
+		User u =userRepository.findByUserName(username).get();
+		Rent rent = rentRepository.user(username);
+		 rent.setUser(u);
+		 rent.setVerif(true);
+		 rentRepository.save(rent);
+	}
+
 
 	@Override
 	public List<Rent> getAllRentList() {

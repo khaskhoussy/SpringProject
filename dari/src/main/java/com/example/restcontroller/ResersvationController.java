@@ -28,7 +28,7 @@ import com.example.entity.Announce;
 import com.example.entity.Reservation;
 import com.example.service.reservationService;
 
-
+	
 
 @RestController
 @RequestMapping("/user/reservation")
@@ -160,7 +160,27 @@ public class ResersvationController {
 	    		
 
 		}
+	    @RequestMapping(value = "/calcul/{idannonce}/{checkIn}/{checkOut}") 
+		public float calcul(@PathVariable("idannonce") int id, @PathVariable("checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,@PathVariable("checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut) throws Exception {
+		    
+	    	return rS.calculprix(id,checkIn, checkOut);
+
+		}
+	    @RequestMapping(value = "/estimate/{type}/{region}/{checkIn}/{checkOut}/{nbrchambre}") 
+		public float estimate(@PathVariable("type") String type,@PathVariable("region") String region, @PathVariable("checkIn") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkIn,@PathVariable("checkOut") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date checkOut, @PathVariable("nbrchambre") int nbrchambre) throws Exception {
+		    
+	    	return rS.estimate(type,region,checkIn, checkOut,nbrchambre);
+
+		}
+	    @RequestMapping(value = "/estimatel/{type}/{region}/{nbrchambre}") 
+		public float estimatel(@PathVariable("type") String type,@PathVariable("region") String region,@PathVariable("nbrchambre") int nbrchambre) throws Exception {
+		    
+	    	return rS.estimatelocm(type,region,nbrchambre);
+
+		}
 	    }
+
+
 
 
 

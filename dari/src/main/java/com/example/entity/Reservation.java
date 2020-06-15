@@ -56,6 +56,10 @@ public class Reservation implements Serializable  {
 	@Temporal(TemporalType.DATE)
 	private Date checkOut;
 
+	public boolean isisValide() {
+		return isValide;
+	}
+	
 	public Date getCheckIn() {
 		return checkIn;
 	}
