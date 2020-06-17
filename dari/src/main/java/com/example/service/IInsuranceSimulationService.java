@@ -19,4 +19,5 @@ public interface IInsuranceSimulationService {
 	public InsuranceSimulation_Favoris getSimulationById(int id_simfav,String userName);
 	public List<InsuranceSimulation_Favoris> getSimulationsById(String userName);
 	public void deleteSimulation_FavorisById(int id);
+	public List<String> findInsuranceNames();
 }

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/pages/template/template.xhtml">
+	<ui:param name="page_name" value="simulationChoice" />
+	<ui:define name="simulationChoice">
+		<!-- DARII -->
+
+		<div class="site-block-wrap">
+			<div class="owl-carousel with-dots">
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/hero_1.jpg);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+								<h1 class="text-shadow">Buy &amp; Sell Property Here</h1>
+								<p class="mb-5 text-shadow">Lorem ipsum dolor sit amet,
+									consectetur adipisicing elit. Provident vitae, aut inventore
+									repellendus. Iusto, assumenda!</p>
+								<p>
+									<a href="#" target="_blank" class="btn btn-primary px-5 py-3">Get
+										Started</a>
+								</p>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/hero_2.jpg);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+								<h1 class="text-shadow">Find Your Perfect Property For Your
+									Home</h1>
+								<p class="mb-5 text-shadow">Lorem ipsum dolor sit amet,
+									consectetur adipisicing elit. Eaque quam doloribus
+									reprehenderit dolore adipisci rerum?</p>
+								<p>
+									<a href="#" target="_blank" class="btn btn-primary px-5 py-3">Get
+										Started</a>
+								</p>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+
+
+		<head>
+<title>Warehouse &mdash; Website Template by Colorlib</title>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,900|Oswald:300,400,700"
+	rel="stylesheet" />
+<link rel="stylesheet" href="/resources/fonts/icomoon/style.css" />
+
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/resources/css/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/css/owl.carousel.min.css" />
+
+<link rel="stylesheet" href="/resources/css/owl.theme.default.min.css" />
+<link rel="stylesheet" href="/resources/css/owl.theme.default.min.css" />
+
+<link rel="stylesheet" href="/resources/css/jquery.fancybox.min.css" />
+
+<link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css" />
+
+<link rel="stylesheet"
+	href="/resources/fonts/flaticon/font/flaticon.css" />
+
+<link rel="stylesheet" href="/resources/css/aos.css" />
+
+<link rel="stylesheet" href="/resources/css/style.css" />
+		</head>
+
+
+
+
+
+		<body>
+			<h:panelGroup columns="2">
+				<h:form>
+					<table>
+						<tr>
+							<td colspan="2"><h:commandButton value="Add"
+									action="#{bankController.redirectToAddBank()}" /></td>
+						</tr>
+						<tr>
+							<td colspan="2"><h:commandButton
+									value="Show"
+									action="#{bankController.redirectToShowBank()}" /></td>
+						</tr>
+						<tr>
+							<td colspan="2"><h:commandButton
+									value="Update"
+									action="#{bankController.redirectToUpdateBank(bank)}" /></td>
+						</tr>
+					</table>
+				</h:form>
+			</h:panelGroup>
+		</body>
+	</ui:define>
+</ui:composition>

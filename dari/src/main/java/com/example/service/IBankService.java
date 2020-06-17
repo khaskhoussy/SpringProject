@@ -13,11 +13,11 @@ public interface IBankService {
 	public int ajouterBank(Bank bank);
 	void affecterOffreABank(int offreId, int bankId);
 	public void deleteBankById(int bankId);
-	public Bank getBankById(int BankId);
+	public List<Bank> getBankById(String userName);
 	public void updateBankById(Bank bank, int bankId);
 	
 	//public List<Employe> getAllEmployeByMission(int missionId);
-	public List<Offre> getAllOffresByBank(int bankId);
+	public List<Offre> getAllOffresByBank(String userName);
 	//public void mettreAjourEmailByEmployeId(String email, int employeId);
 	
 	public int addOrUpdateBank(Bank bank);

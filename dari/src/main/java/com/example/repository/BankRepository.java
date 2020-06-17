@@ -24,7 +24,18 @@ public interface BankRepository extends CrudRepository<Bank, Integer> {
 	
 	List<Bank> findByName(String name);
 	
+//	@Query("select DISTINCT")
+//	public Bank findByBankName();
+	
 	@Query(value = "select name from bank b", nativeQuery = true)
 	public List<String> findBankNames();
+	
+//	@Query("select DISTRINCT b from Bank join b.offre where b.id=:offre.id")
+	@Query(value = "select  b.name from bank b "
+			+ " inner join offre o on o.bank_id = b.id  "
+			+ " inner join simulation on o.id = simulation.id_offre "
+			+ " inner join user u on u.id = simulation.id_user "
+			+ " inner join expert e on e.bank_name = b.name ", nativeQuery = true)
+	public List<String> findByExpertBank(String bank_name);
 
 }

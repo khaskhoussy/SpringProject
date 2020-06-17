@@ -23,13 +23,15 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Poll {
-
+	public Poll(){
+		super();
+	}
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "poll")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "poll")
     private List<Choice> options;
 
     private String title;
@@ -102,6 +104,14 @@ public class Poll {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Poll(List<Choice> options, String title, Date endDate, Boolean visible) {
+		super();
+		this.options = options;
+		this.title = title;
+		this.endDate = endDate;
+		this.visible = visible;
 	}
     
     

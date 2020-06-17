@@ -55,7 +55,7 @@ public class RestControlOffre {
 	
 }
     // http://localhost:8081/dari/servlet/getOffreById/1
-    @GetMapping(value = "getOffreById/{OffreId}")
+    @GetMapping(value = "/getOffreById/{OffreId}")
     @ResponseBody
 	public Offre getOffreById(@PathVariable("OffreId") int OffreId) {
 		Offre offre1 = new Offre();

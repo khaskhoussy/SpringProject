@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ct="http://www.chartistjsf.org/charts"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/pages/template/template.xhtml" xmlns:p="http://primefaces.org/ui">
+
+
+
+
+	<ui:param name="page_name" value="Connexion" />
+	<ui:define name="menu">
+	
+	
+	
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+	<f:view transient="true">
+
+	<style>
+	.main {
+  width: 500px;
+  margin: 20px auto;
+  padding: 50px;
+  border: 2px solid #8495A5;
+}
+	
+	</style>
+	
+<div class="site-block-wrap">
+			<div class="owl-carousel with-dots">
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/vote2.png);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+							<div>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>						
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							</div>
+								<h1 class="text-shadow">Polls</h1>
+								<p class="mb-5 text-shadow">This Interface allows you to show the polls that
+								you have created so that you can check on the results submitted by the users</p>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>				
+			</div>
+
+		</div>	
+	
+	
+	
+	<b:form  id="formpoll">
+	
+	
+	
+	 <p:growl id="growl" showDetail="true" sticky="true" />  
+	
+	
+	
+	
+	
+	
+	   <ui:repeat var="polls" value="#{PollJsf.mespoll()}">
+	
+	
+	
+	
+
+	
+	
+		<div class="main"   > 
+  <h4>
+  #{polls.title}
+  </h4>
+  <div>
+    <h5>
+<!--       <em>Where do you usually browse?</em> -->
+    </h5>
+    
+    
+    
+    <ui:repeat var="poll" value="#{PollJsf.choix(polls.id)}">
+    
+    
+    <strong>#{poll.optionss}</strong>
+    <span class="pull-right"> #{poll.score} </span>
+    <div class="progress progress-striped active">
+      <div class="progress-bar" style="width: #{poll.score}%;"></div>
+    </div>
+    
+ 
+ </ui:repeat>
+    
+    <br />
+    <br />
+    
+    
+  </div>
+</div>
+
+</ui:repeat>
+
+
+</b:form>
+</f:view>
+	</ui:define>
+</ui:composition>

@@ -2,6 +2,9 @@ package com.example.restcontroller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Bank;
 import com.example.entity.Offre;
+import com.example.entity.User;
 import com.example.service.IBankService;
 
 
 
 @RestController
-@RequestMapping("/expert/bank")
+//@RequestMapping("/expert/bank")
 public class RestControlBank {
 
 	
@@ -38,11 +42,11 @@ public class RestControlBank {
 	
 	
     // URL : http://localhost:8081/dari/servlet/getAllOffresByBank/1
-    @GetMapping(value = "getAllOffresByBank/{bankid}")
+    @GetMapping(value = "/getAllOffresByBank/{bankid}")
     @ResponseBody
-	public List<Offre> getAllOffresByBank(@PathVariable("bankid") int bankId) {
-
-		return ibankservice.getAllOffresByBank(bankId);
+	public List<Offre> getAllOffresByBank(HttpServletResponse response,HttpServletRequest request) {
+    	return ibankservice.getAllOffresByBank(Home.connectedUser);
+		//return ibankservice.getAllOffresByBank(bankId);
 	}
     
     
@@ -63,5 +67,13 @@ public class RestControlBank {
 		
 	}
      
-     
+    
+    // http://localhost:8081/dari/servlet/getOffreById/1
+    @GetMapping(value = "/getBankById")
+    @ResponseBody
+    public List<Bank> getBankById(HttpServletResponse response,HttpServletRequest request) {
+    	
+//		Offre offre1 = new Offre();
+		return ibankservice.getBankById(Home.connectedUser);
+	}
 }

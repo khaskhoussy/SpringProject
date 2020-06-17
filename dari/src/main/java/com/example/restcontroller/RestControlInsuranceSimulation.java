@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.controller.HomeController;
 import com.example.entity.Category;
 import com.example.entity.Insurance;
 import com.example.entity.InsuranceSimulation_Favoris;
@@ -115,11 +116,11 @@ public class RestControlInsuranceSimulation {
 			insurance = insurancerepository.findByName(name).get(i);
 		}
 
-		System.err.println(insurance.getId());
-		System.err.println(categoryparam);
-		System.err.println(categoryy);
+//		System.err.println(insurance.getId());
+//		System.err.println(categoryparam);
+//		System.err.println(categoryy);
 		iinsuranceSimulationService.ajoutSimulation(number_rooms, number_floors, house_age,
- 		house_value,goods_value,category,name,fireSafety,waterDamage,robbery,"bbb",
+ 		house_value,goods_value,category,name,fireSafety,waterDamage,robbery,HomeController.connectedUser.getUserName(),
  		insuranceOfferrepository.insuranceOfferid(insurance.getId(),categoryparam),
  		insuranceOfferrepository.FindByInterestCategory(insurance.getId(),categoryparam),
  		insuranceOfferrepository.FindByInterestGoods(insurance.getId(),categoryparam));

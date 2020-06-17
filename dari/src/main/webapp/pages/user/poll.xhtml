@@ -1,0 +1,525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ct="http://www.chartistjsf.org/charts"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/pages/template/template_expert.xhtml" xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="page_name" value="Connexion" />
+	<ui:define name="menu">
+	
+<h:head>
+
+		<h:outputStylesheet library="css" name="main.min.css" />
+		<h:outputStylesheet library="css" name="composite.css" />
+</h:head>
+
+
+
+<div class="site-block-wrap">
+			<div class="owl-carousel with-dots">
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/vote2.png);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+							<div>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>						
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+							</div>
+								<h1 class="text-shadow">Polls</h1>
+								<p class="mb-5 text-shadow">This Interface allows you to create polls with 
+								votes of your choosing so that your bank could benefit from the users
+								submissions and answer</p>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>				
+			</div>
+
+		</div>
+<h:body>
+
+<style>
+
+
+input[type="text"], input[type="number"], input[type="password"] {
+    height: 42px;
+    line-height: 42px;
+    padding-right: 10px;
+    text-align: start;
+}
+
+
+#my-poll * {
+  margin: 0;
+  padding: 0;
+  width: 600px;
+  background-color: #efefef;
+}
+
+#my-poll {
+  padding: 10px;
+/*   width: 400px; */
+  font: 0.8rem Tahoma, sans-serif;
+}
+
+#my-poll .field .del{
+  display: block;
+  width: 20px;
+  position: absolute;
+  right: 5px;
+  top: 12px;
+/*   opacity: 0; */
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #5181b8;
+  cursor: pointer;
+}  
+#my-poll .field:hover .del {
+  opacity: .8;
+  text-align: center;
+}  
+#my-poll .del:after {
+  content: '✕';
+}
+
+#my-poll .button {
+  background: #5181b8;
+  display: inline-block;
+  padding: 6px 20px;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  
+}
+
+#my-poll .send {
+  float: right;
+  margin: 10px 0 15px 0;
+}
+
+#my-poll .respond {
+  margin-top: 10px;
+}
+
+#my-poll .button:hover {
+  background: #5b88bd;
+}
+
+#my-poll .header {
+  font-size: 0.7rem;
+}
+
+#my-poll .poll-form .header {
+  color: #5c5c5c;
+  margin: 5px 0;
+}
+
+#my-poll .poll-form input {
+  padding: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d3d9dc;
+  border-radius: 1px;
+  outline: none;
+  font-size: 1.85em;
+}
+
+#my-poll .poll-form .field {
+  padding: 5px 0;
+  position: relative;
+}
+
+#my-poll .wall {
+  border: 1px solid #d3d9dc;
+  border-radius: 1px;
+  padding: 15px;
+  box-sizing: border-box;
+  clear: both;
+}
+
+#my-poll .wall .header {
+  color: #4264a8;
+  font-size: 0.7rem;
+  margin-bottom: 5px;
+}
+
+#my-poll .wall .field {
+  padding-top: 10px;
+}
+
+#my-poll .wall input {
+  margin-right: 3px;
+  margin-top: -2px;
+  vertical-align: middle;
+}
+
+</style>
+
+
+<style type="text/css">    
+    .white-button.ui-button.ui-state-default {
+        background-color: #ffffff;
+        color: #222222;
+        border-color: #d6d6d6;
+        /* with the exported variables from Nova and Luna Themes*/
+        border-color: var(--input-border-color, #d6d6d6);
+    }
+ 
+    .white-button.ui-button.ui-state-default:enabled:hover, 
+    .white-button.ui-button.ui-state-default:focus {
+        background-color: #f2f2f2;
+        border-color: #ccc;
+        color: #373a3c;
+        /* with the exported variables from Nova and Luna Themes*/
+        border-color: var(--input-hover-border-color, #ccc);
+    }
+ 
+    .green-button.ui-button.ui-state-default {
+        background-color: #5cb85c;
+        border-color: #5cb85c;
+        color: #fff;
+    }
+ 
+    .green-button.ui-button.ui-state-default:enabled:hover, 
+    .green-button.ui-button.ui-state-default:focus {
+        background-color: #4cae4c;
+        border-color: #5cb85c;
+    }
+ 
+    .red-button.ui-button.ui-state-default {
+        background-color: #d9534f;
+        border-color: #d9534f;
+        color: #fff;
+    }
+ 
+    .red-button.ui-button.ui-state-default:enabled:hover, 
+    .red-button.ui-button.ui-state-default:focus {
+        background-color: #d43f3a;
+        border-color: #d9534f;
+    }
+     
+</style>
+
+<!-- style fix  -->
+<style>
+element.style {
+    border: 1px solid;
+    border-color: #ccc #ccc #bbb;
+    border-radius: 3px;
+    background: #467728f2;
+    color: rgba(255, 242, 242, 0.8);
+    line-height: 1;
+    width: 44%;
+}
+</style>
+
+
+
+
+
+<div class="d-flex justify-content-center" style="    width: 50%;
+    margin-left: auto;
+    margin-right: auto;">
+
+
+
+	<div class="row">
+
+
+
+
+
+
+
+
+
+
+			
+
+
+					<br />
+
+<!-- 					<nav class="navbar1"> -->
+
+<!-- 						<div class="navbar-header"> -->
+<!-- 							<button type="button" class="navbar-toggle" -->
+<!-- 								data-toggle="collapse" data-target=".navbar-ex1-collapse"> -->
+<!-- 								<span class="sr-only">Toggle navigation</span> <span -->
+<!-- 									class="icon-bar"></span> <span class="icon-bar"></span> <span -->
+<!-- 									class="icon-bar"></span> -->
+<!-- 							</button> -->
+<!-- 						</div> -->
+
+
+<!-- 						<div class="collapse navbar-collapse navbar-ex1-collapse"> -->
+<!-- 							<ul class="nav navbar-nav"> -->
+<!-- 								<li class="active"><a href="#" id="nav-saisie" -->
+<!-- 									class="nav-panel"> <span class="icon-pencil"></span>Votre -->
+<!-- 										projet -->
+<!-- 								</a> -->
+<!-- 									<div class="arrow-active"></div></li> -->
+<!-- 								<li class="desactive"><a href="#" id="nav-resultats" -->
+<!-- 									class="nav-panel"> <span class="icon-bar-chart"></span>Résultats -->
+<!-- 										détaillés -->
+<!-- 								</a></li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</nav> -->
+
+					<form>
+						<main role="main">
+						<div id="panel-scrollpane">
+
+
+							<div id="saisie" class="panel" style="display: block;">
+								<div class="row">
+									<div class="col-md-12">
+										<section>
+											<div class="section-header">
+											<center>
+												<span class="icon-pencil"></span> Create your own Poll
+												</center>
+											</div>
+											<div class="section-content">
+												<div class="form">
+											
+
+
+
+
+
+
+
+
+
+
+
+									
+
+
+
+<h:form>
+<div id="my-poll">
+  <div class="poll-form">
+    <div class="header">
+      <h3 style="text-align: center;">Question</h3>
+ 
+    </div>
+         <br />
+    				<hr />
+    				<br />
+    <div class="field">
+      <h:inputText type="text" name="question"  value="#{PollJsf.sujet}"   style="max-width: 500%;"   />
+    </div>	<br />
+    				<hr />
+    				<br />
+    <div class="header">
+      <h3  style="text-align: center;" >Poll options</h3>
+    </div>
+     <br />
+    				<hr />
+    				<br />
+    <div class="options">
+    <div class="field">
+      <h:inputText type="text" name="option1 " a:placeholder="Add an option" value="#{PollJsf.paaram}" style="max-width: 500%;"  />
+      <span class="del" title="Remove option"></span>
+    </div>
+      <div class="field">
+      <h:inputText type="text" name="option3 " a:placeholder="Add an option" value="#{PollJsf.paaram}" style="max-width: 500%;" />
+      <span class="del" title="Remove option"></span>
+    </div>
+    <div class="field">
+      <h:inputText type="text" name="option2" a:placeholder="Add an option" value="#{PollJsf.paaram}" style="max-width: 500%;"/>
+      <span class="del" title="Remove option"></span>
+    </div>
+    
+
+    
+    <div class="field">
+      <input type="text" name="default" a:placeholder="Add an option"  style="background-color: #bec4ca ;max-width: 500%;" />
+    </div>
+    </div>
+<!--     <div class="button send"  >Send</div> -->
+<center>
+   <h:commandButton value="Create Poll"
+																	style="border: 1px solid;border-color: #ccc #ccc #bbb;border-radius: 3px;background: #df0101;color: rgba(255, 242, 242, 0.8);line-height: 1;width: 44%;"
+																	id="btt-calculer" action="#{PollJsf.Addpoll()}"
+																	class="btn btn-primaire ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+</center>
+    </div>
+  <div class="post"></div>
+</div>
+
+</h:form>
+
+
+
+
+
+
+												</div>
+
+
+											</div>
+
+
+
+
+										</section>
+
+									</div>
+
+								</div>
+
+
+
+							</div>
+
+
+
+						</div>
+
+						</main>
+
+					</form>
+			
+
+
+
+
+
+
+
+			</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+var myPoll = function() {
+	  var
+	    poll = document.getElementById("my-poll"),
+	    post = document.querySelector("#my-poll .post"),
+	    spans = document.querySelectorAll("#my-poll .del"),
+	    send = document.querySelector("#my-poll .send");
+	  
+	  for(var i = 0; i  &lt; spans.length; i++)
+	    spans[i].onclick = function() {
+	      var spans = document.querySelectorAll("#my-poll .del");
+	      if(spans.length > 1)
+	        this.parentNode.parentNode.removeChild(this.parentNode);
+	    }
+
+	   var addOption = document.querySelectorAll("#my-poll [name=default]")[0], counter = 3; 
+	   addOption.onfocus = function() {
+	     var field = document.createElement("div");
+	     field.className = "field";
+
+	     var newOption = document.createElement("input");
+	     newOption.type = "text";
+	     newOption.name = "case"+counter++;    
+	     var span = document.createElement("span");
+	     span.className = "del";
+	     span.title = "Remove option";
+	     span.onclick = function() {
+	      var spans = document.querySelectorAll("#my-poll .del");
+	      if(spans.length > 1)
+	        this.parentNode.parentNode.removeChild(this.parentNode);
+	     }
+	     field.appendChild(newOption);
+	     
+	     field.appendChild(span);
+	     
+	     var options = document.querySelectorAll("#my-poll .options")[0].insertBefore(field, this.parentNode);
+	     this.value = "";
+	     newOption.focus(); 
+	   }
+
+	    send.onclick = function() {
+	      var wall = document.createElement("div");
+	      wall.className = "wall";
+	      // wall.innerHTML = "";
+
+	      var header = document.createElement("div");
+	      header.className = "header";
+	    
+	      var h3 = document.createElement("h3");
+	      h3.innerHTML = document.querySelectorAll("#my-poll [name=question]")[0].value;
+	      header.appendChild(h3);
+	      wall.appendChild(header);
+
+	      var options = document.querySelectorAll("#my-poll .options [type=text]");
+	      var field, radio;
+	      for(let i = 0, field, radio; i  &lt; options.length-1; i++) {
+	        field = document.createElement("div");
+	        field.className = "field";
+
+	        var label = document.createElement("label");
+	        radio = document.createElement("input");
+	        radio.type = "radio";
+	        radio.name = "radio";
+	        radio.value = i;
+	       
+	        label.appendChild(radio);
+	        field.appendChild(label);
+	        label.innerHTML += options[i].value;
+	       
+	        wall.appendChild(field);
+	      }
+
+	    field = document.createElement("div");
+	    field.className = "button respond";
+	    field.innerHTML = "Respond";
+	    wall.appendChild(field);
+
+	    post.appendChild(wall);
+	      
+	  }
+	}
+	myPoll();
+</script>
+</h:body>
+</ui:define>
+</ui:composition>
+

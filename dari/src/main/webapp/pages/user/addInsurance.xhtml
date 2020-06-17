@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/pages/template/template_admin.xhtml">
+	<ui:param name="page_name" value="test" />
+	<ui:define name="content">
+
+
+		<div class="site-block-wrap">
+			<div class="owl-carousel with-dots">
+
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/expert3.jpg);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+								<h1 class="text-shadow">Add an expert</h1>
+								<p class="mb-5 text-shadow">Here you should be able to add a
+									bank expert to help him manage his banks information !</p>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+
+		<h:panelGroup>
+			<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>Sign Up Form by Colorlib</title>
+
+<!-- Font Icon -->
+<link rel="stylesheet"
+	href="/resources/fontsRegistration/material-icon/css/material-design-iconic-font.min.css" />
+
+<!-- Main css -->
+<link rel="stylesheet" href="/resources/cssRegistration/style.css" />
+</head>
+<body>
+
+
+	<h:panelGroup columns="2">
+		<h:form>
+			<center>
+				<div>
+
+					<h:outputText value="Name"></h:outputText>
+				</div>
+				<div>
+					<h:inputText value="#{insuranceController.name}"></h:inputText>
+
+				</div>
+			
+				<br/>
+				<br/>
+				<div>
+					<h:commandButton action="#{insuranceController.ajouterInsurance()}"
+						class="form-submit" value="Add Insurance">
+					</h:commandButton>
+
+				</div>
+
+			</center>
+		</h:form>
+	</h:panelGroup>
+
+
+
+	<!-- JS -->
+	<h:outputScript library="vendor" name="jquery.min.js" />
+	<h:outputScript library="jsRegistration" name="main.js" />
+
+</body>
+<!-- This templates was made by Colorlib (https://colorlib.com) -->
+			</html>
+
+
+
+
+
+<style>
+select.form-control[multiple], select.form-control[size] {
+    height: auto;
+    max-inline-size: max-content;
+}
+</style>
+
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
+

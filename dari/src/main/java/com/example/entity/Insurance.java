@@ -93,6 +93,24 @@ private String name;
 
 
 
+	public Insurance(int id, String name, @Email String email, int phone, String adress, float interest_firesafety,
+			float interest_waterDamage, float interest_robbery, float interest_age, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.adress = adress;
+		this.interest_firesafety = interest_firesafety;
+		this.interest_waterDamage = interest_waterDamage;
+		this.interest_robbery = interest_robbery;
+		this.interest_age = interest_age;
+		this.description = description;
+	}
+
+
+
+
 	public int getId() {
 		return id;
 	}

@@ -27,7 +27,7 @@ public class Bank implements Serializable{
 	
 	private String name;
 	
-	@Email
+
 	private String email;
 	
 	private int phone;
@@ -52,10 +52,7 @@ public class Bank implements Serializable{
 
 
 
-
-
-
-	public Bank(String name, @Email String email, int phone, String adress, int document_fees_interest) {
+	public Bank(String name, String email, int phone, String adress, int document_fees_interest) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -66,6 +63,29 @@ public class Bank implements Serializable{
 
 
 
+
+
+
+	public Bank(int id, String email, int phone, String adress, int document_fees_interest) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.phone = phone;
+		this.adress = adress;
+		this.document_fees_interest = document_fees_interest;
+	}
+
+
+
+	public Bank(int id, String name, String email, int phone, String adress, int document_fees_interest) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.adress = adress;
+		this.document_fees_interest = document_fees_interest;
+	}
 
 
 
@@ -93,6 +113,7 @@ public class Bank implements Serializable{
 		this.email = email;
 	}
 
+
 	public int getPhone() {
 		return phone;
 	}
@@ -117,19 +138,9 @@ public class Bank implements Serializable{
 		this.offres = offres;
 	}
 
-
-
-
-
-
 	public int getDocument_fees_interest() {
 		return document_fees_interest;
 	}
-
-
-
-
-
 
 	public void setDocument_fees_interest(int document_fees_interest) {
 		this.document_fees_interest = document_fees_interest;

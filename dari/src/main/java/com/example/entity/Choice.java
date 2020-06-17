@@ -59,6 +59,21 @@ public class Choice implements Serializable {
 	public void setPoll(Poll poll) {
 		this.poll = poll;
 	}
+
+	public Choice(String optionss, Long score) {
+		super();
+		this.optionss = optionss;
+		this.score = score;
+	}
+
+	@Override
+	public String toString() {
+		return "Choice [id=" + id + ", optionss=" + optionss + ", score=" + score + ", poll=" + poll + "]";
+	}
+
+	public Choice() {
+		super();
+	}
     
     
     

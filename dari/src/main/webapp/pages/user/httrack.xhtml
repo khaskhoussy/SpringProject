@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/pages/template/template.xhtml">
+	<ui:param name="page_name" value="test" />
+	<ui:define name="content">
+		<!-- DARII -->
+		<h:outputStylesheet library="css" name="jquery-ui1.css" />
+
+		<link rel="stylesheet" href="/resources/css/bootstrap1.min.css" />
+		<link rel="stylesheet" href="/resources/css/bootswatch1.min.css" />
+		<link rel="stylesheet" href="/resources/css/overwrite1.css" />
+		<link rel="stylesheet" href="/resources/css/site1.css" />
+
+		<link rel="stylesheet" href="/resources/css/fhmm1.css" />
+		<link rel="stylesheet" href="/resources/css/font-awesome1.min.css" />
+		<link rel="stylesheet" href="/resources/css/style1.css" />
+		<link rel="stylesheet" href="/resources/css/datepicker31.css" />
+		<!-- 		<link rel="stylesheet" href="/resources/css/jquery-ui1.css"/> -->
+
+		<h:form>
+			<!-- 		<style> -->
+/* 		#credit-valeur { */
+/*     height: 60px; */
+/*     background: url(#{request.contextPath}/resources/images/Calendre.png); */
+/*     background-position: 50% 50%; */
+/*     background-repeat: no-repeat; */
+/*     width: 100%; */
+/*     position: relative; */
+    
+    
+    
+/* } */
+
+
+/* #montant-echeance { */
+/*     font-family: impact; */
+/*     font-size: 42px; */
+/*     width: 100%; */
+/*     height: 58px; */
+/*     margin: auto; */
+/*     position: absolute; */
+/*     top: 0; */
+/*     left: 0; */
+/*     bottom: 0; */
+/*     right: 0; */
+/*     text-align: center; */
+/*     color: #005ba0; */
+/* } */
+/* .ui-widget-content { */
+/*     border: 1px solid #aaaaaa; */
+/*     background: #ffffff url(#{request.contextPath}/resources/images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x; */
+/*     color: #222222; */
+/* } */
+/* #simulateur-credit input[type=text] { */
+
+/*     background-image: url(#{request.contextPath}/resources/images/ChampSaisie.png)!important; */
+/*     background-repeat: no-repeat; */
+/*     background-position: center; */
+/*     border: none; */
+/*     background-size: 100%; */
+/*     height: 41px; */
+/*     text-align: center; */
+/*     font-weight: bolder; */
+/*     color: #005ba0; */
+/* } */
+<!-- 	</style>	 -->
+			<style>
+#simulateur-credit {
+	margin-top: 30px;
+	width: 583px;
+	position: relative;
+	padding-right: 15px
+}
+
+#simulateur-credit p {
+	color: #005ba0;
+	font-weight: bold;
+}
+
+#simulateur-credit .ui-slider-horizontal .ui-state-default {
+
+	background: url(#{request.contextPath}/resources/images/Curseur.png) no-repeat;
+	left: 50%;
+	width: 55px;
+	height: 55px;
+	top: -17px;
+	border: none
+}
+
+#simulateur-credit .ui-slider {
+	margin-left: -5px;
+	height: 20px;
+	margin-top: 35px;
+	width: 80%;
+	display: inline-block
+}
+
+#simulateur-credit .ui-widget-header {
+	background: #005ba0
+}
+
+#simulateur-credit .ui-slider-horizontal .ui-state-default:focus {
+	outline: 0
+}
+
+#credit-valeur {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+#credit-valeur img {
+	max-width: 100%;
+	height: 128px;
+	width: 100%
+}
+
+#credit-valeur {
+	height: 60px;
+	background: url(#{request.contextPath}/resources/images/Calendre.png);
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	width: 100%;;
+	position: relative;
+}
+
+#montant-echeance {
+	font-family: impact;
+	font-size: 42px;
+	width: 100%;
+	height: 58px;
+	margin: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	color: #005ba0
+}
+
+#duree-slider-wrapper, #montant-slider-wrapper, #taux-slider-wrapper {
+	position: relative;
+	margin-bottom: 25px;
+}
+
+#duree, #montant, #taux {
+	width: 93px
+}
+
+#duree-slider-val, #montant-slider-val, #taux-slider-val {
+	position: absolute;
+	right: 20px
+}
+
+.slider-info {
+	position: absolute;
+	color: #005ba0;
+	top: 5px;
+	font-weight: bold;
+}
+
+#simulateur-credit input[type=text] {
+	background-image: url(#{request.contextPath}/resources/images/ChampSaisie.png)
+		!important;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: none;
+	background-size: 100%;
+	height: 41px;
+	text-align: center;
+	font-weight: bolder;
+	color: #005ba0
+}
+
+#simulateur-credit input[type=number]:focus {
+	outline: 0
+}
+
+#duree-slider-val, #montant-slider-val, #taux-slider-val {
+	background-image: url(#{request.contextPath}/resources/images/Afficheur.png)
+		!important;
+	background-repeat: no-repeat;
+	background-position: right;
+	border: none;
+	background-size: 100%;
+	width: 200px;
+	height: 35px;
+	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 40px;
+	color: #fff;
+	font-weight: 700;
+	font-size: 18px
+}
+
+@media only screen and (max-width: 767px) {
+	#simulateur-credit {
+		display: table;
+		margin-left: auto;
+		margin-right: auto;
+		width: 305px;
+		position: relative;
+		padding-right: 15px
+	}
+	#simulateur-credit p {
+		color: #005ba0
+	}
+	#simulateur-credit .ui-slider-horizontal .ui-state-default {
+		background: url(#{request.contextPath}/resources/images/Curseur-xs.png) no-repeat;
+		left: 50%;
+		width: 25px;
+		height: 25px;
+		top: -7px;
+		border: none
+	}
+	#simulateur-credit .ui-slider {
+		margin-left: -5px;
+		height: 10px;
+		margin-top: 40px;
+		width: 80%;
+		display: inline-block
+	}
+	#simulateur-credit .ui-widget-header {
+		background: #005ba0
+	}
+	#simulateur-credit .ui-slider-horizontal .ui-state-default:focus {
+		outline: 0
+	}
+	#credit-valeur img {
+		max-width: 100%;
+		height: 128px;
+		width: 100%
+	}
+	#credit-valeur {
+		height: 57px;
+		background: url(#{request.contextPath}/resources/images/Calendre-xs.png);
+		background-repeat: no-repeat;
+		width: 100%;;
+		position: relative;
+		margin-bottom: 0px
+	}
+	#montant-echeance {
+		font-family: impact;
+		font-size: 34px;
+		width: 100%;
+		height: 50px;
+		margin: auto;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		text-align: center;
+		color: #005ba0
+	}
+	#duree-slider-wrapper, #montant-slider-wrapper, #taux-slider-wrapper {
+		position: relative
+	}
+	#duree, #montant, #taux {
+		width: 54px
+	}
+	#duree-slider-val, #montant-slider-val, #taux-slider-val {
+		position: absolute;
+		top: 23px;
+		right: 5px
+	}
+	.slider-info {
+		position: absolute;
+		color: #005ba0;
+		top: 5px
+	}
+	#simulateur-credit input[type=text] {
+		background-image: url(#{request.contextPath}/resources/images/ChampSaisie-xs.png)
+			!important;
+		background-repeat: no-repeat;
+		background-position: center;
+		border: none;
+		background-size: 100%;
+		height: 23px;
+		text-align: center;
+		font-weight: bolder;
+		color: #005ba0
+	}
+	#simulateur-credit input[type=number]:focus {
+		outline: 0
+	}
+	#duree-slider-val, #montant-slider-val, #taux-slider-val {
+		background-image: url(#{request.contextPath}/resources/images/Afficheur-xs.png)
+			!important;
+		background-repeat: no-repeat;
+		background-position: right;
+		border: none;
+		background-size: 100%;
+		width: 100px;
+		height: 18px;
+		text-align: center;
+		display: inline-block;
+		vertical-align: middle;
+		line-height: 19px;
+		color: #fff;
+		font-weight: 700;
+		font-size: 12px
+	}
+}
+
+#simulateur-credit .indication {
+	margin-bottom: 20px;
+}
+
+.ui-corner-all {
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+
+
+
+
+
+.ui-slider-horizontal .ui-slider-handle {
+    margin-left: -.6em;
+}
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    cursor: default;
+    touch-action: none;
+}
+.ui-corner-all {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    border-bottom-right-radius: 4px;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+    border-top-right-radius: 4px;
+}
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+.ui-widget-content {
+    border: 1px solid #aaaaaa;
+    background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x;
+    url(images/ui-bg_flat_75_ffffff_40x100.png)
+    color: #222222;
+}
+</style>
+
+
+
+
+			<div id="simulateur-credit">
+				<div class="indication">
+					<div>Partez du montant total du bien que vous souhaitez
+						acquérir, retirez votre apport personnel. La somme empruntée
+						servira alors de base pour connaître vos mensualités
+						prévisionnelles en fonction de la durée.</div>
+				</div>
+				<p>Montant de l&#39;&#233;ch&#233;ance par mois (DT)</p>
+				<div id="credit-valeur">
+					<span id="montant-echeance">5000</span>
+				</div>
+				<div id="montant-slider-wrapper">
+					<span class="slider-info">Montant (DT)</span> <span><input
+						type="text" id="montant"></input></span> <span id="montant-slider"></span>
+				</div>
+				   <div id="duree-slider-wrapper">
+				      <span class="slider-info">Duree (Mois)</span>
+				      <span><input type="text" id="duree"></input></span>
+				      <span id="duree-slider"></span>
+				   </div>
+				   <div id="taux-slider-wrapper">
+				      <span class="slider-info">Taux du cr&#233;dit (%)</span>
+				      <span><input type="text" id="taux"></input></span>
+				      <span id="taux-slider"></span>
+				   </div>
+			</div>
+			
+		</h:form>
+		
+		<h3>Ajax Slider</h3>
+    <h:panelGrid columns="1" style="margin-bottom: 10px">
+        <h:inputText id="txt5" value="#{sliderView.number7}" />
+        <p:slider for="txt5">
+            <p:ajax event="slideEnd" listener="#{sliderView.onSlideEnd}" update="growl" />
+        </p:slider>
+    </h:panelGrid>
+	</ui:define>
+</ui:composition>

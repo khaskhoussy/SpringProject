@@ -58,6 +58,7 @@ public class StripeService implements IStripeService{
 			Customer customer = Customer.create(params);
 
 			System.out.println("create customer id: {}");
+			System.err.println(customer.getId());
 			return customer.getId();
 		} catch (StripeException e) {
 
@@ -73,6 +74,7 @@ public class StripeService implements IStripeService{
 		// TODO Auto-generated method stub
 		//return null;
 		// stripe key
+		System.err.println("someonewashere");
 		Stripe.apiKey = "sk_test_or9aEFfs3K60YZehyL6Im5ed00ju1JHlxO";
 
 		Customer customer = Customer.retrieve(customerId);
@@ -92,6 +94,7 @@ public class StripeService implements IStripeService{
 		source.put("source", token.getId());
 
 		customer.getSources().create(source);
+		System.err.println(token.getId());
 		return token.getId();
 	}
 
@@ -110,12 +113,21 @@ public class StripeService implements IStripeService{
 		
 		Map<String, Object> params = new HashMap<>();
 		params.put("amount",chargerequest.getAmount());
-		params.put("currency", chargerequest.getCurrency());
+		
+//		params.put("amount", chargerequest.getAmoutFloat());
+		System.err.println("aerer");
+//		params.put("currency", chargerequest.getCurrency());
+		params.put("currency", chargerequest.getCurrencyString());
 		params.put("description", chargerequest.getDescription());
+//		params.put("currency", "DT");
+//		params.put("description", "PAYEMENT");	
+		
 		params.put("payment_method_types", paymentMethodTypes);
 		
 		PaymentIntent p = PaymentIntent.create(params);
 		p.getId();
+		System.err.println("ahawa");
+		System.err.println(p.getId());
 		//Charge charge = Charge.create(params);
 		return p.getId();
 	}

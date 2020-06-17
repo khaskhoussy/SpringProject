@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Boolean Button</title>
+</h:head>
+<h:body>
+	<h2>PrimeFaces Boolean Button Example</h2>
+	<h:form>
+		<p:growl id="msgs" />
+
+		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+			<h:outputText value="I accept terms and conditions: " />
+			<p:selectBooleanButton id="value1"
+				value="#{selectBooleanView.value1}" onLabel="Yes" offLabel="No"
+				style="width:60px" />
+
+			<h:outputText value="Subscribe me to newsletter: " />
+			<p:selectBooleanButton id="value2"
+				value="#{selectBooleanView.value2}" onLabel="Yes" offLabel="No"
+				onIcon="pi pi-check" offIcon="pi pi-times" style="width:60px">
+				<p:ajax update="msgs" listener="#{selectBooleanView.addMessage}" />
+			</p:selectBooleanButton>
+		</h:panelGrid>
+
+		<p:commandButton id="submit" value="Submit" update="display"
+			icon="pi pi-check" oncomplete="PF('dlg').show()" />
+
+		<p:dialog id="dialog" header="Values" modal="true" resizable="false"
+			showEffect="fade" widgetVar="dlg">
+			<h:panelGrid columns="1" id="display">
+				<h:outputText value="Value 1: #{selectBooleanView.value1}" />
+				<h:outputText value="Value 2: #{selectBooleanView.value2}" />
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/pages/template/template.xhtml">
+	<ui:param name="page_name" value="test" />
+	<ui:define name="content">
+	<center>
+		<!-- DARII -->
+		<div class="site-block-wrap">
+			
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/bank.jpg);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+								<h1 class="text-shadow">Add a Bank</h1>
+								<p class="mb-5 text-shadow">This will allow to an expert to
+									be affected to this bank and therefore he will be able to add
+									and modify the banks data and offers</p>
+								<h:panelGroup columns="2">
+									<h:form>
+										<table>
+											<tr>
+												<td><h:outputText value="Name"></h:outputText></td>
+												<td><h:inputText value="#{bankController.name}"></h:inputText></td>
+											</tr>
+											<tr>
+												<td colspan="2"><h:commandButton value="Add Bank"
+														action="#{bankController.updateBank()}" /></td>
+											</tr>
+										</table>
+									</h:form>
+								</h:panelGroup>
+								<p>
+									<a href="#" target="_blank" class="btn btn-primary px-5 py-3">Get
+										Started</a>
+								</p>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			
+
+		</div>
+</center>
+
+	</ui:define>
+</ui:composition>

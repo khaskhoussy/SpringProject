@@ -136,4 +136,13 @@ public class OffreServiceImpl implements IOffreService {
 		return offreRepository.getAllOffersByBankRepo(bank);
 	}*/
 	
+	
+	
+	@Override
+	public int addOrUpdateOffer(Offre offre) {
+		offreRepository.save(offre);
+//		ibankrepository.save(bank);
+		return offre.getId();
+	}
+	
 }

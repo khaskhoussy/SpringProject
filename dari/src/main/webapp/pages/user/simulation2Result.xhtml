@@ -1,0 +1,2419 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/pages/template/template2.xhtml">
+	<ui:param name="page_name" value="test" />
+	<ui:define name="content">
+		<!-- DARII -->
+
+
+
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js">
+
+//Check for Window load
+//$(window).load(function(){
+//Begin Document Ready
+$(document).ready(function(){
+
+var linkPage = '';
+//flag to toggle between home and other pages
+var homeFlag = 0;
+
+// Call to slide out Extended view
+function pageOn(){
+ $('#main-menu').addClass('main-menu-pgactive');
+ $('#section-home').addClass('vcard-body-pgactive');    
+ $('.profileActive').removeClass('profileActive');    
+ //swithcing to profile pic 1
+ $('#profile-pic2').addClass('profileActive');
+ 
+ homeFlag = 1;
+}
+
+//call to slide in extended view
+function pageOff(){
+ $('.section-page-active').removeClass('section-page-active');
+ $('#main-menu').removeClass('main-menu-pgactive');
+ $('#section-home').removeClass('vcard-body-pgactive');
+ $('.profileActive').removeClass('profileActive');
+ // switching to profile pic1
+ $('#profile-pic1').addClass('profileActive');
+ homeFlag = 0;
+}
+// activate the element /page selected
+$(".link-page").on('click', function(event){
+event.preventDefault();
+$('.menuActive').removeClass('menuActive');  
+$(this).addClass('menuActive');
+linkPage = $(this).attr('href');
+$('.section-page-active').removeClass('section-page-active');
+$(linkPage).addClass('section-page-active');
+pageOn();
+});
+
+// Toggle page screens based on Home flag
+$(".link-home").on('click', function(event){
+event.preventDefault();
+// Home is not active
+ if (homeFlag == 1) {
+ $('.menuActive').removeClass('menuActive');
+ $(this).addClass('menuActive');
+ pageOff();
+}  
+});
+
+// Form Validation
+$("#contact-form").validate({
+ submitHandler: function(form){
+   $.ajax({
+     type: "POST",
+     url: "",
+     data: {
+       "name": $("#contact-form #name").val(),
+       "email": $("#contact-form #email").val(),
+       "subject": $("#contact-form #subject").val(),
+       "message": $("#contact-form #message").val()
+     },
+     datatype: "json",
+     success: function(data) {
+       if(data=="success"){
+         alert("Your message was sent successfully");
+       }
+       else{
+         alert("Error sending your message");
+       }
+     }
+   })
+ }
+});
+// End of form validation
+
+});
+//end of document ready
+
+//});
+//End of window load
+
+
+
+</script>
+		<!-- bouton -->
+		<style>
+form input {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	border: 1px solid rgb(40, 53, 33);
+	background-color: #136b6f;
+	width: 250px;
+	border-radius: 3px;
+	padding: 10px 15px;
+	margin: 0 auto 10px auto;
+	display: block;
+	text-align: center;
+	font-size: 18px;
+	color: white;
+	-webkit-transition-duration: 0.25s;
+	transition-duration: 0.25s;
+	font-weight: 300;
+}
+</style>
+
+		<style>
+/* ===============
+General Styles
+===================*/
+.responsive-image {
+	width: 100%;
+}
+
+/* ===============
+End of General Styles
+===================*/
+/* ===============
+Style for Section
+===================*/
+.section {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+/* ===============
+End of Style for Section
+===================*/
+
+/* ===============
+Style for Body
+===================*/
+body {
+	background:
+		url("https://images.unsplash.com/photo-1471201187657-6406da15e43b?")
+		no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-webkit-font-smoothing: subpixel-antialiased;
+	background-size: cover;
+}
+
+.container {
+	position: relative;
+	padding-bottom: 80px;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+/* ===============
+End of Style for Body
+===================*/
+
+/* ===============
+Style for Menu Bar
+===================*/
+.main-menu {
+	width: 12%;
+	top: 0;
+	position: fixed;
+	left: 0%;
+	padding-right: 10px;
+	margin-top: 36px;
+	-webkit-transition: all 0.6s ease-in-out;
+	transition: all 0.6s ease-in-out;
+	display: none;
+}
+
+@media ( min-width :992px) {
+	.main-menu {
+		display: block;
+	}
+}
+
+@media ( min-width : 1400px) {
+	.main-menu {
+		margin-top: 186px;
+	}
+}
+
+.main-menu-pgactive {
+	left: 0%;
+}
+
+.main-menu-list {
+	margin: 0;
+	padding: 0;
+}
+
+.main-menu-list li {
+	margin-bottom: 5px;
+	padding: 0;
+	margin: 5px;
+	list-style: none;
+}
+
+.main-menu-list a {
+	display: block;
+	background: #08aeac;
+	color: #ffffff;
+	padding: 7px;
+	font-size: 15px;
+	text-transform: uppercase;
+	text-decoration: none;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.main-menu-list a:active, .main-menu-list a:visited {
+	text-decoration: none;
+}
+
+.main-menu-list a:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	background: #021533;
+	z-index: -1;
+}
+
+.main-menu-list a:hover {
+	color: red;
+	border: 0px solid transparent !important;
+	text-decoration: none;
+	padding-left: 30px;
+}
+
+.main-menu-list a:hover:before {
+	width: 100%;
+}
+
+.main-menu-list a.menuActive {
+	text-decoration: none;
+	background: #021533;
+	padding-left: 15px;
+}
+
+/* ===============
+End of Style for Menu Bar
+===================*/
+
+/* ===============
+Style for section- vcard-body
+===================*/
+.vcard-body {
+	width: 99%;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 20px;
+	border-top: 6px solid #111;
+	background: #f4f4f4;
+	overflow-y: scroll;
+	-webkit-transition: all 0.6s ease-in-out;
+	-moz-transition: all 0.6s ease-in-out;
+	transition: all 0.6s ease-in-out;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	-webkit-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+	-moz-box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+	box-shadow: 0px 6px 18px 0px rgba(0, 0, 0, 0.46);
+	border-bottom: 15px solid #f4f4f4;
+}
+
+@media ( min-width :992px) {
+	.vcard-body {
+		margin-top: 30px;
+		margin-right: -40px;
+		left: 20%;
+		height: 570px;
+		width: 90%;
+		padding: 45px;
+		padding-bottom: 20px;
+	}
+}
+
+@media ( min-width : 1400px) {
+	.vcard-body {
+		margin-top: 180px;
+	}
+}
+
+.vcard-body-pgactive {
+	left: 15%;
+}
+
+/* ===============
+End of Style for section- vcard-body
+===================*/
+
+/* ===============
+Style for section-Home
+===================*/
+.section-home {
+	z-index: 88;
+	opacity: 1;
+	overflow-y: auto;
+}
+
+.vcard-profile-photo {
+	width: 200px;
+	height: 100px;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.vcard-profile-photo img {
+	width: 100%;
+	border-radius: 100%;
+	-moz-border-radius: 100%;
+	-webkit-border-radius: 100%;
+	border: 5px solid #ddd;
+	-webkit-transition: all 0.6s ease-in-out;
+	-moz-transition: all 0.6s ease-in-out;
+	top: 0;
+	left: 0;
+	position: absolute;
+	opacity: 1;
+}
+
+.profileActive {
+	opacity: 1 !important;
+}
+
+.color1 {
+	color: #08aeac;
+}
+
+.vcard-description {
+	text-align: center;
+}
+
+.profile-title {
+	text-align: center;
+	font-weight: bold;
+	margin-top: 0;
+	font-size: 30px;
+	letter-spacing: -2px;
+	margin-bottom: 8px;
+	color: #021533;
+}
+
+.profile-subtitle {
+	text-align: center;
+	margin-top: 0;
+	font-size: 14px;
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.hr1 {
+	height: 1px;
+	width: 100%;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0),
+		rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.description-text {
+	padding: 10px;
+	padding-top: 5px;
+	margin-bottom: 1px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.description-text p {
+	font-size: 18px;
+}
+
+.description-footer-item {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 2px;
+	margin-bottom: 15px;
+	background-color: #08aeac;
+	color: white;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.description-footer-item p {
+	margin-bottom: 0;
+	color: #ffffff;
+	font-size: 12px;
+}
+
+@media ( min-width :992px) {
+	.section-page-single {
+		left: 55%;
+		transform: translateY(-200px);
+		-moz-transform: translateY(-200px);
+		-webkit-transform: translateY(-200px);
+		visibility: hidden;
+		padding: 20px;
+		padding-top: 0px;
+	}
+}
+
+@media ( min-width :992px) {
+	.section-page {
+		z-index: 11;
+		opacity: 1;
+	}
+}
+
+.section-page-active {
+	opacity: 1;
+	z-index: 22;
+	left: 55%;
+	visibility: visible;
+	transform: translateY(0px);
+	-moz-transform: translateY(0px);
+	-webkit-transform: translateY(0px);
+}
+
+@media ( min-width :992px) {
+	.section-page-active {
+		margin-top: 30px;
+		margin-left: 10px;
+	}
+}
+
+@media ( min-width : 1400px) {
+	.section-page-active {
+		margin-top: 180px;
+	}
+}
+
+@media ( min-width :992px) {
+	.page-mask {
+		position: absolute;
+		top: 605px;
+		left: 30%;
+		display: block;
+		width: 40%;
+		height: 20px;
+		background: #333;
+		z-index: 77;
+		opacity: 1;
+		-webkit-transition: all 0.6s ease-in-out;
+		-moz-transition: all 0.6s ease-in-out;
+		transition: all 0.6s ease-in-out;
+	}
+}
+
+.page-mask-active {
+	left: 55%;
+	opacity: 1;
+	margin-left: 10px;
+}
+
+/* ===============
+End of Style for section-Home
+===================*/
+
+/* ===============
+Style for Footer
+===================*/
+.footer-icons {
+	text-align: center;
+	font-size: 28px;
+}
+
+.footer-icons a {
+	color: #ffffff;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	background: #333333;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	font-size: 14px;
+	line-height: 30px;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+}
+
+.footer-icons a:hover {
+	color: #ffffff;
+	background: #08aeac;
+}
+
+/* ===============
+End of Style for Footer
+===================*/
+
+/* ===============
+Style for Resume Page
+===================*/
+.section-education {
+	margin-bottom: 40px;
+}
+
+.resume-buttons {
+	margin-bottom: 30px;
+}
+
+.page-buttons {
+	margin-top: -10px;
+}
+
+.page-footer {
+	border-top: 1px solid #ccc;
+	padding-top: 20px;
+}
+/* Content Styling */
+.section-title {
+	color: #181031;
+	text-transform: uppercase;
+	font-size: 26px;
+	font-weight: bold;
+	line-height: 29px;
+	margin-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #181031;
+	margin-bottom: 20px;
+}
+
+.section-title2 {
+	font-weight: bold;
+	color: #009993;
+	font-size: 27px;
+	line-height: 14px;
+	letter-spacing: -1px;
+	padding-bottom: 10px;
+	padding-left: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+/* Testimonials */
+.testimonials {
+	text-align: center;
+	font-size: 20px;
+}
+
+.testimonial-item {
+	width: 100%;
+	margin: 0 auto;
+}
+
+@media ( min-width : 768px) {
+	.testimonial-item {
+		padding: 20px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+}
+
+.testimonial-author {
+	margin-top: 30px;
+}
+
+.testimonial-picture {
+	width: 110px;
+	height: 110px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+.testimonial-picture img {
+	width: 100%;
+	border-radius: 100%;
+	-webkit-border-radius: 100%;
+	border: 6px solid #ddd;
+}
+
+.testimonial-content {
+	font-size: 20px;
+	background: #08aeac;
+	color: #ffffff;
+	padding: 20px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	width: 100%;
+	position: relative;
+}
+
+.testimonial-content p {
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.testimonial-content:after {
+	content: '';
+	display: block;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	left: 50%;
+	bottom: -5px;
+	margin-left: -5px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	z-index: 888;
+	background: #08aeac;
+}
+
+.author-name {
+	font-size: 18px;
+	margin-bottom: 0;
+	margin-top: 15px;
+	font-weight: bold;
+}
+
+.author-firm {
+	font-size: 11px;
+	margin-bottom: 0;
+	text-transform: uppercase;
+	font-style: italic;
+	font-weight: lighter;
+}
+
+/* ===============
+End of Style for Resume Page
+===================*/
+
+/* ===============
+Style for Buttons
+===================*/
+.btn {
+	font-weight: bold;
+	color: #ffffff;
+	background: #009993;
+	border-radius: 0;
+	font-size: 12px;
+	padding: 5px 10px;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	margin-bottom: 2px;
+}
+
+.btn:hover {
+	background: #000000;
+	color: #ffffff;
+}
+
+.btn-default {
+	display: inline-block;
+	padding: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background: #008c8a !important;
+	color: #ffffff;
+	font-weight: bold;
+	text-transform: uppercase;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	border: 0px solid transparent !important;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.btn-default:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 0;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	background: #021533;
+	z-index: -1;
+}
+
+.btn-default:hover {
+	color: #ffffff;
+	border: 0px solid transparent !important;
+}
+
+.btn-default:hover:before {
+	width: 100%;
+}
+
+.btn-default2 {
+	font-size: 10px;
+	background: #021533;
+	font-weight: lighter;
+}
+
+.btn-default3 {
+	background: #d9212a;
+	color: #ffffff;
+	border: 0;
+	text-transform: uppercase;
+}
+
+.btn-default3:hover {
+	background: #009d9b;
+	color: #ffffff;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+/* ===============
+End of Style for Buttons
+===================*/
+
+/* ===============
+Style for Content
+===================*/
+.resume-item {
+	padding: 10px;
+	border: 4px double #ccc;
+	margin-bottom: 20px;
+}
+
+.resume-item-title {
+	font-weight: bold;
+	color: #021533;
+	color: #333;
+	padding-left: 0;
+	margin-left: 0;
+	font-size: 18px;
+	line-height: 20px;
+	margin: 0;
+	margin-bottom: 8px;
+	letter-spacing: -1px;
+}
+
+.resume-item-text {
+	line-height: 15px;
+	font-style: italic;
+	color: #555;
+	font-size: 15px;
+	margin-top: 15px;
+	padding-bottom: 5px;
+}
+
+.grad-date {
+	line-height: 15px;
+	font-style: italic;
+	font-size: 12px;
+}
+
+.job {
+	line-height: 15px;
+	font-style: italic;
+	color: #555;
+	font-size: 14px;
+	margin-top: 15px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ccc;
+}
+
+.job-date {
+	line-height: 15px;
+	font-style: italic;
+	font-size: 12px;
+}
+
+.resume-item-description p {
+	font-size: 14px;
+}
+
+.section-item-title2 {
+	font-weight: bold;
+	color: #021533;
+	color: #333;
+	padding-left: 0;
+	margin-left: 0;
+	line-height: 22px;
+	margin: 0;
+	margin-bottom: 8px;
+	letter-spacing: -1px;
+	border-bottom: 1px dotted #021533;
+	padding-bottom: 5px;
+	font-size: 20px;
+}
+/* ===============
+End of Style for Content
+===================*/
+/* ===============
+Style for Skills page
+===================*/
+.skill-list {
+	padding-left: 0;
+	margin-left: 0;
+	list-style: none;
+	margin-bottom: 40px;
+}
+
+.progress {
+	position: relative;
+	height: 25px;
+	margin-bottom: 10px;
+}
+
+.progress>.progress-type {
+	position: absolute;
+	left: 0px;
+	font-size: 13px;
+	padding: 8px 10px 8px 10px;
+	color: #ffffff;
+	background-color: rgba(25, 25, 25, 0.2);
+}
+
+.progress>.progress-completed {
+	position: absolute;
+	right: 0px;
+	font-weight: 800;
+	padding: 3px 10px 2px;
+	color: grey;
+	font-size: 15px;
+}
+
+.progress-bar {
+	background: #08aeac;
+	width: 20%;
+}
+
+.progress-bar-2 {
+	background: #111175;
+}
+
+.progress-bar-3 {
+	background: #69057A;
+}
+
+/* ===============
+End of Style for Skills page
+===================*/
+
+/* ===============
+Style for Portfolio page
+===================*/
+.project-item {
+	padding: 0;
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 10px;
+	position: relative;
+	opacity: 1;
+	-webkit-transition: all 0.8s ease-in-out;
+	-moz-transition: all 0.8s ease-in-out;
+	transition: all 0.8s ease-in-out;
+	transform: translateY(0px);
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+}
+
+.project-item a {
+	cursor: url('../img/projects2.cur'), projetos !important;
+	border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+
+.project-thumbnail {
+	display: block;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+	height: 250px;
+	text-align: center;
+	color: #ffffff;
+	padding: 15px;
+}
+
+.project-thumbnail:hover {
+	color: #ffffff;
+}
+
+.project-thumbnail:hover .project-description-wrapper {
+	opacity: 1;
+	transform: translateY(0px);
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+}
+
+.project-thumbnail:hover .project-title, .project-thumbnail:hover span.see-more
+	{
+	transform: translateY(0px);
+	-webkit-transform: translateY(0px);
+	-moz-transform: translateY(0px);
+}
+
+.project-description-wrapper {
+	display: block;
+	width: 100%;
+	height: 70%;
+	opacity: 1;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	color: #ffffff;
+	position: relative;
+	background: rgb(28, 121, 78);
+}
+
+.project-description {
+	position: absolute;
+	top: 50%;
+	margin-top: -55px;
+	width: 100%;
+}
+
+.project-title {
+	text-transform: uppercase;
+	font-size: 20px;
+	transform: translateY(10px);
+	-webkit-transform: translateY(10px);
+	-moz-transform: translateY(10px);
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.project-title:after {
+	content: '';
+	display: block;
+	height: 1px;
+	border-bottom: 1px solid #ffffff;
+	width: 50%;
+	margin: 0 auto;
+	opacity: 0.5;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.project-thumbnail {
+	display: block;
+	color: #ffffff;
+	position: relative;
+}
+
+span.see-more {
+	font-style: italic;
+	text-transform: lowercase;
+	letter-spacing: 3px;
+	font-size: 12px;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	transform: translateY(10px);
+	-webkit-transform: translateY(10px);
+	-moz-transform: translateY(10px);
+}
+
+/* ===============
+End of Style for Portfolio page
+===================*/
+
+/* ===============
+Style for Contact page
+===================*/
+.form-element {
+	margin-bottom: 8px;
+}
+
+.form-control {
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	height: 50px;
+}
+
+.form-send {
+	width: 100%;
+}
+
+.form-send:hover {
+	background: #d9212a !important;
+}
+
+::-webkit-input-placeholder {
+	font-style: italic;
+	color: #999999 !important;
+}
+
+:-moz-placeholder {
+	font-style: italic;
+	color: #999999 !important;
+}
+
+::-moz-placeholder {
+	font-style: italic;
+	color: #999999 !important;
+}
+
+:-ms-input-placeholder {
+	font-style: italic;
+	color: #999999 !important;
+}
+
+.contact-email {
+	font-size: 13px;
+	margin-bottom: 10px;
+	margin-top: 25px;
+	font-weight: bold;
+	color: #099993;
+	padding-bottom: 5px;
+	border-bottom: 1px dotted #099993;
+}
+
+.contact-info p {
+	font-size: 13px;
+	line-height: 16px;
+	letter-spacing: -1px;
+}
+
+.contact-map {
+	position: relative;
+	margin-bottom: 20px;
+}
+
+/* ===============
+End of Style for Contact page
+===================*/
+</style>
+
+		<!-- split -->
+		<style>
+/* Split the screen in half */
+.split {
+	height: 100%;
+	width: 50%;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+	left: 0;
+	background-color: #249674;
+}
+
+/* Control the right side */
+.right {
+	right: 0;
+	background-color: #b91919;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+	width: 150px;
+	border-radius: 50%;
+}
+</style>
+
+
+
+
+
+		<div class="site-block-wrap">
+			<div class="owl-carousel with-dots">
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/sim5.jpg);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+								<h1 class="text-shadow">Credit Simulator</h1>
+								<p class="mb-5 text-shadow">This tool allows you to
+									calculate your credit amount, using various loan terms,
+									interest rates, and loan amounts. It includes advanced features
+									like a detailed report containing the monthly refund
+									amount,different fees, whether it is possible to take the
+									credit or not, etc ...</p>
+								<center>
+									<p>
+
+
+
+										<h:form>
+											<h:panelGrid columns="2" style="width: 60%">
+												<p:column>
+													<h:commandButton value="Simulate Again !"
+														action="#{simulationController.redirectToSimuler()}"
+														type="password" />
+												</p:column>
+						<p:column>
+							<h:commandButton value="Show Saved Simulations !"
+								action="#{simulationController.show()}" type="password" />
+						</p:column>
+											</h:panelGrid>
+										</h:form>
+
+									</p>
+								</center>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+
+		<h:head>
+			<link
+				href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+				rel="stylesheet"
+				integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+				crossorigin="anonymous"></link>
+		</h:head>
+		<h:body>
+			<!--Main Page-->
+			<!-- <section id="body" class=""> -->
+			<!--Main Container-->
+			<div class="container">
+				<!--Menu Bar-->
+				<div class="main-menu" id="main-menu">
+					<ul class="main-menu-list">
+						<li><a href="#nothing" class="link-home">Home</a></li>
+						<li><a href="#page-resume" class="link-page">Self Finance</a>
+						</li>
+												<li><a href="#monthly_payback" class="link-page">Monthly
+								Payback</a></li>
+						<li><a href="#page-skills" class="link-page">Total
+								Payback</a></li>
+						<li><a href="#page-portfolio" class="link-page">Result</a></li>
+					</ul>
+				</div>
+				<!--End of Menu Bar-->
+				<!-- Profile Card-->
+				<div class="vcard-body section-home" id="section-home">
+					<!--vcard-profile photo-->
+					<div class="vcard-profile-photo">
+						<!--         <img src= "https://avatars0.githubusercontent.com/u/16531064?v=3&s=460" id="profile-pic2" alt= ""/> -->
+						<img
+							src="https://media.licdn.com/media/AAEAAQAAAAAAAAjPAAAAJGVlODdjNjUxLTVjNGUtNDMyMC1hMmQ2LTc3NTQwYTkwNWNhMg.jpg"
+							id="profile-pic1" class="profileActive" alt="" />
+					</div>
+					<!--End of vcard-profile photo-->
+
+					<!--vcard-Description-->
+					<div class="vcard-description">
+						<!--vcard-Description-Profile-->
+						<h1 class="profile-title">
+							Hi, we are <span class="color1">DARI</span>
+						</h1>
+						<h2 class="profile-subtitle">Website</h2>
+						<hr class="hr1" />
+						<!--End of vcard-Description-Profile-->
+						<!--vcard-Description-Text-->
+						<div class="description-text">
+							<p>We are led to carry out a real estate website "DARI": It
+								is which aims to put in contact people who are looking for a
+								house to buy or to rent and those that have available properties
+								the same purpose. We intend to deliver a constructive service to
+								each and every person of Tunisia by providing them an online
+								platform.</p>
+						</div>
+						<!--End of vcard-Description-Text-->
+						<!--vcard-Description-footer-->
+						<div class="description-footer">
+							<!--Item-->
+							<div class="description-footer-item">
+								<p class="active">email : dari.noreply@gmail.com</p>
+							</div>
+							<!--End of Item-->
+						</div>
+						<!--End of vcard-Description-footer-->
+					</div>
+					<!--End of vcard-Description-->
+					<!--Footer-->
+					<div class="vcard-footer">
+						<!--social icons-->
+						<!-- 						<div class="footer-icons"> -->
+						<!-- 							<a -->
+						<!-- 								href="https://www.linkedin.com/in/premnath-ramanathan-5110b538/" -->
+						<!-- 								target="_blank"><i class="fa fa-linkedin-square"></i></a> <a -->
+						<!-- 								href="https://twitter.com/dragonprem" target="_blank"><i -->
+						<!-- 								class="fa fa-twitter"></i></a> <a -->
+						<!-- 								href="https://github.com/PremnathRamanathan" target="_blank"><i -->
+						<!-- 								class="fa fa-github"></i></a> <a -->
+						<!-- 								href="https://www.facebook.com/dragonprem" target="_blank"><i -->
+						<!-- 								class="fa fa-facebook-official"></i></a> -->
+
+						<!-- 						</div> -->
+						<!--End of social icons-->
+					</div>
+					<!--End of Footer-->
+				</div>
+				<!-- End of Profile card -->
+				<!-- Extended View-->
+				<!--Page: Resume-->
+
+				<div class="vcard-body section-page" id="page-resume">
+					<!--Section: Education-->
+					<div class="section-education">
+						<!--section title-->
+						<h2 class="section-title">Self Finance</h2>
+						<!--end of section title-->
+
+
+						<div id="top_x_div1" style="width: 900px; height: 500px;"></div>
+						<div id="top_x_div2" style="width: 900px; height: 500px;"></div>
+						<!--Education Header-->
+						<h2 class="section-title2">
+							<br /> <i class="fa fa-flag"></i>&nbsp; Comparaison
+						</h2>
+						<!-- /Education Header-->
+						<!-- Resume Item-->
+						<br />
+
+						<!-- /Resume Item-->
+					</div>
+					<!--End of Section: Education-->
+					<!--Section: Work Experience-->
+					<!--End of Section: Work Experience-->
+					<!-- Section: Testimonials-->
+					<!--testimonial header-->
+
+
+					<!--/testimonial header-->
+
+					<div class="testimonials">
+						<!--Testimonial slides-->
+						<div class="testimonial-slides" id="testimonial-carousal">
+							<!--item-->
+							<div class="testimonial-item">
+								<!--Testimonial-content-->
+								<div class="testimonial-content">
+									<div>
+										<h:outputText value="#{simulationController.restResult}"></h:outputText>
+									</div>
+									<div>
+										<h:outputText
+											value="You're required to add #{simulationController.rest1} DT"></h:outputText>
+									</div>
+									<div>
+										<h:outputText value="#{simulationController.restResult2}"></h:outputText>
+									</div>
+									<div>
+										<h:outputText
+											value="You're required to add #{simulationController.rest3} DT"></h:outputText>
+									</div>
+									<div>
+										<h:outputText value="Self finance Comparaison :"></h:outputText>
+									</div>
+									<div>
+										<h:outputText
+											value="#{simulationController.selfFinanceBanksComparaison}"></h:outputText>
+									</div>
+								</div>
+								<!--/Testimonial-content-->
+								<!--Testimonial-Author-->
+								<div class="testimonial-author">
+									<!--Picture-->
+									<div class="testimonial-picture">
+										<img
+											src="https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAdCAAAAJGMwOTEwNDE0LWZjYTItNDA1MC1hMGE1LWFhN2MwZWMzYTJmYQ.jpg"
+											alt="" />
+									</div>
+									<!--/Picture-->
+									<p class="author-name">DARI</p>
+									<!-- 									<p class="author-firm">Accenture Services</p> -->
+								</div>
+								<!--/Testimonial-Author-->
+							</div>
+							<!--/item-->
+						</div>
+						<!--/Testimonial slides-->
+					</div>
+					<!-- /Section: Testimonials-->
+				</div>
+
+
+
+
+
+
+
+
+
+				<!--Page: Resume-->
+
+				<div class="vcard-body section-page" id="monthly_payback">
+					<!--Section: Education-->
+					<div class="section-education">
+						<!--section title-->
+						<h2 class="section-title">Monthly Payback</h2>
+						<!--end of section title-->
+
+
+						<div id="top_x_div" style="width: 900px; height: 500px;"></div>
+						<!--Education Header-->
+						<h2 class="section-title2">
+							<br /> <i class="fa fa-flag"></i>&nbsp; Comparaison
+						</h2>
+						<!-- /Education Header-->
+						<!-- Resume Item-->
+						<br />
+
+						<!-- /Resume Item-->
+					</div>
+					<!--End of Section: Education-->
+					<!--Section: Work Experience-->
+					<!--End of Section: Work Experience-->
+					<!-- Section: Testimonials-->
+					<!--testimonial header-->
+
+
+					<!--/testimonial header-->
+
+					<div class="testimonials">
+						<!--Testimonial slides-->
+						<div class="testimonial-slides" id="testimonial-carousal">
+							<!--item-->
+							<div class="testimonial-item">
+								<!--Testimonial-content-->
+								<div class="testimonial-content">
+									<div>
+										<h:outputText value="Monthly Payback (First Bank) :"></h:outputText>
+									</div>
+									<div>
+										<h:outputText
+											value="#{simulationController.monthlyPayback} DT"></h:outputText>
+									</div>
+									<div>
+										<h:outputText value="Monthly Payback (Second Bank) :"></h:outputText>
+									</div>
+									<div>
+										<h:outputText
+											value="#{simulationController.monthlyPayback1} DT"></h:outputText>
+									</div>
+									<div>
+										<h:outputText value="Monthly Payback Comparaison :"></h:outputText>
+									</div>
+									<div>
+										<h:outputText
+											value="#{simulationController.monthlyPaybackCompraison}"></h:outputText>
+									</div>
+								</div>
+								<!--/Testimonial-content-->
+								<!--Testimonial-Author-->
+								<div class="testimonial-author">
+									<!--Picture-->
+									<div class="testimonial-picture">
+										<img
+											src="https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAdCAAAAJGMwOTEwNDE0LWZjYTItNDA1MC1hMGE1LWFhN2MwZWMzYTJmYQ.jpg"
+											alt="" />
+									</div>
+									<!--/Picture-->
+									<p class="author-name">DARI</p>
+									<!-- 									<p class="author-firm">Accenture Services</p> -->
+								</div>
+								<!--/Testimonial-Author-->
+							</div>
+							<!--/item-->
+						</div>
+						<!--/Testimonial slides-->
+					</div>
+					<!-- /Section: Testimonials-->
+				</div>
+
+
+
+
+
+
+
+
+				<!--End of Page Resume-->
+				<!--Page: Skills-->
+				<div class="vcard-body section-page" id="page-skills">
+					<div class="section-skills">
+						<!--skills-title-->
+						<h2 class="section-title">Total Payback</h2>
+						<!--/skills-title-->
+						<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+						<div id="piechart_3d1" style="width: 900px; height: 500px;"></div>
+
+
+
+						<!--/testimonial header-->
+
+						<div class="testimonials">
+							<!--Testimonial slides-->
+							<div class="testimonial-slides" id="testimonial-carousal">
+								<!--item-->
+								<div class="testimonial-item">
+									<!--Testimonial-content-->
+									<div class="testimonial-content">
+										<div>
+											<h:outputText value="Total (First Bank):"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="#{simulationController.total} DT"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="Total (Second Bank):"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="#{simulationController.total1} DT"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="Docuemnt Fees (First Bank)"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="#{simulationController.document_fees} DT"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="Docuemnt Fees (Second Bank)"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="#{simulationController.document_fees1} DT"></h:outputText>
+										</div>
+										<div>
+											<div>
+												<h:outputText value="Interest Amount (First Bank)"></h:outputText>
+											</div>
+											<div>
+												<h:outputText value="#{simulationController.total_interest} DT"></h:outputText>
+											</div>
+											<div>
+												<h:outputText value="Interest Amount (Second Bank)"></h:outputText>
+											</div>
+											<div>
+												<h:outputText
+													value="#{simulationController.total_interest1} DT"></h:outputText>
+											</div>
+										</div>
+									</div>
+									<!--/Testimonial-content-->
+									<!--Testimonial-Author-->
+									<div class="testimonial-author">
+										<!--Picture-->
+										<div class="testimonial-picture">
+											<img
+												src="https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAdCAAAAJGMwOTEwNDE0LWZjYTItNDA1MC1hMGE1LWFhN2MwZWMzYTJmYQ.jpg"
+												alt="" />
+										</div>
+										<!--/Picture-->
+										<!-- 									<p class="author-firm">Accenture Services</p> -->
+									</div>
+									<!--/Testimonial-Author-->
+								</div>
+								<!--/item-->
+							</div>
+							<!--/Testimonial slides-->
+						</div>
+						<!-- /Section: Testimonials-->
+
+
+
+						<br /> <br />
+						<h2 class="section-title2">
+							<br /> <i class="fa fa-flag"></i>&nbsp; Comparaison
+						</h2>
+						<!--/testimonial header-->
+
+						<div class="testimonials">
+							<!--Testimonial slides-->
+							<div class="testimonial-slides" id="testimonial-carousal">
+								<!--item-->
+								<div class="testimonial-item">
+									<!--Testimonial-content-->
+									<div class="testimonial-content">
+										<div>
+											<h:outputText value="Total Payback Comparaison :"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="#{simulationController.priceCompraison}"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="Document Fees Comparaison :"></h:outputText>
+										</div>
+										<div>
+											<h:outputText
+												value="#{simulationController.documentFeesCompraison}"></h:outputText>
+										</div>
+										<div>
+											<h:outputText value="Total Interest Comparaison :"></h:outputText>
+										</div>
+										<div>
+											<h:outputText
+												value="#{simulationController.total_interestComparaison}"></h:outputText>
+										</div>
+									</div>
+								</div>
+								<!--/Testimonial-content-->
+								<!--Testimonial-Author-->
+								<div class="testimonial-author">
+									<!--Picture-->
+									<div class="testimonial-picture">
+										<img
+											src="https://media.licdn.com/mpr/mpr/shrinknp_100_100/AAEAAQAAAAAAAAdCAAAAJGMwOTEwNDE0LWZjYTItNDA1MC1hMGE1LWFhN2MwZWMzYTJmYQ.jpg"
+											alt="" />
+									</div>
+									<!--/Picture-->
+									<p class="author-name">DARI</p>
+									<!-- 									<p class="author-firm">Accenture Services</p> -->
+								</div>
+								<!--/Testimonial-Author-->
+							</div>
+							<!--/item-->
+						</div>
+						<!--/Testimonial slides-->
+					</div>
+					<!-- /Section: Testimonials-->
+
+
+				</div>
+			</div>
+			<!--/Page: Skills-->
+			<!--Page: PortFolio-->
+			<div class="vcard-body section-page" id="page-portfolio">
+				<!--title-->
+				<h2 class="section-title">Result</h2>
+				<!--/title-->
+
+
+
+				<div class="projects-list">
+					<!-- Project Item-->
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Credit Amount</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.creditAmount} DT"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+
+
+
+				</div>
+
+
+				<div class="projects-list">
+					<!-- Project Item-->
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Refund Period</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.refundPeriod} Year(s)"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+
+
+
+				</div>
+
+
+				<div class="projects-list">
+					<!-- Project Item-->
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Monthly Capacity</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.monthlyCapacity} DT"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+
+
+
+				</div>
+
+
+
+
+				<!-- Project List-->
+				<div class="projects-list">
+					<!-- Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+
+
+
+								<div class="split left">
+									<div class="centered">
+
+										<!--     <h2>Jane Flex</h2> -->
+										<!--     <p>Some text.</p> -->
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Bank Name</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.name}"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+									</div>
+								</div>
+
+								<div class="split right">
+									<div class="centered">
+
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Bank Name</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.name2}"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+
+
+
+									</div>
+								</div>
+
+
+							</div>
+						</a>
+					</div>
+				</div>
+
+
+
+
+
+				<!-- Project List-->
+				<div class="projects-list">
+					<!-- Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+
+
+
+								<div class="split left">
+									<div class="centered">
+
+										<!--     <h2>Jane Flex</h2> -->
+										<!--     <p>Some text.</p> -->
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Monthly Payback</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.monthlyPayback} DT"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+									</div>
+								</div>
+
+								<div class="split right">
+									<div class="centered">
+
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Monthly Payback</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.monthlyPayback1} DT"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+
+
+
+									</div>
+								</div>
+
+
+							</div>
+						</a>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+				<!-- Project List-->
+				<div class="projects-list">
+					<!-- Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+
+
+
+								<div class="split left">
+									<div class="centered">
+
+										<!--     <h2>Jane Flex</h2> -->
+										<!--     <p>Some text.</p> -->
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Document Fees</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.document_fees} DT"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+									</div>
+								</div>
+
+								<div class="split right">
+									<div class="centered">
+
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Document Fees</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.document_fees1} DT"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+
+
+
+									</div>
+								</div>
+
+
+							</div>
+						</a>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+				<!-- Project List-->
+				<div class="projects-list">
+					<!-- Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+
+
+
+								<div class="split left">
+									<div class="centered">
+
+										<!--     <h2>Jane Flex</h2> -->
+										<!--     <p>Some text.</p> -->
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Interest Amount</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.total_interest} DT"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+									</div>
+								</div>
+
+								<div class="split right">
+									<div class="centered">
+
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Interest Amount</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.total_interest1} DT"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+
+
+
+									</div>
+								</div>
+
+
+							</div>
+						</a>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+				<!-- Project List-->
+				<div class="projects-list">
+					<!-- Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+
+
+
+								<div class="split left">
+									<div class="centered">
+
+										<!--     <h2>Jane Flex</h2> -->
+										<!--     <p>Some text.</p> -->
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Total</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.total} DT"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+									</div>
+								</div>
+
+								<div class="split right">
+									<div class="centered">
+
+										<div class="project-description">
+											<!-- project name -->
+
+											<h2 class="project-title">Total</h2>
+											<!-- /project name -->
+											<h:outputText style="see-more"
+												value="#{simulationController.total1} DT"></h:outputText>
+											<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+											<!-- 											donations</span> -->
+										</div>
+
+
+
+									</div>
+								</div>
+
+
+							</div>
+						</a>
+					</div>
+				</div>
+
+
+				<br /> <br /> <br />
+
+
+				<div class="projects-list">
+					<!-- Project Item-->
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Number of due dates</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.total_due_date}"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+					<h2 class="section-title2">
+						<br /> <i class="fa fa-flag"></i>&nbsp; Recap
+					</h2>
+
+
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Self Finance</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.selfFinanceBanksComparaison}"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+
+
+
+
+
+
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Document Fees</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.documentFeesCompraison}"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+
+
+
+
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Total Interest</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.total_interestComparaison}"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+
+
+
+
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Monthly Payback</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.monthlyPaybackCompraison}"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+
+
+
+
+					<!-- /Project Item-->
+					<div class="project-item">
+						<!-- Thumbnail Background-->
+						<a
+							href="https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg"
+							class="project-thumbnail nivobox"
+							data-lightbox-gallery="portfolio"
+							style="background-image: url('https://premnathramanathan.000webhostapp.com/Content/PW_app_arch.jpg');">
+							<!-- project-description -->
+							<div class="project-description-wrapper">
+								<div class="project-description">
+									<!-- project name -->
+
+									<h2 class="project-title">Total Payback</h2>
+									<!-- /project name -->
+									<h:outputText style="see-more"
+										value="#{simulationController.totalPaybackComparaison}"></h:outputText>
+									<!-- 										<span class="see-more">Crowdsourcing app for pet -->
+									<!-- 											donations</span> -->
+								</div>
+							</div> <!-- /project-description -->
+						</a>
+					</div>
+
+
+
+				</div>
+				<!-- /Project List-->
+				<div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;">
+					<div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div>
+				</div>
+
+
+
+
+
+
+				<div class="ps-scrollbar-y-rail"
+					style="top: 0px; height: 549px; right: 4px;">
+					<div class="ps-scrollbar-y" style="top: 0px; height: 121px;"></div>
+				</div>
+			</div>
+			<!--/Page: PortFolio-->
+			<!--Page: Contact-->
+
+			<!--/Page: Contact-->
+			<!--End of extended view-->
+
+
+
+
+
+
+
+
+
+
+
+			<center>
+				<br /> <br />
+
+
+				<h:form>
+					<h:panelGrid columns="2" style="width: 60%">
+						<p:column>
+							<h:commandButton value="Save Simulation"
+								action="#{simulationController.Simuler2save()}" type="password" />
+						</p:column>
+
+					</h:panelGrid>
+				</h:form>
+			</center>
+
+
+
+
+		</h:body>
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			google.charts.load('current', {
+				'packages' : [ 'corechart' ]
+			});
+			google.charts.setOnLoadCallback(drawChart);
+
+			function drawChart() {
+
+				var data = google.visualization.arrayToDataTable([
+						[ 'Credit Amount', 'Hours per Day' ], 
+						[ 'Document Fees', #{simulationController.document_fees} ],
+						[ 'Interest Amount', #{simulationController.total_interest} ], 
+						[ 'Credit Amount', #{simulationController.creditAmount} ]
+						
+						 ]);
+
+				var data1 = google.visualization.arrayToDataTable([
+					[ 'Credit Amount', 'Hours per Day' ], 
+					[ 'Document Fees', #{simulationController.document_fees1} ],
+					[ 'Interest Amount', #{simulationController.total_interest1} ], 
+					[ 'Credit Amount', #{simulationController.total_interest1} ]
+					
+					 ]);		
+				
+				
+				
+				var options = {
+					title : 'Total Payback Partition'
+				};
+
+				
+				var options1 = {
+						title : 'Total Payback Partition'
+					};				
+				
+				var chart = new google.visualization.PieChart(document
+						.getElementById('piechart_3d'));
+				
+				chart.draw(data, options);
+				
+				var chart1 = new google.visualization.PieChart(document
+						.getElementById('piechart_3d1'));	
+				
+				chart1.draw(data1, options1);
+				
+			}
+		</script>
+
+
+
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+
+
+        
+        var data2 = new google.visualization.arrayToDataTable([
+            ['Opening Move', 'Percentage'],
+            ["Self finance from Second One", #{simulationController.self_finance}],
+            ["Self finance required from second bank", #{simulationController.self_finance_bank1}]
+          ]);
+        var options2 = {
+          title: 'Self Finance Requires',
+          width: 900,
+          legend: { position: 'none' },
+//           chart: { title: 'Chess opening moves',
+//                    subtitle: 'popularity by percentage' },
+          bars: 'vertical', // Required for Material Bar Charts.
+          axes: {
+            x: {
+              0: { side: 'top', label: 'Percentage'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div2'));
+        chart.draw(data2, options2);
+      };
+    </script>
+
+
+
+
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+
+        var data1 = new google.visualization.arrayToDataTable([
+            ['Opening Move', 'Percentage'],
+            ["Self finance from Bank One", #{simulationController.self_finance}],
+            ["Self finance required from first bank", #{simulationController.self_finance_bank}]
+          ]);
+        
+
+        var options1 = {
+          title: 'Self Finance Requires',
+          width: 900,
+          legend: { position: 'none' },
+//           chart: { title: 'Chess opening moves',
+//                    subtitle: 'popularity by percentage' },
+          bars: 'vertical', // Required for Material Bar Charts.
+          axes: {
+            x: {
+              0: { side: 'top', label: 'Percentage'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div1'));
+        chart.draw(data1, options1);
+      };
+    </script>
+
+
+
+
+		<script type="text/javascript"
+			src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+          ['Opening Move', 'Percentage'],
+          ["Monthly Payback from Bank One", #{simulationController.monthlyPayback}],
+          ["Monthly Payback from Bank Two", #{simulationController.monthlyPayback1}]
+        ]);
+
+        var options = {
+          title: 'Self Finance Requires',
+          width: 900,
+          legend: { position: 'none' },
+//           chart: { title: 'Chess opening moves',
+//                    subtitle: 'popularity by percentage' },
+          bars: 'vertical', // Required for Material Bar Charts.
+          axes: {
+            x: {
+              0: { side: 'top', label: 'Percentage'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        chart.draw(data, options);
+      };
+    </script>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	template="/pages/template/template.xhtml">
+	<ui:param name="page_name" value="test" />
+	<ui:define name="content">
+		<!-- DARII -->
+<div class="site-block-wrap">
+			<div class="owl-carousel with-dots">
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/sim2.jpeg);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+								<h1 class="text-shadow">Credit Simulator</h1>
+								<p class="mb-5 text-shadow">This tool allows you to calculate your credit amount, 
+              using various loan terms, interest rates, and loan amounts. 
+              It includes advanced features like a detailed report containing the monthly refund amount,different fees,
+              whether it is possible to take the credit or not, etc ...  </p>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>				
+			</div>
+
+		</div>
+<h:head>
+    <title>Subscription</title>
+    <!--Bootstrap 4 CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+
+    <!--Bootstrap 4 JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!--Stripe JavaScript Library-->
+    <script src="https://js.stripe.com/v3/"></script>
+</h:head>
+<center>
+<h:body class="bg-light pt-5">
+<!--     <p>#{insuranceSimulationController.param1}</p> -->
+<!--     <p>#{insuranceSimulationController.param2}</p> -->
+    <h:inputHidden value="#{insuranceSimulationController.param1}" ></h:inputHidden>
+    <h:inputHidden value="#{insuranceSimulationController.param2}"></h:inputHidden>
+<h:form>
+<!--hero section-->
+<!-- <section class="py-5"> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-12 my-auto mx-auto">
+                <h1>
+                    Confirmation Form
+                </h1>
+                <p class="lead mb-4">
+                    Please fill the form below to complete the payment
+                </p>
+                <h5 class="mb-2">Once step close to complete the payment !</h5>
+<!--                 <p class="text-muted"> -->
+<!--                     60% OFF when you upgrade to annual plan. -->
+<!--                 </p> -->
+<!--                 <form action="#" id="payment-form" method="post"> -->
+                    <input id="api-key" type="hidden" th:value="${stripePublicKey}"/>
+                    <div class="form-group">
+                        <label class="font-weight-medium" for="card-element">
+                            Enter the required information below
+                        </label>
+                        <div class="w-100" id="card-element">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputText class="form-control" id="coupon" name="coupon"
+                               value="#{insuranceSimulationController.customerId}"/>
+                    </div>                    
+                    <div class="form-group">
+                        <h:inputText class="form-control" id="card" name="card"
+                               a:placeholder="Card Number" value="#{insuranceSimulationController.carta}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:inputText class="form-control" id="month" name="month"
+                               a:placeholder="Expiration Month" value="#{insuranceSimulationController.expMonth}"/>
+                    </div>
+                    <div class="form-group">
+                        <h:inputText class="form-control" id="year" name="year"
+                               a:placeholder="Expiration Year" value="#{insuranceSimulationController.expYear}"/>
+                    </div>  
+                    <div class="form-group">
+                        <h:inputText class="form-control" id="cvc" name="cvc"
+                               a:placeholder="CVC" value="#{insuranceSimulationController.cvc}"/>
+                    </div>                                                              
+<!--                     <div class="form-group"> -->
+<!--                         <input class="form-control" id="coupon" name="coupon" -->
+<!--                                placeholder="Coupon code (optional)" type="text"/> -->
+<!--                     </div> -->
+                    <!-- Used to display Element errors. -->
+                    <div class="text-danger w-100" id="card-errors" role="alert"></div>
+                    <div class="form-group pt-2">
+<!--                         <button class="btn btn-primary btn-block" id="submitButton" type="submit"> -->
+<!--                             Pay With Your Card -->
+<!--                         </button> -->
+<h:commandButton value="Proceed"
+								action="#{insuranceSimulationController.createCustumorStripe()}" />                        
+                        <div class="small text-muted mt-2">
+                            Pay securely with Stripe. By clicking the button above, you agree
+                            to our <a target="_blank" href="#">Terms of Service</a>,
+                            <a target="_blank" href="#">Privacy</a> and
+                            <a target="_blank" href="#">Refund</a> policies.
+
+                        </div>
+                    </div>
+
+
+<!--                 </form> -->
+                <p class="mt-5 text-muted">
+                    <small>An example project by <a th:href="@{https://attacomsian.com}" target="_blank">Atta</a>.
+                    </small>
+                </p>
+            </div>
+        </div>
+    </div>
+<!-- </section> -->
+</h:form>
+<!--custom javascript for handling subscription-->
+
+</h:body>
+</center>
+
+
+	</ui:define>
+</ui:composition>

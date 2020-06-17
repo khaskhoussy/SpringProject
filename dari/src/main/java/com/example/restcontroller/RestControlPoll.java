@@ -59,15 +59,15 @@ public class RestControlPoll {
 
     }
 
-    @PostMapping("/{userName}")
-    //@Secured("ROLE_USER")
-    //Principal p
-    public String post(@RequestBody Poll poll,@PathVariable("userName") String userName) {
-    	System.err.println(userName);
-     
-        //System.err.println(p.getName());
-        return  pollService.savePoll(poll,userName);
-    }
+//    @PostMapping("/{userName}")
+//    //@Secured("ROLE_USER")
+//    //Principal p
+//    public String post(@RequestBody Poll poll,@PathVariable("userName") String userName) {
+//    	System.err.println(userName);
+//     
+//        //System.err.println(p.getName());
+//        return  pollService.savePoll(poll,userName);
+//    }
 
     //@Secured("ROLE_USER")
     @DeleteMapping("/{id}")
@@ -78,9 +78,9 @@ public class RestControlPoll {
     }
 
 
-    @PostMapping("{id}/vote/{optionId}/{idUser}")
-    public String post(@PathVariable Long id, @PathVariable Long optionId, HttpServletRequest request ,@PathVariable int idUser) throws Exception {
-        
-        return pollService.vote(id, optionId, idUser);
-    }
+//    @PostMapping("{id}/vote/{optionId}/{idUser}")
+//    public String post(@PathVariable Long id, @PathVariable Long optionId, HttpServletRequest request ,@PathVariable int idUser) throws Exception {
+//        
+//        return pollService.vote(id, optionId, idUser);
+//    }
 }

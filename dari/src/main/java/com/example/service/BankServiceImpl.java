@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.Bank;
 import com.example.entity.Offre;
+import com.example.entity.User;
 import com.example.repository.BankRepository;
+import com.example.repository.UserRepository;
 
 //import tn.esprit.spring.entities.Bank;
 //import tn.esprit.spring.entities.Offre;
@@ -19,7 +21,8 @@ public class BankServiceImpl implements IBankService {
 	@Autowired
 	BankRepository ibankrepository;
 	
-	
+	@Autowired
+	UserRepository userRepository;
 
 	@Override
 	public int ajouterBank(Bank bank) {
@@ -51,16 +54,33 @@ public class BankServiceImpl implements IBankService {
 	}
 
 	@Override
-	public Bank getBankById(int BankId) {
+	public List<Bank> getBankById(String userName) {
+		User user = new User();
+		user=userRepository.findByUserName(userName).get();
+		Bank bank = ibankrepository.findById(ibankrepository.findByName(user.getExpert().getBank_name()).get(0).getId()).get();
+		System.err.println(bank.getName());
+		if (bank.getName().equals(user.getExpert().getBank_name())){
+			return ibankrepository.findByName(bank.getName());
+		}
+		else {
+			return null;
+		}
+//		String test =ibankrepository.findByExpertBank(user.getExpert().getBank_name();
 		// TODO Auto-generated method stub
-		return null;
+//		return ibankrepository.findByExpertBank(user.getExpert().getBank_name());
+//		return ibankrepository.findById(BankId).get();
 	}
 
 	@Override
-	public List<Offre> getAllOffresByBank(int bankId) {
+	public List<Offre> getAllOffresByBank(String userName) {
 		// TODO Auto-generated method stub
 		//return null;
-		return ibankrepository.getAllOffresByBankRepo(bankId);
+		User user = new User();
+		user=userRepository.findByUserName(userName).get();
+		Bank bank = ibankrepository.findById(ibankrepository.findByName(user.getExpert().getBank_name()).get(0).getId()).get();
+		System.err.println(bank.getId());
+		System.err.println(bank.getName());
+		return ibankrepository.getAllOffresByBankRepo(bank.getId());
 	}
 
 	@Override

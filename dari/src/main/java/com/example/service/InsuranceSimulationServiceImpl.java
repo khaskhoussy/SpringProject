@@ -38,13 +38,13 @@ public class InsuranceSimulationServiceImpl implements IInsuranceSimulationServi
 			int house_value,int goods_value,Category category,String name,boolean fireSafety,boolean waterDamage,boolean robbery,String userName,int idOffre,
 	 		float interest_category, float interest_goods) {
 		
-		
+		System.err.println(waterDamage);
 		Insurance_Simulation insurance_simulation = new Insurance_Simulation();
 		Insurance_SimulationPK insurance_simulationPK = new Insurance_SimulationPK();
 		Insurance insurance = new Insurance();
 		
-		System.err.println(interest_category);
-		System.err.println(interest_goods);
+//		System.err.println(interest_category);
+//		System.err.println(interest_goods);
 		for (int i = 0; i < insurancerepository.findByName(name).size(); i++) {
 
 			insurance = insurancerepository.findByName(name).get(i);
@@ -81,10 +81,33 @@ public class InsuranceSimulationServiceImpl implements IInsuranceSimulationServi
 		//float total_requests =(int)(rooms_interest+floors_interest+age_interest);
 //		float total = rooms_interest+floors_interest+age_interest;
 		
-		float robbery_total =(float)((insurance.getInterest_robbery()*(house_value+goods_value))/(float)100*1.0);
-		float fireSafety_total =(float)((insurance.getInterest_firesafety()*(house_value+goods_value))/(float)100*1.0);
-		float waterDamage_total =(float)((insurance.getInterest_waterDamage()*(house_value+goods_value))/(float)100*1.0);
+		float robbery_total;
+		if(robbery){
+			System.err.println("someone was here");
+			robbery_total =(float)((insurance.getInterest_robbery()*(house_value+goods_value))/(float)100*1.0);
+		}
+		else {
+			robbery_total =0;
+		}
 		
+		float fireSafety_total;
+		if(fireSafety){
+			
+			fireSafety_total =(float)((insurance.getInterest_firesafety()*(house_value+goods_value))/(float)100*1.0);
+		}
+		else
+		{
+			fireSafety_total =0;
+		}
+		float waterDamage_total;
+		if(waterDamage){
+			waterDamage_total =(float)((insurance.getInterest_waterDamage()*(house_value+goods_value))/(float)100*1.0);	
+			
+		}
+		else
+		{
+			waterDamage_total =0;	
+		}
 		float category_total=(float)((interest_category*(house_value+goods_value))/(float)100*1.0);
 		float goods_total=(float)((interest_goods*(house_value+goods_value))/(float)100*1.0);
 		
@@ -93,13 +116,15 @@ public class InsuranceSimulationServiceImpl implements IInsuranceSimulationServi
 		System.err.println(robbery_total);
 		System.err.println(fireSafety_total);
 		System.err.println(waterDamage_total);
+		System.err.println(waterDamage);
+		
 		insurance_simulationPK.setHouse_age(house_age);
 		insurance_simulationPK.setNumber_floors(number_floors);
 		insurance_simulationPK.setNumber_rooms(number_rooms);
 		insurance_simulationPK.setGoods_value(goods_value);
 		insurance_simulationPK.setHouse_value(house_value);
-		insurance_simulationPK.setTotal((robbery_total+fireSafety_total+waterDamage_total+category_total+goods_total)*(rooms_interest*floors_interest*age_interest));
-		float total =(robbery_total+fireSafety_total+waterDamage_total+category_total+goods_total)*(rooms_interest*floors_interest*age_interest);
+		insurance_simulationPK.setTotal(((robbery_total+fireSafety_total+waterDamage_total+category_total+goods_total)*(rooms_interest*floors_interest*age_interest))/10);
+		float total =((robbery_total+fireSafety_total+waterDamage_total+category_total+goods_total)*(rooms_interest*floors_interest*age_interest))/10;
 		insurance_simulationPK.setMonthlyPayback(total/12);
 
 		
@@ -224,5 +249,12 @@ public class InsuranceSimulationServiceImpl implements IInsuranceSimulationServi
 		InsuranceSimulation_Favoris sim_fav = insuranceSimulationFavorisRepository.findById(id).get();
 		insuranceSimulationFavorisRepository.delete(sim_fav);
 		
+	}
+
+
+	@Override
+	public List<String> findInsuranceNames() {
+		// TODO Auto-generated method stub
+		return insurancerepository.findInsuranceNames();
 	}
 }

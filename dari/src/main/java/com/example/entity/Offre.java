@@ -66,6 +66,17 @@ public class Offre implements Serializable {
 
 
 
+	public Offre(int id, String description, int interest_rate, int self_finance_rate, Duration duration) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.interest_rate = interest_rate;
+		this.self_finance_rate = self_finance_rate;
+		this.duration = duration;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

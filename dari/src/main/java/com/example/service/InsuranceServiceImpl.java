@@ -1,11 +1,16 @@
 package com.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.Bank;
 import com.example.entity.Insurance;
+import com.example.entity.Insurance_Offer;
+import com.example.entity.User;
 import com.example.repository.InsuranceRepository;
+import com.example.repository.UserRepository;
 
 
 
@@ -16,6 +21,7 @@ public class InsuranceServiceImpl implements IInsuranceService {
 	@Autowired
 	InsuranceRepository iinsurancerepository;
 	
+	@Autowired UserRepository userRepository;
 	
 	@Override
 	public int ajouterInsurance(Insurance insurance) {
@@ -60,6 +66,51 @@ public class InsuranceServiceImpl implements IInsuranceService {
 			iinsurancerepository.save(insurance1);	
 		}
 
+	}
+
+	@Override
+	public List<Insurance> getInsuranceById(String userName) {
+		
+		User user = new User();
+		user=userRepository.findByUserName(userName).get();
+		Insurance insurance =iinsurancerepository.findById(iinsurancerepository.findByName(user.getExpert_insurance().getInsurance_name()).get(0).getId()).get();
+//		Bank bank = ibankrepository.findById(ibankrepository.findByName(user.getExpert().getBank_name()).get(0).getId()).get();
+		System.err.println(insurance.getName());
+		if (insurance.getName().equals(user.getExpert_insurance().getInsurance_name())){
+			return iinsurancerepository.findByName(insurance.getName());
+		}
+		else {
+			return null;
+		}
+		
+		
+		// TODO Auto-generated method stub
+//		return null;
+	}
+
+	@Override
+	public int addOrUpdateInsurance(Insurance insurance) {
+		// TODO Auto-generated method stub
+		iinsurancerepository.save(insurance);
+		return insurance.getId();
+		
+	}
+
+	@Override
+	public List<Insurance_Offer> getAllOffresByInsurance(String userName) {
+		
+		User user = new User();
+		user=userRepository.findByUserName(userName).get();
+//		Bank bank = ibankrepository.findById(ibankrepository.findByName(user.getExpert().getBank_name()).get(0).getId()).get();
+		Insurance insurance = iinsurancerepository.findById(iinsurancerepository.findByName(user.getExpert_insurance().getInsurance_name()).get(0).getId()).get();
+		
+		System.err.println(insurance.getId());
+		System.err.println(insurance.getName());
+//		return ibankrepository.getAllOffresByBankRepo(bank.getId());
+		return iinsurancerepository.getAllOffresByInsuranceRepo(insurance.getId());
+		
+		// TODO Auto-generated method stub
+//		return null;
 	}
 
 

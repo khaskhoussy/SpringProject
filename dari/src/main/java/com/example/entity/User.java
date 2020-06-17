@@ -26,7 +26,7 @@ public class User {
 	
 	
 	
-	//cascade should bee in the child
+	
 	@OneToMany(mappedBy="userReciver",cascade = CascadeType.ALL)
 	private List<Demande> Demandes;
 	
@@ -95,21 +95,6 @@ public class User {
 	
 	public User() {
 		super();
-	}
-
-	public User(String userName,String mailAddress,String name,  String lastName, int phoneNumber,int nic, String password,String photo,  String roles,boolean active) 
-	{
-		super();
-		this.userName = userName;
-		this.password = password;
-		this.phoneNumber = phoneNumber;
-		this.name = name;
-		this.lastName = lastName;
-		this.roles = roles;
-		this.mailAddress = mailAddress;
-		this.nic = nic;
-		this.active=active;
-		this.photo=photo;
 	}
 
 
@@ -257,11 +242,11 @@ public class User {
 	private List<Insurance_Simulation> insurance_simulations;
 
 	@JsonIgnore
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	Expert expert;
 
 	@JsonIgnore
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	Expert_Insurance expert_insurance;
 	/////////////////////////////////////////
 

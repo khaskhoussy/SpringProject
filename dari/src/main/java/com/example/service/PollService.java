@@ -33,18 +33,30 @@ public class PollService {
     }
 
     @Transactional
-    public String savePoll(Poll poll, String userName) {
+    public Poll savePoll(Poll poll, String username) {
 
-        User user = userRepository.findByUserName(userName).get();
-        	System.err.println(user.getId());
-        poll.setUser(user);
+
+
+    	
+    	
+//        User user = userRepository.findOneByUsername(username);
+        User user = userRepository.findByUserName(username).get();
+      poll.setUser(user);
         Poll savedPoll = pollRepository.save(poll);
-        poll.getOptions().stream().forEach(option -> {
+        
+
+        
+
+        
+        savedPoll.getOptions().stream().forEach(option -> {
+        	
+        	
+        	if(option.getPoll()==null){
             option.setPoll(savedPoll);
-            optionRepository.save(option);
+            optionRepository.save(option);}
         });
 
-        return "added";
+        return savedPoll;
     }
 
     @Transactional
@@ -65,6 +77,7 @@ public class PollService {
     }
 
     public Poll getPollById(Long id) {
+    	System.err.println(id);
         return pollRepository.getOne(id);
     }
 
@@ -73,11 +86,12 @@ public class PollService {
     }
 
     @Transactional
-    public String vote(Long id, Long optionId, int idUser)  {
+    public String vote(Long id, Long optionId, String userName)  {
         Poll poll = pollRepository.getOne(id);
         User u = new User();
       //u =  userRepository.findById(idUser).get();
-      u =  userRepository.findById(idUser).get();
+//      u =  userRepository.findById(userName).get();
+      u =  userRepository.findByUserName(userName).get();
         //TO-DO: check end-date
         if (poll.getEndDate().before(new Date())) {
            return "Voting has already ended!";
@@ -94,11 +108,12 @@ public class PollService {
             optionRepository.save(option);
             poll.getIpAdresses().add(u.getUserName());
             pollRepository.save(poll);
+            return"Thank you for your vote";
         } else {
         	 //return "Option id for poll not unique!";
-        	 return "Thank you for your vote!";
+        	return "Option id for poll not unique!";
         }
-        return "Option id for poll not unique!";
+        
     }
 
     public List<Poll> getAllForUser(String userName) {

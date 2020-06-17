@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/pages/template/template.xhtml">
+	<ui:param name="page_name" value="test" />
+	<ui:define name="content">
+		<!-- DARII -->
+
+
+
+		<style>
+form input {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	outline: 0;
+	border: 1px solid rgb(40, 53, 33);
+	background-color: #249674;
+	width: 250px;
+	border-radius: 3px;
+	padding: 10px 15px;
+	margin: 0 auto 10px auto;
+	display: block;
+	text-align: center;
+	font-size: 18px;
+	color: white;
+	-webkit-transition-duration: 0.25s;
+	transition-duration: 0.25s;
+	font-weight: 300;
+}
+</style>
+
+
+
+
+		<div class="site-block-wrap">
+			<div class="owl-carousel with-dots">
+				<div class="site-blocks-cover overlay overlay-2"
+					style="background-image: url(#{request.contextPath}/resources/images/sim4.jpg);"
+					data-aos="fade" id="home-section">
+
+
+					<div class="container">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 mt-lg-5 text-center">
+								<h1 class="text-shadow">Buy &amp; Sell Property Here</h1>
+								<p class="mb-5 text-shadow">Lorem ipsum dolor sit amet,
+									consectetur adipisicing elit. Provident vitae, aut inventore
+									repellendus. Iusto, assumenda!</p>
+								<p>
+									<a href="#" target="_blank" class="btn btn-primary px-5 py-3">Get
+										Started</a>
+								</p>
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+
+<br/>
+<br/>
+		<h:panelGroup columns="2">
+
+			<center><h2 style="background: #37cfa2;
+    border-color: #37cfa2;
+    color: #fff;
+    width: max-content;">Saved Simulations</h2></center>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="table-responsive">
+							<table
+								summary="This table shows how to create responsive tables using Bootstrap's default functionality"
+								class="table table-bordered table-hover">
+								<caption class="text-center">
+									This are the simulations you saved <a
+										href="https://getbootstrap.com/css/#tables-responsive"
+										target="_blank"></a>
+								</caption>
+
+								<h:dataTable
+									summary="This table shows how to create responsive tables using Bootstrap's default functionality"
+									class="table table-bordered table-hover"
+									value="#{simulationController.simulations}" var="simulation"
+									border="1">
+									<caption class="text-center">
+										This are the simulations you saved <a
+											href="https://getbootstrap.com/css/#tables-responsive"
+											target="_blank"></a>
+									</caption>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Simulation Date" />
+										</f:facet>
+										<h:outputText value="#{simulation.date}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Bank Name" />
+										</f:facet>
+										<h:outputText value="#{simulation.bankName}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="credit amount" />
+										</f:facet>
+										<h:outputText value="#{simulation.creditAmount}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Self Finance" />
+										</f:facet>
+										<h:outputText value="#{simulation.self_finance}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="refund period" />
+										</f:facet>
+										<h:outputText value="#{simulation.refundPeriod}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Monthly Capacity" />
+										</f:facet>
+										<h:outputText value="#{simulation.monthlyCapacity}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Monthly Payback" />
+										</f:facet>
+										<h:outputText value="#{simulation.monthleyPayBack}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Document Fees" />
+										</f:facet>
+										<h:outputText value="#{simulation.document_fees}" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<h:outputText value="Total payback amount" />
+										</f:facet>
+										<h:outputText value="#{simulation.price}" />
+									</h:column>
+									
+									<h:column>
+									<h:form>
+										<f:facet name="header">
+											<h:outputText value="Delete" />
+										</f:facet>
+										<h:commandButton
+											action="#{simulationController.delete(simulation.id)}"
+											value="delete" type="password"/>
+											</h:form>
+									</h:column>
+									
+									
+									
+									
+									
+									<!-- 					<h:column> -->
+									<!-- 						<f:facet name="header"> -->
+									<!-- 							<h:outputText value="Duration" /> -->
+									<!-- 						</f:facet> -->
+									<!-- 						<h:outputText value="#{simulation.duration}" /> -->
+									<!-- 					</h:column> -->
+								</h:dataTable>
+								<tfoot>
+									<tr>
+										<td colspan="5" class="text-center">Data retrieved from <a
+											href="http://www.infoplease.com/ipa/A0855611.html"
+											target="_blank">infoplease</a> and <a
+											href="http://www.worldometers.info/world-population/population-by-country/"
+											target="_blank">worldometers</a>.
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!--end of .table-responsive-->
+					</div>
+				</div>
+			</div>
+
+			<p class="p">
+				Demo by George Martsoukos. <a
+					href="http://www.sitepoint.com/responsive-data-tables-comprehensive-list-solutions"
+					target="_blank">See article</a>.
+			</p>
+
+
+
+		</h:panelGroup>
+	</ui:define>
+</ui:composition>
